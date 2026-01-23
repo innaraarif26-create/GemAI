@@ -124,11 +124,10 @@ class DeviceUtilities {
 
   static Future<void> launchUrlExternal(String url) async {
     final uri = Uri.parse(url);
-
-    if (!await canLaunchUrl(uri)) {
+    if (!await canLaunchUrl(uri))
+    {
       throw 'Could not launch $url';
     }
-
     await launchUrl(
       uri,
       mode: LaunchMode.externalApplication,
