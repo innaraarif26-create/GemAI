@@ -24,4 +24,9 @@ class AppImages
   static const String sapphire = "assets/images/PopularGems/Sapphire.png";
   static const String tanzanite = "assets/images/PopularGems/Tanzanite.png";
   static const String topaz = "assets/images/PopularGems/Topaz.png";
+
+  // Onboarding Screen Images
+  static const String onBoardingImage1 = "assets/images/onboarding_images/onboarding1.gif";
+  static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding1.gif";
+  static const String onBoardingImage3 = "assets/images/onboarding_images/onboarding3.1.gif";
 }

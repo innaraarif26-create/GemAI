@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HelperFunctions {
-  HelperFunctions._();
+class AppHelperFunctions {
+  AppHelperFunctions._();
 
   /* -------------------- GET COLOR -------------------- */
   static Color getColor(String value) {
@@ -79,11 +79,20 @@ class HelperFunctions {
       Theme.of(context).brightness == Brightness.dark;
 
   /* -------------------- SCREEN SIZE -------------------- */
-  static Size screenSize(BuildContext context) => MediaQuery.of(context).size;
+  static Size screenSize()
+  {
+    return MediaQuery.of(Get.context!).size;
+  }
 
-  static double screenWidth(BuildContext context) => screenSize(context).width;
+  static double screenWidth()
+  {
+    return MediaQuery.of(Get.context!).size.width;
+  }
 
-  static double screenHeight(BuildContext context) => screenSize(context).height;
+  static double screenHeight()
+  {
+    return MediaQuery.of(Get.context!).size.height;
+  }
 
   /* -------------------- WRAP WIDGET -------------------- */
   static Widget wrapWidget(Widget child,
