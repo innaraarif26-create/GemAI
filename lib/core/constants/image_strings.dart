@@ -26,6 +26,6 @@ class AppImages
 
   // Onboarding Screen Images
   static const String onBoardingImage1 = "assets/images/onboarding_images/onboarding1.gif";
-  static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding1.gif";
+  static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding2.gif";
   static const String onBoardingImage3 = "assets/images/onboarding_images/onboarding3.1.gif";
 }

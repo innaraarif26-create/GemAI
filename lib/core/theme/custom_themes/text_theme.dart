@@ -4,9 +4,9 @@ class AppTextTheme {
   AppTextTheme._();
 
   static TextTheme lightTextTheme = TextTheme(
-   headlineLarge: const TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'TimesRomanFont'),
-   headlineMedium: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600,color: Colors.black87, fontFamily: 'TimesRomanFont'),
-   headlineSmall: const TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600,color: Colors.black, fontFamily: 'TimesRomanFont'),
+   headlineLarge: const TextStyle().copyWith(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.black, fontFamily: 'TimesRomanFont'),
+   headlineMedium: const TextStyle().copyWith(fontSize: 24.0, fontWeight: FontWeight.w600,color: Colors.black87, fontFamily: 'TimesRomanFont'),
+   headlineSmall: const TextStyle().copyWith(fontSize: 18.0, fontWeight: FontWeight.w100,color: Colors.black, fontFamily: 'TimesRomanFont'),
 
    titleLarge: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
    titleMedium: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),

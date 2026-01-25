@@ -40,27 +40,22 @@ dev_dependencies:
 
 
 flutter:
-
   uses-material-design: true
 
-#-----------Local Assets------------#
-assets:
-  - assets/images/onboarding_images
-  - assets/logos/
-  - assets/icons/
-  - assets/pdfs/
+  assets:
+    - assets/images/onboarding_images/
+    - assets/logos/
+    - assets/icons/
+    - assets/pdfs/
 
-#-----------Local Fonts------------#
-fonts:
-   - family: TimesRomanFont
-     fonts:
-       - asset: assets/fonts/times.ttf
-       - asset: assets/fonts/times-bd.ttf
-         weight: 800
-       - asset: assets/fonts/times-bi.ttf
-         weight: 800
-         style: italic
-       - asset: assets/fonts/times-i.ttf
-         style: italic
-
-
+  fonts:
+    - family: TimesRomanFont
+      fonts:
+        - asset: assets/fonts/times.ttf
+        - asset: assets/fonts/times-bd.ttf
+          weight: 800
+        - asset: assets/fonts/times-bi.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/times-i.ttf
+          style: italic
