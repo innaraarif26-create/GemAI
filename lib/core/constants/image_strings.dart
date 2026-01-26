@@ -4,8 +4,8 @@ class AppImages
   AppImages._();
 
   // App logo
-  static const String  darkAppLogo = "assets/logos/app_white_logo";
-  static const String  lightAppLogo = "assets/logos/app_black_logo";
+  static const String  darkAppLogo = "assets/logos/app_white_logo.png";
+  static const String  lightAppLogo = "assets/logos/app_black_logo.png";
 
   // Social Logos
   static const String  google = "assets/logos/google_logo";
