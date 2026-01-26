@@ -2,7 +2,7 @@
 class AppTexts
 {
   // Onboarding Texts
-  static const String onBoardingTitle1 = "Welcome to GemsAi";
+  static const String onBoardingTitle1 = "Welcome to GemAi";
   static const String onBoardingTitle2 = "Smart Gem Detection";
   static const String onBoardingTitle3 = "Gem Marketplace";
 

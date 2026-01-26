@@ -17,39 +17,34 @@ class DeviceUtilities {
   /* -------------------- SCREEN -------------------- */
 
   static double getScreenWidth(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width;
+      MediaQuery.of(context).size.width;
 
   static double getScreenHeight(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .height;
+      MediaQuery .of(context).size.height;
 
   static double getPixelRatio(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .devicePixelRatio;
+      MediaQuery .of(context).devicePixelRatio;
 
   static double getStatusBarHeight(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .padding
-          .top;
+      MediaQuery.of(context).padding .top;
+
+  static double getBottomNavigationBarHeight()
+  {
+    return kBottomNavigationBarHeight;
+  }
+
+  static double getAppBarHeight()
+  {
+    return kToolbarHeight;
+  }
 
   /* -------------------- ORIENTATION -------------------- */
 
   static bool isLandscapeOrientation(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .orientation == Orientation.landscape;
+      MediaQuery .of(context) .orientation == Orientation.landscape;
 
   static bool isPortraitOrientation(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .orientation == Orientation.portrait;
+      MediaQuery.of(context).orientation == Orientation.portrait;
 
   /// Disable landscape mode (Portrait only)
   static Future<void> setPortraitOnly() async {
@@ -70,16 +65,10 @@ class DeviceUtilities {
   }
 
   static bool isKeyboardAvailable(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .viewInsets
-          .bottom > 0;
+      MediaQuery.of(context).viewInsets.bottom > 0;
 
   static double getKeyboardHeight(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .viewInsets
-          .bottom;
+      MediaQuery.of(context).viewInsets.bottom;
 
   /* -------------------- SYSTEM UI -------------------- */
 
