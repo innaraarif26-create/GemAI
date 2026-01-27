@@ -4,8 +4,8 @@ class AppImages
   AppImages._();
 
   // App logo
-  static const String  darkAppLogo = "assets/logos/app_white_logo.png";
-  static const String  lightAppLogo = "assets/logos/app_black_logo.png";
+  static const String  darkAppLogo = "assets/logos/app_logo.png";
+  static const String  lightAppLogo = "assets/logos/app_logo.png";
 
   // Social Logos
   static const String  google = "assets/logos/google_logo.png";
@@ -27,5 +27,5 @@ class AppImages
   // Onboarding Screen Images
   static const String onBoardingImage1 = "assets/images/onboarding_images/onboarding1.gif";
   static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding2.gif";
-  static const String onBoardingImage3 = "assets/images/onboarding_images/onboarding3.1.gif";
+  static const String onBoardingImage3 = "assets/images/onboarding_images/onboarding3.gif";
 }

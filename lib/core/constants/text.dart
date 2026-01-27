@@ -7,7 +7,7 @@ class AppTexts
   static const String onBoardingTitle3 = "Gem Marketplace";
 
   static const String onBoardingSubTitle1 = "An intelligent platform for discovering, analyzing, and trading precious gemstones.";
-  static const String onBoardingSubTitle2 = "Detect gemstones and get accurate price suggestions using AI-powered analysis.";
+  static const String onBoardingSubTitle2 = "Detect gemstones and predict their approximate price using AI-powered analysis.";
   static const String onBoardingSubTitle3 = "Buy, sell, and explore verified gemstones in a secure and trusted marketplace.";
 
   // Authentication heading texts
@@ -27,7 +27,7 @@ class AppTexts
   // Authentication Form Text
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
-  static const String email = "E-Mail";
+  static const String email = "Email";
   static const String password = "Password";
   static const String newPassword = " New Password";
   static const String phoneNumber = "Phone Number";

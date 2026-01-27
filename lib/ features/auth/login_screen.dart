@@ -33,14 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final dark = AppHelperFunctions.isDarkMode(context);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Iconsax.arrow_left_2, color: Color.fromARGB(255, 180, 139, 84), size: AppSizes.iconMd),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -56,22 +48,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image(
-                    height: 150,
+                    height: 70,
                     image: AssetImage(
                       dark ? AppImages.darkAppLogo : AppImages.lightAppLogo,
                     ),
                   ),
+                  const SizedBox(height: AppSizes.md),
                   Text(
                     AppTexts.loginTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.sm),
+                  const SizedBox(height: AppSizes.xs),
                   Text(
                     AppTexts.loginSubTitle,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
               ),
@@ -80,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Form(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: AppSizes.spaceBtwSections,
+                    vertical: 30,
                   ),
                   child: Column(
                     children: [
@@ -88,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         controller: emailController,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Iconsax.direct_right),
+                          prefixIcon: Icon(Iconsax.direct_right,size: 20,),
                           labelText: AppTexts.email,
                         ),
                       ),
@@ -99,10 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: passwordController,
                         obscureText: obscureText,
                         decoration: InputDecoration(
-                          prefixIcon:const Icon(Iconsax.password_check),
+                          prefixIcon:const Icon(Iconsax.password_check,size: 20,),
                           labelText: AppTexts.password,
                           suffixIcon: IconButton(
-                            icon: Icon( obscureText? Iconsax.eye_slash : Iconsax.eye, color: const Color(0xFFB48B54),),
+                            icon: Icon( obscureText? Iconsax.eye_slash : Iconsax.eye, color: const Color(0xFFB48B54),size: 20,),
                             onPressed: () {
                               setState(()
                               {
@@ -178,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
 
-              const SizedBox(height: AppSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.defaultSpace),
 
               /// Footer (Social Login)
               Row(

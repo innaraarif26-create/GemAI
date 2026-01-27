@@ -29,14 +29,14 @@ class AppSizes
   static const double buttonElevation =4.0;
 
   //AppBar Height
-  static const double appBarHeight = 56.0;
+  static const double appBarHeight = 60.0;
 
   // Image Size
   static const double imageThumbSize = 80.0;
 
   // Default Spacing between Sections
   static const double defaultSpace = 24.0;
-  static const double spaceBtwItems = 16.0;
+  static const double spaceBtwItems = 10.0;
   static const double spaceBtwSections = 32.0;
 
   // Border Radius

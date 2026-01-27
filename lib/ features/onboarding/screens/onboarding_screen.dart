@@ -96,12 +96,12 @@ class OnBoardingSkip extends StatelessWidget
   Widget build(BuildContext context) {
     return Positioned(
         top: DeviceUtilities.getAppBarHeight(),
-        right: AppSizes.defaultSpace,
+        right: 8,
         child: TextButton(onPressed: ()
         {
           OnboardingController.instance.skipPage();
         },
-        child: Text("Skip",style: TextStyle(fontSize: 14, fontFamily: 'TimesRomanFont',color: Colors.blueAccent))));
+        child: Text("Skip",style: TextStyle(fontSize: 16, fontFamily: 'TimesRomanFont',color: Colors.blueAccent))));
   }
 }
 
@@ -115,7 +115,7 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
+      padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: Column(
         children: [
           Image(
