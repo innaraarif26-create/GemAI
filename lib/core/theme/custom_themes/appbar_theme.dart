@@ -10,9 +10,9 @@ class AppbarTheme {
     scrolledUnderElevation: 0,
     backgroundColor: Colors.transparent,
     surfaceTintColor: Colors.transparent,
-    iconTheme: IconThemeData(color: Colors.black, size: 20),
-    actionsIconTheme: IconThemeData(color: Colors.black, size: 20),
-    titleTextStyle: TextStyle(fontSize: 22,fontFamily: 'TimesRomanFont', color: Colors.black,fontWeight: FontWeight.bold,)
+    iconTheme: IconThemeData(color: Colors.black, size: 24),
+    actionsIconTheme: IconThemeData(color: Colors.black, size: 24),
+    titleTextStyle: TextStyle(fontSize: 18.0,fontFamily: 'TimesRomanFont', color: Colors.black,fontWeight: FontWeight.w600,)
   );
 
   static const darkAppBarTheme = AppBarThemeData(
@@ -21,9 +21,9 @@ class AppbarTheme {
       scrolledUnderElevation: 0,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
-      iconTheme: IconThemeData(color: Colors.black, size: 20),
-      actionsIconTheme: IconThemeData(color: Colors.black, size: 20),
-      titleTextStyle: TextStyle(fontSize: 22,fontFamily: 'TimesRomanFont', color: Colors.white,fontWeight: FontWeight.bold,)
+      iconTheme: IconThemeData(color: Colors.black, size: 24),
+      actionsIconTheme: IconThemeData(color: Colors.black, size: 24),
+      titleTextStyle: TextStyle(fontSize: 18,fontFamily: 'TimesRomanFont', color: Colors.white,fontWeight: FontWeight.w600,)
 
   );
 }

@@ -26,25 +26,27 @@ class OnboardingScreen  extends StatelessWidget {
             controller:  controller.pageController,
             onPageChanged: controller.updatePageIndicator,
             children: [
-              onBoardingPage(image: AppImages.onBoardingImage1,title: AppTexts.onBoardingTitle1,subTitle: AppTexts.onBoardingSubTitle1,),
-              onBoardingPage(image: AppImages.onBoardingImage2,title: AppTexts.onBoardingTitle2,subTitle: AppTexts.onBoardingSubTitle2,),
-              onBoardingPage(image: AppImages.onBoardingImage3,title: AppTexts.onBoardingTitle3,subTitle: AppTexts.onBoardingSubTitle3,),
+              OnBoardingPage(image: AppImages.onBoardingImage1,title: AppTexts.onBoardingTitle1,subTitle: AppTexts.onBoardingSubTitle1,),
+              OnBoardingPage(image: AppImages.onBoardingImage2,title: AppTexts.onBoardingTitle2,subTitle: AppTexts.onBoardingSubTitle2,),
+              OnBoardingPage(image: AppImages.onBoardingImage3,title: AppTexts.onBoardingTitle3,subTitle: AppTexts.onBoardingSubTitle3,),
             ],
           ),
           // Skip Button
-          onBoardingSkip(),
+          OnBoardingSkip(),
           // Dot Navigation SmoothPageIndicator
-          onBoardingDotNavigation(),
+          OnBoardingDotNavigation(),
           // Circular Button
-          onBoardingNextButton()
+          OnBoardingNextButton
+            ()
         ],
       ),
     );
   }
 }
 
-class onBoardingNextButton extends StatelessWidget {
-  const onBoardingNextButton({
+class OnBoardingNextButton
+    extends StatelessWidget {
+  const OnBoardingNextButton({
     super.key,
   });
 
@@ -58,15 +60,15 @@ class onBoardingNextButton extends StatelessWidget {
           {
             OnboardingController.instance.nextPage();
           },
-          style: ElevatedButton.styleFrom(shape: CircleBorder(), backgroundColor: dark? AppColors.primary : Colors.black ),
+          style: ElevatedButton.styleFrom(shape: CircleBorder(), backgroundColor: dark? AppColors.primary : Colors.black,),
           child: const Icon(Iconsax.arrow_right_3),
       ),
     );
   }
 }
 
-class onBoardingDotNavigation extends StatelessWidget {
-  const onBoardingDotNavigation({
+class OnBoardingDotNavigation extends StatelessWidget {
+  const OnBoardingDotNavigation({
     super.key,
   });
 
@@ -84,9 +86,9 @@ class onBoardingDotNavigation extends StatelessWidget {
   }
 }
 
-class onBoardingSkip extends StatelessWidget
+class OnBoardingSkip extends StatelessWidget
 {
-  const onBoardingSkip({
+  const OnBoardingSkip({
     super.key,
   });
 
@@ -103,8 +105,8 @@ class onBoardingSkip extends StatelessWidget
   }
 }
 
-class onBoardingPage extends StatelessWidget {
-  const onBoardingPage({
+class OnBoardingPage extends StatelessWidget {
+  const OnBoardingPage({
     super.key, required this.image, required this.title, required this.subTitle,
   });
 

@@ -14,14 +14,14 @@ class AppCheckBoxTheme
         }
       else
         {
-          return Colors.black;
+          return Color.fromARGB(255, 180, 139, 84);
         }
     }),
     fillColor: MaterialStateProperty.resolveWith((states)
       {
         if(states.contains(MaterialState.selected))
       {
-        return Colors.blue;
+        return Color.fromARGB(255, 180, 139, 84);
       }
         else
           {
