@@ -6,9 +6,9 @@ class AppCheckBoxTheme
 
   static  CheckboxThemeData lightCheckBoxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-    checkColor: MaterialStateProperty.resolveWith((states)
+    checkColor: WidgetStateProperty.resolveWith((states)
     {
-      if(states.contains(MaterialState.selected))
+      if(states.contains(WidgetState.selected))
         {
           return Colors.white;
         }
@@ -17,9 +17,9 @@ class AppCheckBoxTheme
           return Color.fromARGB(255, 180, 139, 84);
         }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states)
+    fillColor: WidgetStateProperty.resolveWith((states)
       {
-        if(states.contains(MaterialState.selected))
+        if(states.contains(WidgetState.selected))
       {
         return Color.fromARGB(255, 180, 139, 84);
       }
@@ -28,15 +28,17 @@ class AppCheckBoxTheme
             return Colors.transparent;
           }
       }),
+    // side: const BorderSide(
+    //   color: Color(0xFFB48B54),
+    //   width: 2,
+    // ),
   );
-
-
 
   static CheckboxThemeData darkCheckBoxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-    checkColor: MaterialStateProperty.resolveWith((states)
+    checkColor: WidgetStateProperty.resolveWith((states)
     {
-      if(states.contains(MaterialState.selected))
+      if(states.contains(WidgetState.selected))
       {
         return Colors.white;
       }
@@ -45,9 +47,9 @@ class AppCheckBoxTheme
         return Colors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states)
+    fillColor: WidgetStateProperty.resolveWith((states)
     {
-      if(states.contains(MaterialState.selected))
+      if(states.contains(WidgetState.selected))
       {
         return Colors.blue;
       }
@@ -56,5 +58,9 @@ class AppCheckBoxTheme
         return Colors.transparent;
       }
     }),
+    // side: const BorderSide(
+    //   color: Color(0xFFB48B54), // border when unchecked
+    //   width: 2,
+    // ),
   );
 }

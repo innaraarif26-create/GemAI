@@ -32,7 +32,7 @@ class AppTexts
   static const String newPassword = " New Password";
   static const String phoneNumber = "Phone Number";
   static const String rememberMe = "Remember Me";
-  static const String forgetPassword = "Forget Password";
+  static const String forgetPassword = "Forget Password?";
   static const String signIn = "Sign In";
   static const String createAccount = "Create Account";
   static const String orSignInWith = "or Sign in with";

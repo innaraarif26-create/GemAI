@@ -5,7 +5,7 @@ class AppColors
   AppColors._();
 
   // App Basic color
-  static const  Color primary = Color(0xFF4b68ff);
+  static const  Color primary = Colors.blueAccent;
   static const  Color secondary = Color.fromARGB(255, 219, 37, 24);
   static const  Color accent=  Color(0xFF86520D);
 

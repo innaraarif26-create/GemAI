@@ -13,8 +13,8 @@ class AppElevatedButtonTheme {
       disabledForegroundColor: Colors.grey,
       disabledBackgroundColor: Colors.grey,
       padding: EdgeInsets.symmetric(vertical: 18),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
-      textStyle: TextStyle(fontFamily: 'TimesRomanFont',fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14),),
+      textStyle: TextStyle(fontFamily: 'TimesRomanFont',fontSize: 16,color: Colors.white,),
     )
   );
 
@@ -27,8 +27,8 @@ class AppElevatedButtonTheme {
         disabledForegroundColor: Colors.grey,
         disabledBackgroundColor: Colors.grey,
         padding: EdgeInsets.symmetric(vertical: 18),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
-        textStyle: TextStyle(fontFamily: 'TimesRomanFont',fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14),),
+        textStyle: TextStyle(fontFamily: 'TimesRomanFont',fontSize: 16,color: Colors.white,),
       )
   );
 }

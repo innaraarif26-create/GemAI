@@ -8,8 +8,8 @@ class AppImages
   static const String  lightAppLogo = "assets/logos/app_black_logo.png";
 
   // Social Logos
-  static const String  google = "assets/logos/google_logo";
-  static const String  facebook = "assets/logos/facebook_logo";
+  static const String  google = "assets/logos/google_logo.png";
+  static const String  facebook = "assets/logos/facebook_logo.png";
 
   // popular gems logos
   static const String diamond = "assets/images/PopularGems/Diamond.png";

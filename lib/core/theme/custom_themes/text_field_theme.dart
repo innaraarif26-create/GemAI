@@ -5,7 +5,7 @@ class AppTextFieldTheme
   AppTextFieldTheme._();
 
   static InputDecorationTheme lightAppTextFieldTheme = InputDecorationTheme(
-    errorMaxLines: 2,
+    errorMaxLines: 3,
     prefixIconColor:  Color(0xFFB48B54),
     suffixIconColor:  Color(0xFFB48B54),
     labelStyle: const TextStyle().copyWith(fontFamily: 'TimesRomanFont', color: Colors.grey.shade700,fontSize: 14),
@@ -16,14 +16,14 @@ class AppTextFieldTheme
     borderRadius: BorderRadius.circular(14),
     borderSide: const BorderSide(width: 1,color: Colors.grey),
     ),
-    focusedBorder:UnderlineInputBorder( borderSide: BorderSide(width: 1,color: Colors.black12),),
-    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(width: 1,color: Colors.grey),),
-    errorBorder: const UnderlineInputBorder(borderSide:  BorderSide(width: 1, color: Colors.red)),
-    focusedErrorBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.orange)),
+    focusedBorder:UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(width: 1,color: Colors.black12),),
+    enabledBorder: UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide: BorderSide(width: 1,color: Colors.grey),),
+    errorBorder: const UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide:  BorderSide(width: 1, color: Colors.red)),
+    focusedErrorBorder: const UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(width: 2, color: Colors.orange)),
   );
 
   static InputDecorationTheme darkAppTextFieldTheme = InputDecorationTheme(
-    errorMaxLines: 2,
+    errorMaxLines: 3,
     prefixIconColor:  Color(0xFFB48B54),
     suffixIconColor:  Color(0xFFB48B54),
     labelStyle: const TextStyle().copyWith(fontFamily: 'TimesRomanFont', color: Colors.white,fontSize: 14),
@@ -34,9 +34,9 @@ class AppTextFieldTheme
       borderRadius: BorderRadius.circular(14),
       borderSide: const BorderSide(width: 1,color: Colors.grey),
     ),
-    focusedBorder:UnderlineInputBorder( borderSide: BorderSide(width: 1,color: Colors.white),),
-    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(width: 1,  color: Colors.grey),),
-    errorBorder: const UnderlineInputBorder(borderSide:  BorderSide(width: 1, color: Colors.red)),
-    focusedErrorBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.orange)),
+    focusedBorder:UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(width: 1,color: Colors.white),),
+    enabledBorder: UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide: BorderSide(width: 1,  color: Colors.grey),),
+    errorBorder: const UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide:  BorderSide(width: 1, color: Colors.red)),
+    focusedErrorBorder: const UnderlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide: BorderSide(width: 2, color: Colors.orange)),
   );
 }

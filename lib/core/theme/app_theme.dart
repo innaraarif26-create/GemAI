@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/core/theme/custom_themes/outlined_button_theme.dart';
 import 'package:gemai/core/theme/custom_themes/text_field_theme.dart';
 import 'package:gemai/core/theme/custom_themes/text_theme.dart';
 import 'package:gemai/core/theme/custom_themes/elevated_button_theme.dart';
@@ -18,6 +19,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.white,
     textTheme: AppTextTheme.lightTextTheme,
     elevatedButtonTheme: AppElevatedButtonTheme.lightElevatedButtonTheme,
+    outlinedButtonTheme: AppOutlinedButtonTheme.lightOutlinedButtonTheme,
     appBarTheme: AppbarTheme.lightAppBarTheme,
     bottomSheetTheme: AppBottomSheetTheme.lightBottomSheetTheme,
     checkboxTheme: AppCheckBoxTheme.lightCheckBoxTheme,
@@ -33,6 +35,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.black,
     textTheme: AppTextTheme.darkTextTheme,
     elevatedButtonTheme: AppElevatedButtonTheme.darkElevatedButtonTheme,
+    outlinedButtonTheme: AppOutlinedButtonTheme.darkOutlinedButtonTheme,
     bottomSheetTheme: AppBottomSheetTheme.darkBottomSheetTheme,
     checkboxTheme: AppCheckBoxTheme.darkCheckBoxTheme,
     chipTheme: AppChipTheme.darkAppChipTheme,

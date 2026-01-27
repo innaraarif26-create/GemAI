@@ -7,92 +7,216 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class LoginScreen extends StatelessWidget
-{
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
+  State<LoginScreen> createState() => _LoginScreenState();
+   }
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool obscureText = true;
+  bool rememberMe = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
+
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Iconsax.arrow_left_2, color: Color.fromARGB(255, 180, 139, 84), size: AppSizes.iconMd),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-           padding: EdgeInsets.only(
-             top: AppSizes.appBarHeight,
-             bottom: AppSizes.defaultSpace,
-             left: AppSizes.defaultSpace,
-             right: AppSizes.defaultSpace,
-           ),
+          padding: EdgeInsets.only(
+            top: AppSizes.appBarHeight,
+            bottom: AppSizes.defaultSpace,
+            left: AppSizes.defaultSpace,
+            right: AppSizes.defaultSpace,
+          ),
           child: Column(
             children: [
+              /// Header
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image(
                     height: 150,
-                    image: AssetImage(dark? AppImages.lightAppLogo : AppImages.darkAppLogo),
+                    image: AssetImage(
+                      dark ? AppImages.darkAppLogo : AppImages.lightAppLogo,
+                    ),
                   ),
-                  Text(AppTexts.loginTitle, style: Theme.of(context).textTheme.bodyMedium,),
-                  const SizedBox(height:  AppSizes.sm,),
-                  Text(AppTexts.loginSubTitle, style: Theme.of(context).textTheme.bodyMedium,),
+                  Text(
+                    AppTexts.loginTitle,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(height: AppSizes.sm),
+                  Text(
+                    AppTexts.loginSubTitle,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ],
               ),
+
               /// Form
               Form(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppSizes.spaceBtwSections,
+                  ),
                   child: Column(
-                  children: [
-                    /// Email
-                    TextFormField(decoration: const InputDecoration(prefixIcon: Icon(Iconsax.direct_right),labelText: AppTexts.email),
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwInputFields,),
-
-                    /// Password
-                    TextFormField(decoration: const InputDecoration(prefixIcon: Icon(Iconsax.password_check),labelText: AppTexts.password, suffixIcon: Icon(Iconsax.eye_slash)),
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwInputFields / 2,),
-
-                    /// Remember Me & Forget Password
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        /// Remember Me
-                        Row(
-                          children: [
-                            Checkbox(value: true, onChanged: (value){}),
-                            const Text(AppTexts.rememberMe),
-                          ],
+                    children: [
+                      /// Email
+                      TextFormField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Iconsax.direct_right),
+                          labelText: AppTexts.email,
                         ),
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-                        /// Forget Password
-                        TextButton(onPressed: (){}, child: const Text(AppTexts.forgetPassword)),
-                      ],
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwSections,),
+                      /// Password
+                      TextFormField(
+                        controller: passwordController,
+                        obscureText: obscureText,
+                        decoration: InputDecoration(
+                          prefixIcon:const Icon(Iconsax.password_check),
+                          labelText: AppTexts.password,
+                          suffixIcon: IconButton(
+                            icon: Icon( obscureText? Iconsax.eye_slash : Iconsax.eye, color: const Color(0xFFB48B54),),
+                            onPressed: () {
+                              setState(()
+                              {
+                                obscureText = !obscureText;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
 
-                    /// Sign In Button
-                    SizedBox(width: double.infinity, child: ElevatedButton(onPressed: (){}, child: Text(AppTexts.signIn))),
-                    const SizedBox(height:  AppSizes.spaceBtwItems,),
-                    /// Create Account Button
-                    SizedBox(width: double.infinity, child: OutlinedButton(onPressed: (){}, child: Text(AppTexts.createAccount))),
+                      const SizedBox(
+                        height: AppSizes.spaceBtwInputFields / 2,
+                      ),
+
+                      /// Remember Me & Forget Password
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: rememberMe,
+                                onChanged: (value) {
+                                  setState(()
+                                  {
+                                    rememberMe = value ?? false;
+                                  });
+                                },
+                              ),
+                              const Text(AppTexts.rememberMe),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child:const Text(AppTexts.forgetPassword,style: TextStyle(color: Color.fromARGB(255, 180, 139, 84),fontSize: 13, fontFamily: 'TimesRomanFont'),),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: AppSizes.spaceBtwSections),
+
+                      /// Sign In Button
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text(AppTexts.signIn),
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwItems),
+
+                      /// Create Account Button
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          child:  const Text(AppTexts.createAccount),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
+
               /// Divider
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(child: Divider(color: dark ? AppColors.darkGrey : AppColors.grey, thickness: 0.5, indent: 60,endIndent: 5,)),
-                  Text(AppTexts.orSignInWith.capitalize!, style: Theme.of(context).textTheme.labelMedium,),
-                  Flexible(child: Divider(color: dark ? AppColors.darkGrey : AppColors.grey, thickness: 0.5, indent: 5,endIndent: 60,)),
+                  Flexible(child: Divider( color: dark  ? AppColors.darkGrey : AppColors.grey,thickness: 1,indent: 60, endIndent: 5,),),
+                  Text( AppTexts.orSignInWith.capitalize!, style:Theme.of(context).textTheme.labelMedium,),
+                  Flexible(child: Divider( color: dark ? AppColors.darkGrey: AppColors.grey,thickness: 1, indent: 5,endIndent: 60,),),
                 ],
-              )
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwSections),
+
+              /// Footer (Social Login)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _SocialButton(image: AppImages.google),
+                  const SizedBox(width: AppSizes.spaceBtwItems),
+                  _SocialButton(image: AppImages.facebook),
+                ],
+              ),
             ],
           ),
-        )
+        ),
+      ),
+    );
+  }
+}
+
+/// Reusable social button
+class _SocialButton extends StatelessWidget {
+  final String image;
+
+  const _SocialButton({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: IconButton(
+        onPressed: () {},
+        icon: Image(
+          width: AppSizes.iconMd,
+          height: AppSizes.iconMd,
+          image: AssetImage(image),
+        ),
       ),
     );
   }
