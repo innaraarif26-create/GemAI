@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/%20features/auth/login/login_screen.dart';
+import 'package:gemai/%20features/auth/signup/success_screen.dart';
 import 'package:gemai/core/constants/image_strings.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/constants/text.dart';
@@ -36,7 +37,7 @@ class VerifyEmailScreen extends StatelessWidget
               Text(AppTexts.confirmEmailSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),
               const SizedBox(height: AppSizes.spaceBtwSections,),
               /// Buttons
-              SizedBox(width: double.infinity, child: ElevatedButton(onPressed: (){}, child: Text('Continue'),),),
+              SizedBox(width: double.infinity, child: ElevatedButton(onPressed: ()=> Get.to(() => SuccessScreen()), child: Text('Continue'),),),
               const SizedBox(height: AppSizes.spaceBtwItems,),
               SizedBox(width: double.infinity, child:  TextButton(onPressed: (){}, child: Text(AppTexts.resendEmail)),)
             ],

@@ -21,8 +21,8 @@ class AppTexts
   static const String confirmEmail = " Verify Your Email Address";
   static const String confirmEmailSubTitle = "Congratulations! Your Account Awaits: verify your Email to start exploring AI-powered gemstone insights.";
   static const String emailNotReceivedMessage = "Didn't get the email? Check your junk/spam or resend it";
-  static const String yourAccountCreatedTitle = "Your account successfully created!";
-  static const String yourAccountCreatedSubTitle = "Welcome to GemAi: Your Account is Created,Detect gemstones, explore smart price insights, and trade securely in the GemAI marketplace.";
+  static const String yourAccountCreatedTitle = "Your Account Successfully Created!";
+  static const String yourAccountCreatedSubTitle = "Welcome to GemAi: Your Account is Created, Detect gemstones, explore smart price insights, and trade securely in the GemAI marketplace.";
 
   // Authentication Form Text
   static const String firstName = "First Name";
