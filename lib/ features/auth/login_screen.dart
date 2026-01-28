@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               /// Header
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image(
                     height: 70,
@@ -63,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: AppSizes.xs),
                   Text(
                     AppTexts.loginSubTitle,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: AppSizes.spaceBtwSections),
+                      const SizedBox(height: AppSizes.defaultSpace),
 
                       /// Sign In Button
                       SizedBox(
