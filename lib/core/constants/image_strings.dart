@@ -28,4 +28,9 @@ class AppImages
   static const String onBoardingImage1 = "assets/images/onboarding_images/onboarding1.gif";
   static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding2.gif";
   static const String onBoardingImage3 = "assets/images/onboarding_images/onboarding3.gif";
+
+  // Animations
+  static const String emailVerification = "assets/images/animations/Email_Verification.gif";
+  static const String emailVerified = "assets/images/animations/Email_Verified.png";
+
 }
