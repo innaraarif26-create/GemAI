@@ -51,7 +51,7 @@ class AppCheckBoxTheme
     {
       if(states.contains(WidgetState.selected))
       {
-        return Colors.blue;
+        return Color.fromARGB(255, 180, 139, 84);
       }
       else
       {

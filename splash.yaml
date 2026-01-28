@@ -1,8 +1,9 @@
 flutter_native_splash:
   color: "#FFFFFF"
   color_dark: "#272727"
-  image: assets/logos/app_logo.png
-  image_dark: assets/logos/app_logo.png
+  image: assets/logos/Gems_Detection_logo.png
+  image_dark: assets/logos/Gems_Detection_logo.png
+  size: 60
 
 
   android_12:

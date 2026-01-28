@@ -19,6 +19,7 @@ dependencies:
   url_launcher: ^6.3.2
   flutter_native_splash: ^2.4.7
   smooth_page_indicator: ^2.0.1
+  flutter_html: ^3.0.0
 
   # Icons
   iconsax: ^0.0.8
@@ -47,6 +48,8 @@ flutter:
     - assets/logos/
     - assets/icons/
     - assets/pdfs/
+    - assets/docs/terms_of_use.html
+    - assets/docs/privacy_policy.html
 
   fonts:
     - family: TimesRomanFont

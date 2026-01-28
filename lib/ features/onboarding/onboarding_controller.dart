@@ -24,9 +24,12 @@ class OnboardingController extends GetxController {
 
   /// Move to next page or navigate to Login
   void nextPage() {
-    if (currentPageIndex.value == 2) {
+    if (currentPageIndex.value == 2)
+    {
       Get.off(() => const LoginScreen());
-    } else {
+    }
+    else
+    {
       currentPageIndex.value++;
       pageController.jumpToPage(currentPageIndex.value);
     }

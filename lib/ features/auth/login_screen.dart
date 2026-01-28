@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/auth/signup.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/image_strings.dart';
 import 'package:gemai/core/constants/sizes.dart';
@@ -56,9 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: AppSizes.md),
                   Text(
                     AppTexts.loginTitle,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: AppSizes.xs),
                   Text(
@@ -152,7 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.off(()=> const SignupScreen());
+                          },
                           child:  const Text(AppTexts.createAccount),
                         ),
                       ),

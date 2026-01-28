@@ -27,8 +27,10 @@ class AppTexts
   // Authentication Form Text
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
+  static const String userName = "User Name";
   static const String email = "Email";
   static const String password = "Password";
+  static const String confirmPassword ="Confirm Password";
   static const String newPassword = " New Password";
   static const String phoneNumber = "Phone Number";
   static const String rememberMe = "Remember Me";
@@ -37,7 +39,8 @@ class AppTexts
   static const String createAccount = "Create Account";
   static const String orSignInWith = "or Sign in with";
   static const String orSignUpWith = "or Sign up with";
-  static const String iAgreeTo = "I agree to";
+  static const String iAgreeTo = " I agree to ";
+  static const String and = " and ";
   static const String privacyPolicy = "Privacy Policy";
   static const String termOfUse = "Terms of use";
   static const String verificationCode = "verificationCode";
