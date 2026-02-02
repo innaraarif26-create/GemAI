@@ -219,7 +219,7 @@ class _SocialButton extends StatelessWidget {
         onPressed: () {},
         icon: Image(
           width: AppSizes.iconMd,
-          height: AppSizes.iconMd,
+          height: AppSizes.iconSm,
           image: AssetImage(image),
         ),
       ),
