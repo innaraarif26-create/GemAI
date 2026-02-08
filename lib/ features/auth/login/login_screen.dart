@@ -6,6 +6,7 @@ import 'package:gemai/core/constants/image_strings.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/constants/text.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -145,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => const NavigationMenu()),
                           child: const Text(AppTexts.signIn),
                         ),
                       ),
