@@ -5,6 +5,8 @@ import 'package:gemai/core/constants/text.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../login/login_screen.dart';
+
 class ForgetPassword extends StatelessWidget
 {
   const ForgetPassword({super.key});
@@ -13,7 +15,12 @@ class ForgetPassword extends StatelessWidget
   Widget build(BuildContext context)
   {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Get.off(()=>LoginScreen()),
+          icon: Icon(Icons.arrow_back_ios, color: Color(0xFFB48B54), size: 20),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Column(
@@ -28,7 +35,7 @@ class ForgetPassword extends StatelessWidget
             /// Text Field
             TextFormField(
               decoration: InputDecoration(
-                labelText: AppTexts.email,prefixIcon: Icon(Iconsax.direct_right),),
+                labelText: AppTexts.email,prefixIcon: Icon(Iconsax.direct_right,size:20,),),
             ),
             const SizedBox(height: AppSizes.spaceBtwSections,),
 
@@ -36,7 +43,7 @@ class ForgetPassword extends StatelessWidget
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(onPressed: () =>
-                Get.to(() => const ResetPassword()),
+                Get.off(() => const ResetPassword()),
               child: Text(AppTexts.submit)),
             )
           ],
