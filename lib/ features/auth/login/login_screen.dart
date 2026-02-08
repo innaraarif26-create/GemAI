@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/auth/password_configuration/forgot_password_screen.dart';
 import 'package:gemai/%20features/auth/signup/signup.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/image_strings.dart';
@@ -129,7 +130,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: ()
+                            {
+                              Get.off(() => const ForgetPassword());
+                            },
                             child:const Text(AppTexts.forgetPassword,style: TextStyle(color: Color.fromARGB(255, 180, 139, 84),fontSize: 13, fontFamily: 'TimesRomanFont'),),
                           ),
                         ],

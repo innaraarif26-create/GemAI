@@ -27,7 +27,7 @@ class AppTextFieldTheme
     labelStyle: const TextStyle().copyWith(fontFamily: 'TimesRomanFont', color: Colors.white,fontSize: 14),
     hintStyle:  const TextStyle().copyWith(fontFamily: 'TimesRomanFont', color: Colors.white,fontSize: 14),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal,fontFamily: 'TimesRomanFont'),
-    floatingLabelStyle: const TextStyle().copyWith(color: Colors.white.withOpacity(0.8),fontFamily: 'TimesRomanFont'),
+    floatingLabelStyle: const TextStyle().copyWith(color: Colors.white.withValues(alpha: 0.8),fontFamily: 'TimesRomanFont'),
     border: const OutlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide: const BorderSide(width: 1,color: Colors.grey), ),
     focusedBorder:OutlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(width: 1,color: Colors.white),),
     enabledBorder: OutlineInputBorder().copyWith(borderRadius: BorderRadius.circular(14),borderSide: BorderSide(width: 1,  color: Colors.grey),),

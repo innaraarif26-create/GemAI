@@ -13,9 +13,9 @@ class AppTexts
   // Authentication heading texts
   static const String loginTitle = "Welcome back,";
   static const String loginSubTitle = "Sign in to continue exploring AI-powered gemstone insights.";
-  static const String signupTitle = "Let's create your account";
+  static const String signupTitle = "Let's Create Your Account";
   static const String forgetPasswordTitle = "Forget Password";
-  static const String forgetPasswordSubTitle = "Enter your email and we will send you a link to reset your password";
+  static const String forgetPasswordSubTitle = "Don't worry sometimes people can forget too, Enter your email and we will send you a link to reset your password";
   static const String changeYourPasswordTitle = "Password  Reset Email Sent";
   static const String changeYourPasswordSubTitle = "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password and Keep Your Account Protected";
   static const String confirmEmail = " Verify Your Email Address";
@@ -36,6 +36,7 @@ class AppTexts
   static const String rememberMe = "Remember Me";
   static const String forgetPassword = "Forget Password?";
   static const String signIn = "Sign In";
+  static const String submit = "Submit";
   static const String createAccount = "Create Account";
   static const String orSignInWith = "or Sign in with";
   static const String orSignUpWith = "or Sign up with";

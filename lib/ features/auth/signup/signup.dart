@@ -35,7 +35,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.off(()=>LoginScreen()),
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
+          icon: Icon(Icons.arrow_back_ios, color: Color(0xFFB48B54), size: 20),
         ),
       ),
       body: SingleChildScrollView(
@@ -47,7 +47,9 @@ class _SignupScreenState extends State<SignupScreen> {
               /// Title
               Text(
                 AppTexts.signupTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Color.fromARGB(255, 180, 139, 84),
+                ),
               ),
               const SizedBox(height: AppSizes.defaultSpace),
 
