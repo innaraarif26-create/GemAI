@@ -24,13 +24,15 @@ class ForgetPassword extends StatelessWidget
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Heading
-            Text(AppTexts.forgetPasswordTitle,style: Theme.of(context).textTheme.headlineMedium,),
+            /// Icon
+            Icon(Icons.lock_reset_rounded,size: 80,color: Color(0xFFB48B54),),
             const SizedBox(height: AppSizes.spaceBtwItems,),
-            Text(AppTexts.forgetPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium,),
-            const SizedBox(height: AppSizes.spaceBtwSections*2,),
+            /// Heading
+            Text(AppTexts.forgetPasswordTitle,style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
+            const SizedBox(height: AppSizes.spaceBtwItems,),
+            Text(AppTexts.forgetPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),
+            const SizedBox(height: AppSizes.spaceBtwSections,),
 
             /// Text Field
             TextFormField(

@@ -47,9 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
               /// Title
               Text(
                 AppTexts.signupTitle,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Color.fromARGB(255, 180, 139, 84),
-                ),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: AppSizes.defaultSpace),
 
