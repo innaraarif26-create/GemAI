@@ -49,6 +49,7 @@ class AppTexts
   static const String resendEmailIn = "Resend email in";
 
   // Home
-
+  static const String homeAppBarTitle = "Discover the World of Gemstones";
+  static const String homeAppBarSubTitle = "From basics to expert knowledge";
   // Global Texts
 }
