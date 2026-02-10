@@ -11,31 +11,19 @@ class AppPrimaryHeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCurvedEdgeWidget(
-      child: Container(
-        color: AppColors.accent,
-        padding: EdgeInsets.all(0),
-        child: SizedBox(
-          height: 400,
-          child: Stack(
-            children: [
-              Positioned(
-                top: -150,
-                right: -250,
-                child: AppCircularContainer(
-                  backgroundColor: AppColors.textWhite.withValues(alpha: 0.1),
-                ),
-              ),
-              Positioned(
-                top: 100,
-                right: -300,
-                child: AppCircularContainer(
-                  backgroundColor: AppColors.textWhite.withValues(alpha: 0.1),
-                ),
-              ),
-            ],
+      child: SizedBox(
+        height: 400,
+        child: Container(
+          color: AppColors.accent,
+            child: Stack(
+              children: [
+                Positioned(top: -150, right: -250,child: AppCircularContainer( backgroundColor: AppColors.textWhite.withValues(alpha: 0.1),),),
+                Positioned(top: 100,right: -300, child: AppCircularContainer(backgroundColor: AppColors.textWhite.withValues(alpha: 0.1), ),),
+                child,
+              ],
+            ),
           ),
         ),
-      ),
     );
   }
 }
