@@ -1,7 +1,4 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/utils/devices/device_utility.dart';
@@ -21,7 +18,7 @@ class AppSearchContainer extends StatelessWidget {
 
     final dark = AppHelperFunctions.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric( horizontal: AppSizes.defaultSpace,),
+      padding: const EdgeInsets.symmetric( horizontal: AppSizes.md,),
       child: Container(
         width: DeviceUtilities.getScreenWidth(context),
         padding: const EdgeInsets.all(AppSizes.md),
@@ -32,7 +29,7 @@ class AppSearchContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon ,color: AppColors.darkerGrey,size: 20,),
+            Icon(icon ,color: AppColors.darkerGrey,size: 18,),
             const SizedBox(width: AppSizes.spaceBtwItems),
             Text(text,  style: Theme.of(context).textTheme.bodySmall,),
           ],

@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
                   /// Appbar
                   const AppHomeAppBar(),
-                  const SizedBox(height: AppSizes.spaceBtwSections),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Search Bar
                   AppSearchContainer(text: "Search",icon: Iconsax.search_normal,),
