@@ -3,6 +3,7 @@ import 'package:gemai/widgets/custom_shapes/containers/primary_header_container.
 import 'package:iconsax/iconsax.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import '../../../widgets/custom_shapes/containers/search_container.dart';
+import '../../../widgets/texts/section_heading.dart';
 import 'home_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +27,17 @@ class HomeScreen extends StatelessWidget {
 
                   /// Search Bar
                   AppSearchContainer(text: "Search",icon: Iconsax.search_normal,),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
 
+                  /// Categories
+                 Padding(padding: EdgeInsets.only(left: AppSizes.defaultSpace),
+                 child: Column(
+                   children: [
+                     AppSectionHeading(title: 'Popular Gems', showActionButton: false,),
+                     const SizedBox(height: AppSizes.spaceBtwItems),
+                   ],
+                 ),
+                 )
                 ],
               ),
             ),
@@ -37,4 +48,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
