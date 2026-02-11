@@ -12,7 +12,7 @@ class AppPrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCurvedEdgeWidget(
       child: SizedBox(
-        height: 300,
+        height: 330,
         child: Container(
           color: AppColors.accent,
             child: Stack(

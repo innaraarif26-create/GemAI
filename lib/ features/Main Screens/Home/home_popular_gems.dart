@@ -3,20 +3,36 @@ import '../../../core/constants/image_strings.dart';
 import '../../../widgets/image_text_Widget/vertical_image_text.dart';
 
 class AppHomePopularGems extends StatelessWidget {
-  const AppHomePopularGems({
-    super.key,
-  });
+  const AppHomePopularGems({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final gems = [
+      {"image": AppImages.diamond, "title": "Diamond"},
+      {"image": AppImages.amethyst, "title": "Amethyst"},
+      {"image": AppImages.citrine, "title": "Citrine"},
+      {"image": AppImages.aquamarine, "title": "Aquamarine"},
+      {"image": AppImages.emerald, "title": "Emerald"},
+      {"image": AppImages.ruby, "title": "Ruby"},
+      {"image": AppImages.sapphire, "title": "Sapphire"},
+      {"image": AppImages.morganite, "title": "Morganite"},
+      {"image": AppImages.topaz, "title": "Topaz"},
+      {"image": AppImages.tanzanite, "title": "Tanzanite"},
+      {"image": AppImages.peridot, "title": "Peridot"},
+    ];
+
     return SizedBox(
-      height:80,
+      height: 80,
       child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 6,
         scrollDirection: Axis.horizontal,
+        itemCount: gems.length,
         itemBuilder: (_, index) {
-          return AppVerticalImageText(image: AppImages.emerald, title: 'Diamond',onTap: (){},);
+          return AppVerticalImageText(
+            image: gems[index]["image"]!,
+            title: gems[index]["title"]!,
+            onTap: () {},
+          );
         },
       ),
     );

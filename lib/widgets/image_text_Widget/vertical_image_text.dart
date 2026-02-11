@@ -48,7 +48,6 @@ class AppVerticalImageText extends StatelessWidget {
               width: 55,
               child: Text(title,style: Theme.of(context).textTheme.labelMedium!.apply(color: textColor),
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
             )
           ],
