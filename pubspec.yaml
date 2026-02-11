@@ -46,6 +46,7 @@ flutter:
   assets:
     - assets/images/onboarding_images/
     - assets/images/PopularGems/
+    - assets/images/books/
     - assets/images/animations/
     - assets/logos/
     - assets/icons/
