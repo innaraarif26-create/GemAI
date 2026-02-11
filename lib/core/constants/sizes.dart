@@ -33,6 +33,10 @@ class AppSizes
   // Image Size
   static const double imageThumbSize = 80.0;
 
+  // Books Size
+  static const double bookWidth = 120.0;
+  static const double bookHeight = 160.0;
+
   // Default Spacing between Sections
   static const double defaultSpace = 24.0;
   static const double spaceBtwItems = 10.0;

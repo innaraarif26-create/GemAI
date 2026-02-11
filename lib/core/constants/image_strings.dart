@@ -24,6 +24,12 @@ class AppImages
   static const String tanzanite = "assets/images/PopularGems/Tanzanite.png";
   static const String topaz = "assets/images/PopularGems/Topaz.png";
 
+  //Book Images
+  static const String book1 = "assets/images/books/book1.jpg";
+  static const String book2 = "assets/images/books/book2.png";
+  static const String book3 = "assets/images/books/book3.jpg";
+  static const String book4 = "assets/images/books/book4.jpg";
+
   // Onboarding Screen Images
   static const String onBoardingImage1 = "assets/images/onboarding_images/onboarding1.gif";
   static const String onBoardingImage2 = "assets/images/onboarding_images/onboarding2.gif";
