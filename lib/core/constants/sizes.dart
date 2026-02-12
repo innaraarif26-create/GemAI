@@ -76,7 +76,7 @@ class AppSizes
   static const double gridViewSpacing = 16.0;
 
   // Articles height
-  static const double articlesHeight = 200.0;
+  static const double articlesHeight = 180.0;
 
 
 }

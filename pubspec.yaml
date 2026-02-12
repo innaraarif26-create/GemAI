@@ -48,9 +48,9 @@ flutter:
     - assets/images/PopularGems/
     - assets/images/books/
     - assets/images/RealFake/
+    - assets/images/Articles/
     - assets/images/animations/
     - assets/logos/
-    - assets/icons/
     - assets/pdfs/
     - assets/docs/terms_of_use.html
     - assets/docs/privacy_policy.html
