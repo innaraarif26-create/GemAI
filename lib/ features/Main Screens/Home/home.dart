@@ -73,7 +73,8 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Articles Horizontal List
-                  const AppArticlesList()
+                  const AppArticlesList(),
+                  const SizedBox(height: AppSizes.md),
 
                 ],
               ),
