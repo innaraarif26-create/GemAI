@@ -11,14 +11,14 @@ class AppHomePopularGems extends StatelessWidget {
     final gems = [
       {"image": AppImages.diamond, "title": "Diamond"},
       {"image": AppImages.amethyst, "title": "Amethyst"},
+      {"image": AppImages.tanzanite, "title": "Tanzanite"},
       {"image": AppImages.citrine, "title": "Citrine"},
-      {"image": AppImages.aquamarine, "title": "Aquamarine"},
       {"image": AppImages.emerald, "title": "Emerald"},
       {"image": AppImages.ruby, "title": "Ruby"},
+      {"image": AppImages.aquamarine, "title": "Aquamarine"},
       {"image": AppImages.sapphire, "title": "Sapphire"},
       {"image": AppImages.morganite, "title": "Morganite"},
       {"image": AppImages.topaz, "title": "Topaz"},
-      {"image": AppImages.tanzanite, "title": "Tanzanite"},
       {"image": AppImages.peridot, "title": "Peridot"},
     ];
 

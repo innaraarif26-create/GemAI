@@ -9,7 +9,8 @@ class AppHomeAppBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return AppAppBar(title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
