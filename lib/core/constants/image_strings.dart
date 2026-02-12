@@ -53,4 +53,10 @@ class AppImages
   static const String diamond1 = "assets/images/RealFake/Diamond.png";
   static const String citrine1 = "assets/images/RealFake/Citrine.png";
   static const String fluorite = "assets/images/RealFake/Fluorite.png";
+
+  // Articles
+  static const String article1 = "assets/images/Articles/article1.jpg";
+  static const String article2 = "assets/images/Articles/article2.jpg";
+  static const String article3 = "assets/images/Articles/article3.jpg";
+  static const String article4 = "assets/images/Articles/article4.jpg";
 }
