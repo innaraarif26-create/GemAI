@@ -20,7 +20,7 @@ class AppSectionHeading extends StatelessWidget
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(title,style: Theme.of(context).textTheme.headlineSmall!.apply(color: textColor),maxLines: 1,overflow: TextOverflow.ellipsis,),
+        Text(title,style: Theme.of(context).textTheme.titleSmall!.apply(color: textColor),maxLines: 1,overflow: TextOverflow.ellipsis,),
         Spacer(),
         if (showActionButton)  TextButton(onPressed: onPressed , child: Text(buttonTitle))
       ],
