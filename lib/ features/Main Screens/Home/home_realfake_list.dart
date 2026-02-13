@@ -14,6 +14,7 @@ class AppRealFakeList extends StatelessWidget {
       {"image": AppImages.labradorite, "title": "Labradorite"},
       {"image": AppImages.turquoise, "title": "Turquoise"},
       {"image": AppImages.redCoral, "title": "Red Coral"},
+      {"image": AppImages.citrine1, "title": "Citrine"},
       {"image": AppImages.amethyst1, "title": "Amethyst"},
       {"image": AppImages.pearl, "title": "Pearl"},
       {"image": AppImages.amber, "title": "Amber"},
@@ -21,7 +22,6 @@ class AppRealFakeList extends StatelessWidget {
       {"image": AppImages.opal, "title": "Opal"},
       {"image": AppImages.gold, "title": "Gold"},
       {"image": AppImages.diamond1, "title": "Diamond"},
-      {"image": AppImages.citrine1, "title": "Citrine"},
       {"image": AppImages.fluorite, "title": "Fluorite"},
     ];
     return SizedBox(

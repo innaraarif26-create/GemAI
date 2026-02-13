@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
 
                   /// Books Heading
-                  AppSectionHeading(title: 'Books', showActionButton: false,textColor: Colors.black,),
+                  AppSectionHeading(title: 'Books'),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Books Horizontal List
@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                  const SizedBox(height: AppSizes.md),
 
                   /// Real vs Fake Heading
-                 AppSectionHeading(title: 'Real vs Fake', showActionButton: true,textColor: Colors.black,),
+                 AppSectionHeading(title: 'Real vs Fake',showActionButton: true, onPressed: (){},),
                  const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Real vs Fake Horizontal List
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: AppSizes.md),
 
                   /// Articles Heading
-                  AppSectionHeading(title: 'Articles', showActionButton: false,textColor: Colors.black,),
+                  AppSectionHeading(title: 'Articles'),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Articles Horizontal List
