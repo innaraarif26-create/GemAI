@@ -2,6 +2,7 @@
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
 import '../../styles/shadows.dart';
 
 class AppProductCardVertical extends StatelessWidget
@@ -24,9 +25,22 @@ class AppProductCardVertical extends StatelessWidget
        child: Column(
          children: [
            /// Thumbnail,Wishlist button
+            AppRoundedContainer(
+              height: 180,
+              padding: const EdgeInsets.all(AppSizes.sm),
+              backgroundColor: dark ? AppColors.dark : AppColors.light,
+              child: Stack(
+                children: [
+                  /// Thumbnail image
 
+                  ///
+                ],
+              ),
+            )
          ],
        ),
      );
    }
  }
+
+
