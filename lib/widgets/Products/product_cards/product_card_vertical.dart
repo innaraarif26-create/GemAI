@@ -21,7 +21,26 @@ class AppProductCardVertical extends StatelessWidget
          borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
          color: dark ? AppColors.darkerGrey : AppColors.white,
        ),
+       child: Column(
+         children: [
+           /// Thumbnail,Wishlist button
+
+         ],
+       ),
      );
    }
  }
+
+ class AppRoundedContainer extends StatelessWidget
+ {
+   const AppRoundedContainer({super.key});
+
+
+
+   @override
+   Widget build(BuildContext context) {
+     return const Placeholder();
+   }
+ }
+
 
