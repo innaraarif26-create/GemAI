@@ -7,6 +7,7 @@ import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/custom_shapes/containers/search_container.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
 import '../../../widgets/Favorite_Products/favorite_icon.dart';
+import '../../../widgets/Products/product_cards/product_card_vertical.dart';
 
 class Store extends StatelessWidget
 {
@@ -51,7 +52,7 @@ class Store extends StatelessWidget
                       /// Products
                       AppSectionHeading(title: 'Popular products',),
                       const SizedBox(height: AppSizes.spaceBtwItems),
-
+                      AppProductCardVertical(),
 
 
                     ],
