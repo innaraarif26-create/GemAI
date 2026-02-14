@@ -1,8 +1,10 @@
  import 'package:flutter/cupertino.dart';
 import 'package:gemai/core/constants/colors.dart';
+import 'package:gemai/core/constants/image_strings.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:gemai/widgets/image_widget/rounded_image.dart';
 import '../../styles/shadows.dart';
 
 class AppProductCardVertical extends StatelessWidget
@@ -32,7 +34,7 @@ class AppProductCardVertical extends StatelessWidget
               child: Stack(
                 children: [
                   /// Thumbnail image
-
+                  AppRoundedImage(imageUrl: AppImages.morganite,)
                   ///
                 ],
               ),

@@ -49,6 +49,7 @@ flutter:
     - assets/images/books/
     - assets/images/RealFake/
     - assets/images/Articles/
+    - assets/images/MarketPlace/
     - assets/images/animations/
     - assets/logos/
     - assets/pdfs/
