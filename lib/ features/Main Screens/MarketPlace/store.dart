@@ -52,9 +52,9 @@ class Store extends StatelessWidget
                       /// Products
                       AppSectionHeading(title: 'Popular products',),
                       const SizedBox(height: AppSizes.spaceBtwItems),
-                      AppProductCardVertical(),
 
-
+                      /// Popular Products
+                      AppGridLayout(),
                     ],
                   ),
                 ),
@@ -65,4 +65,5 @@ class Store extends StatelessWidget
     );
   }
 }
+
 

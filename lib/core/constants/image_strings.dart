@@ -61,5 +61,10 @@ class AppImages
   static const String article4 = "assets/images/Articles/article4.jpg";
 
   // MarketPlace
-static const String product1 = "assets/images/MarketPlace/topaz_pendant.jpg";
+  static const String product1 = "assets/images/MarketPlace/topaz_pendant.jpg";
+  static const String product2 = "assets/images/MarketPlace/diamond_ring.jpg";
+  static const String product3 = "assets/images/MarketPlace/emerald_necklace.jpg";
+  static const String product4 = "assets/images/MarketPlace/peridot_quartz.jpg";
+  static const String product5 = "assets/images/MarketPlace/peridot_quartz.png";
+
 }
