@@ -5,6 +5,7 @@ import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:gemai/widgets/image_widget/rounded_image.dart';
+import 'package:gemai/widgets/texts/product_title_text.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../icons/circular_icon.dart';
 import '../../styles/shadows.dart';
@@ -29,6 +30,7 @@ class AppProductCardVertical extends StatelessWidget
            color: dark ? AppColors.darkerGrey : AppColors.white,
          ),
          child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
            children: [
              /// Thumbnail,Wishlist button
               AppRoundedContainer(
@@ -52,19 +54,21 @@ class AppProductCardVertical extends StatelessWidget
                     Padding(
                         padding: EdgeInsets.only(left: AppSizes.sm),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Emerald Necklace",
-                              style: Theme.of(context).textTheme.labelLarge,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                            ),
-                            Text("\$35.5",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style:  Theme.of(context).textTheme.headlineMedium,
+                            AppProductTitleText(title: "Emerald Necklace",smallSize: true,),
+                            SizedBox(height: AppSizes.spaceBtwItems / 2,),
+                            Row(
+                              children: [
+                                const Icon(Icons.person,size: 12,color: AppColors.grey,),
+                                const SizedBox(width: AppSizes.xs,),
+                                AppProductTitleText(title: "Shahab",smallSize: true,),
+                                const SizedBox(height: AppSizes.xs,),
+                                AppProductTitleText(title: "\$35.5",smallSize: true,),
 
+                              ],
                             )
+
                           ],
                         ),
                     )

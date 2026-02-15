@@ -6,14 +6,15 @@ class AppRoundedContainer extends StatelessWidget
 {
   const AppRoundedContainer({
     super.key,
+    this.child,
     this.width,
     this.height,
+    this.padding,
+    this.margin,
     this.radius = AppSizes.cardRadiusLg,
-    this.child,
     this.showBorder = false,
     this.borderColor = AppColors.borderPrimary,
     this.backgroundColor = AppColors.white,
-    this.padding, this.margin
   });
 
   final double? width;
