@@ -56,19 +56,17 @@ class AppProductCardVertical extends StatelessWidget
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppProductTitleText(title: "Emerald Necklace",smallSize: true,),
+                            AppProductTitleText(title: "Emerald Necklace",smallSize: false,),
                             SizedBox(height: AppSizes.spaceBtwItems / 2,),
                             Row(
                               children: [
-                                const Icon(Icons.person,size: 12,color: AppColors.grey,),
-                                const SizedBox(width: AppSizes.xs,),
+                                const Icon(Icons.person,size: 14,color: AppColors.grey,),
+                                const SizedBox(width: AppSizes.sm,),
                                 AppProductTitleText(title: "Shahab",smallSize: true,),
-                                const SizedBox(height: AppSizes.xs,),
-                                AppProductTitleText(title: "\$35.5",smallSize: true,),
-
                               ],
-                            )
-
+                            ),
+                            const SizedBox(height: AppSizes.xs,),
+                            AppProductTitleText(title: "\$35.5",smallSize: false,),
                           ],
                         ),
                     )

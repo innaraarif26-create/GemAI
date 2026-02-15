@@ -1,13 +1,15 @@
 
 import 'package:flutter/material.dart';
 
+import '../../core/constants/colors.dart';
+
 class AppProductTitleText extends StatelessWidget
 {
   const AppProductTitleText({super.key,
     required this.title,
     this.smallSize = false,
     this.maxLines = 2,
-    this.textAlign = TextAlign.left
+    this.textAlign = TextAlign.left,
   });
 
   final String title;
@@ -20,7 +22,7 @@ class AppProductTitleText extends StatelessWidget
   {
     return Text(
       title,
-      style: smallSize ? Theme.of(context).textTheme.labelLarge : Theme.of(context).textTheme.titleSmall,
+      style: smallSize ? Theme.of(context).textTheme.labelLarge : Theme.of(context).textTheme.bodySmall!.apply(color: AppColors.accent),
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
       textAlign: textAlign,

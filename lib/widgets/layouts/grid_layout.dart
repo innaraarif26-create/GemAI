@@ -6,7 +6,7 @@ class AppGridLayout extends StatelessWidget
   const AppGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 288,
+    this.mainAxisExtent = 270,
     required this.itemBuilder,
   });
 
@@ -25,7 +25,7 @@ class AppGridLayout extends StatelessWidget
         crossAxisCount: 2,
         mainAxisSpacing: AppSizes.gridViewSpacing,
         crossAxisSpacing: AppSizes.gridViewSpacing,
-        mainAxisExtent: 288,
+        mainAxisExtent: 270,
       ),
       itemBuilder: itemBuilder );
   }
