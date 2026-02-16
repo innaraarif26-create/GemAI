@@ -18,10 +18,10 @@ class Store extends StatelessWidget
   Widget build(BuildContext context)
   {
     return DefaultTabController(
-      length:6,
+      length: 6,
       child: Scaffold(
       appBar: AppAppBar(
-      title: Text("Store",style: Theme.of(context).textTheme.headlineMedium,),
+      title: Text("Store",style: Theme.of(context).textTheme.headlineMedium),
         actions: [
           AppFavoriteCounterIcon(onPressed: () {}, iconColor: AppColors.black,),
         ]
@@ -34,7 +34,7 @@ class Store extends StatelessWidget
                   pinned: true,
                   floating: true,
                   backgroundColor: AppHelperFunctions.isDarkMode(context) ? AppColors.black : AppColors.white,
-                  expandedHeight: 150,
+                  expandedHeight: 140,
                   
                   flexibleSpace: Padding(
                     padding: EdgeInsets.all(AppSizes.defaultSpace),
