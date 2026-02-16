@@ -66,7 +66,7 @@ class AppProductCardVertical extends StatelessWidget
                               ],
                             ),
                             const SizedBox(height: AppSizes.xs,),
-                            AppProductTitleText(title: "\$35.5"),
+                            AppProductTitleText(title: "\$35.6"),
                           ],
                         ),
                     )
