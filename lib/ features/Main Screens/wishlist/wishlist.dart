@@ -5,9 +5,7 @@ import 'package:gemai/widgets/icons/circular_icon.dart';
 import 'package:gemai/widgets/layouts/grid_layout.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../../../core/constants/sizes.dart';
-import '../MarketPlace/store.dart';
 
 class FavouriteScreen extends StatelessWidget
 {
@@ -20,7 +18,7 @@ class FavouriteScreen extends StatelessWidget
       appBar: AppAppBar(
         title: Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium,),
         actions: [
-          AppCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(const Store()),)
+          AppCircularIcon(icon: Iconsax.add, onPressed: () => Get.back(),)
         ],
       ),
      body: SingleChildScrollView(
