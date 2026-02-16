@@ -6,6 +6,7 @@ import 'package:gemai/widgets/layouts/grid_layout.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/constants/sizes.dart';
+import '../../../navigation_menu.dart';
 
 class FavouriteScreen extends StatelessWidget
 {
@@ -16,9 +17,10 @@ class FavouriteScreen extends StatelessWidget
   {
     return Scaffold(
       appBar: AppAppBar(
+        showBackArrow: true,
         title: Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium,),
         actions: [
-          AppCircularIcon(icon: Iconsax.add, onPressed: () => Get.back(),)
+          AppCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(NavigationMenu()),)
         ],
       ),
      body: SingleChildScrollView(

@@ -1,8 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
-
 import '../../core/constants/sizes.dart';
 
 class AppCircularImage extends StatelessWidget
@@ -38,7 +36,10 @@ class AppCircularImage extends StatelessWidget
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(
-        child: Image(image: isNetworkImage ? NetworkImage(image) : AssetImage(image) as ImageProvider,color: overlayColor,),
+        child: Image(image: isNetworkImage ? NetworkImage(image) : AssetImage(image) as ImageProvider,
+          color: overlayColor,
+          fit: fit,
+        ),
       ),
     );
   }

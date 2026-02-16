@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
+import '../../../Main Screens/wishlist/wishlist.dart';
+import '../profile/widgets/profile.dart';
 
 class SettingScreen extends StatelessWidget
 {
@@ -27,7 +30,7 @@ class SettingScreen extends StatelessWidget
                     const SizedBox(height: AppSizes.spaceBtwSections,),
                     
                     /// User Profile Card
-                    AppUserProfileTile(),
+                    AppUserProfileTile(onPressed: ()=> Get.to(ProfileScreen())),
                     const SizedBox(height: AppSizes.spaceBtwSections,),
                   ],
             )),
@@ -39,10 +42,10 @@ class SettingScreen extends StatelessWidget
                   /// Account Setting
                   AppSectionHeading(title: "Account",showActionButton: false,),
                   SizedBox(height: AppSizes.spaceBtwItems,),
-                  AppSettingMenuTile(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: ()=> Get.to(ProfileScreen())),
                   AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: (){}),
-                  AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: ()=> Get.to(FavouriteScreen())),
                   AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers", onTap: (){}),
 
 

@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import '../../core/constants/sizes.dart';
 import '../../core/utils/devices/device_utility.dart';
 
-class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
+class AppAppBar extends StatelessWidget implements PreferredSizeWidget
+{
   const AppAppBar({
     super.key,
     this.title,
