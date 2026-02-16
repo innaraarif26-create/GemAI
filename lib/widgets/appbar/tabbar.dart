@@ -18,6 +18,7 @@ class AppTabBar extends StatelessWidget implements PreferredSizeWidget {
     return Material(
       color: dark ? AppColors.black : AppColors.white,
       child: TabBar(
+        tabAlignment: TabAlignment.start,
         tabs: tabs,
         isScrollable: true,
         indicatorColor: AppColors.buttonSecondary,

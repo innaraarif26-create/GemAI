@@ -34,7 +34,7 @@ class AppProductCardVertical extends StatelessWidget
            children: [
              /// Thumbnail,Wishlist button
               AppRoundedContainer(
-                height: 180,
+                height: 170,
                 padding: const EdgeInsets.all(AppSizes.sm),
                 backgroundColor: dark ? AppColors.dark : AppColors.light,
                 child: Stack(
@@ -52,21 +52,21 @@ class AppProductCardVertical extends StatelessWidget
                     const SizedBox(height: AppSizes.spaceBtwItems/2,),
                     /// Details
                     Padding(
-                        padding: EdgeInsets.only(left: AppSizes.sm),
+                        padding: EdgeInsets.only(left: AppSizes.xs),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppProductTitleText(title: "Emerald Necklace",smallSize: false,),
+                            AppProductTitleText(title: "Emerald Necklace ",smallSize: false,),
                             SizedBox(height: AppSizes.spaceBtwItems / 2,),
                             Row(
                               children: [
                                 const Icon(Icons.person,size: 14,color: AppColors.grey,),
-                                const SizedBox(width: AppSizes.sm,),
+                                const SizedBox(width: AppSizes.xs,),
                                 AppProductTitleText(title: "Shahab",smallSize: true,),
                               ],
                             ),
                             const SizedBox(height: AppSizes.xs,),
-                            AppProductTitleText(title: "\$35.5",smallSize: false,),
+                            AppProductTitleText(title: "\$35.5"),
                           ],
                         ),
                     )
