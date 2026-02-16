@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/auth/login/login_screen.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
@@ -61,13 +62,13 @@ class SettingScreen extends StatelessWidget
                   AppSettingMenuTile(icon: Iconsax.message, title: "Feedback", subTitle: "Send us your suggestions", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.document, title: "Terms of Use", subTitle: "Guidelines for using our services", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.shield_tick, title: "Privacy Policy", subTitle: "Learn how we protect your personal information", onTap: (){}),
-                  AppSettingMenuTile(icon: Iconsax.login, title: "Sign In / Sign Up", subTitle: "Sign in to manage and list your items", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.login, title: "Sign In / Sign Up", subTitle: "Sign in to manage and list your items", onTap: ()=> Get.to(LoginScreen())),
 
                   /// Logout Button
                   const SizedBox(height: AppSizes.spaceBtwSections,),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(onPressed: (){}, child: const Text("Logout")),
+                    child: OutlinedButton(onPressed: ()=> Get.to(LoginScreen()), child: const Text("Logout")),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwSections )
                 ],
