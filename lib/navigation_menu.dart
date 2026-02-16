@@ -28,7 +28,7 @@ class NavigationMenu extends StatelessWidget
             indicatorColor:  darkMode ? AppColors.white.withValues(alpha: 0.1) : AppColors.black.withValues(alpha: 0.1),
             destinations: const [
                NavigationDestination(icon: Icon(Iconsax.home), label: "Home"),
-               NavigationDestination(icon: Icon(Iconsax.shop), label: "Store"),
+               NavigationDestination(icon: Icon(Iconsax.shop), label: "MarketPlace"),
                NavigationDestination(icon: Icon(Iconsax.camera), label: "Capture"),
                NavigationDestination(icon: Icon(Iconsax.dollar_circle), label: "Valuation"),
                NavigationDestination(icon: Icon(Iconsax.user), label: "Profile"),

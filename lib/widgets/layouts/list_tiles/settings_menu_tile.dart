@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
 
-class AppSectionMenuTitle extends StatelessWidget
+class AppSettingMenuTile extends StatelessWidget
 {
-  const AppSectionMenuTitle({super.key,
+  const AppSettingMenuTile({super.key,
     required this.icon,
     required this.title,
     required this.subTitle,

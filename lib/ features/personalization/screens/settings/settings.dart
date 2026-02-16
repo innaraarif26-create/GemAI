@@ -37,17 +37,28 @@ class SettingScreen extends StatelessWidget
               child: Column(
                 children: [
                   /// Account Setting
-                  AppSectionHeading(title: "Account Setting",showActionButton: false,),
+                  AppSectionHeading(title: "Account",showActionButton: false,),
                   SizedBox(height: AppSizes.spaceBtwItems,),
+                  AppSettingMenuTile(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers", onTap: (){}),
 
-                    AppSectionMenuTitle(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set SHopping delivery address", onTap: (){}),
-                    AppSectionMenuTitle(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: (){}),
-                    AppSectionMenuTitle(icon: Iconsax.message, title: "Feedback", subTitle: "Send us your suggestions", onTap: (){}),
-                    AppSectionMenuTitle(icon: Iconsax.login, title: "Sign In / Sign Up", subTitle: "Sign in to manage and list your items", onTap: (){}),
-                    AppSectionMenuTitle(icon: Iconsax.heart, title: "My Favorite", subTitle: "Items you’ve saved for later", onTap: (){}),
-                    AppSectionMenuTitle(icon: Iconsax.heart, title: "Notifications", subTitle: "Manage alerts for your account and listings", onTap: (){}),
-                    AppSectionMenuTitle(icon: Icons.description, title: "Terms of Use", subTitle: "Guidelines for using our services", onTap: (){}),
-                    AppSectionMenuTitle(icon: Icons.privacy_tip, title: "Privacy Policy", subTitle: "Learn how we protect your personal information", onTap: (){}),
+
+                  /// Divider
+                  const SizedBox(height: AppSizes.spaceBtwItems),
+                  const Divider(thickness: 1),
+
+                  /// Settings
+                  SizedBox(height: AppSizes.spaceBtwItems),
+                  AppSectionHeading(title: "Settings", showActionButton: false,),
+                  SizedBox(height: AppSizes.spaceBtwItems,),
+                  AppSettingMenuTile(icon: Iconsax.notification, title: "Notifications", subTitle: "Manage alerts for your account and listings", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.message, title: "Feedback", subTitle: "Send us your suggestions", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.document, title: "Terms of Use", subTitle: "Guidelines for using our services", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.shield_tick, title: "Privacy Policy", subTitle: "Learn how we protect your personal information", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.login, title: "Sign In / Sign Up", subTitle: "Sign in to manage and list your items", onTap: (){}),
 
                   /// Logout Button
                   const SizedBox(height: AppSizes.spaceBtwSections,),
@@ -55,7 +66,7 @@ class SettingScreen extends StatelessWidget
                     width: double.infinity,
                     child: OutlinedButton(onPressed: (){}, child: const Text("Logout")),
                   ),
-                  const SizedBox(height: AppSizes.spaceBtwSections * 2.5)
+                  const SizedBox(height: AppSizes.spaceBtwSections )
                 ],
               ),
             )
