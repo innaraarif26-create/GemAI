@@ -67,4 +67,7 @@ class AppImages
   static const String product4 = "assets/images/MarketPlace/peridot_quartz.jpg";
   static const String product5 = "assets/images/MarketPlace/peridot_quartz.png";
 
+  // profile
+  static const String user = "assets/images/user/user.png";
+
 }

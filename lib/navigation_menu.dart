@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/%20features/Main%20Screens/Home/home.dart';
 import 'package:gemai/%20features/Main%20Screens/MarketPlace/store.dart';
 import 'package:gemai/%20features/Main%20Screens/detection/capture_image_screen.dart';
+import 'package:gemai/%20features/personalization/screens/settings/settings.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
@@ -48,6 +49,6 @@ class NavigationController extends GetxController
     const Store(),
     const CaptureImageScreen(),
     Container(color: Colors.orange),
-    Container(color: Colors.pink),
+    const SettingScreen(),
   ];
 }

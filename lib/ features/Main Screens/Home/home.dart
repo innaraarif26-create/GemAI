@@ -40,6 +40,8 @@ class HomeScreen extends StatelessWidget {
 
                         /// Popular Gems List
                         const AppHomePopularGems(),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
+
                       ],
                     ),
                   ),

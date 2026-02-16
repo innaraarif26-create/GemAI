@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/images/onboarding_images/
     - assets/images/PopularGems/
+    - assets/images/user/
     - assets/images/books/
     - assets/images/RealFake/
     - assets/images/Articles/
