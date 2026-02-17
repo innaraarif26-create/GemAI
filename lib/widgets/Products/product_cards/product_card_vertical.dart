@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/shop/screens/product_details/product_detail.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/image_strings.dart';
 import 'package:gemai/core/constants/sizes.dart';
@@ -6,6 +7,7 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:gemai/widgets/image_widget/rounded_image.dart';
 import 'package:gemai/widgets/texts/product_title_text.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../icons/circular_icon.dart';
 import '../../styles/shadows.dart';
@@ -20,7 +22,7 @@ class AppProductCardVertical extends StatelessWidget
      final dark = AppHelperFunctions.isDarkMode(context);
 
      return GestureDetector(
-       onTap: (){},
+       onTap: () => Get.to(()=> const ProductDetailScreen()) ,
        child: Container(
           width: 180,
           padding: const EdgeInsets.all(1),
