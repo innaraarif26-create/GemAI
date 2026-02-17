@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/shop/screens/product_details/widgets/product_price_text.dart';
 import '../../../../../core/constants/sizes.dart';
 
 class AppPriceAndShare extends StatelessWidget {
@@ -14,7 +15,7 @@ class AppPriceAndShare extends StatelessWidget {
         /// Price
         Row(
           children: [
-              Text("Rs 50000",style: Theme.of(context).textTheme.headlineSmall),
+              AppProductPriceText(price: '50000'),
           ],
         ),
         /// Share Button

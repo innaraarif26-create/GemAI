@@ -4,6 +4,8 @@ import 'package:gemai/%20features/shop/screens/product_details/widgets/product_d
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 
+import '../../../../widgets/texts/product_title_text.dart';
+
 
 class ProductDetailScreen extends StatelessWidget
 {
@@ -27,9 +29,13 @@ class ProductDetailScreen extends StatelessWidget
               child: Column(
                 children: [
                   /// Price And share button
-                  AppPriceAndShare()
+                  AppPriceAndShare(),
+                  const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
                   ///Title,
+                  AppProductTitleText(title: 'Certified Natural Emerald Necklace',),
+                  const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+
                 ],
               ),
             )

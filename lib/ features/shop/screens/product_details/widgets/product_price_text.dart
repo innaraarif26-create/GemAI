@@ -4,7 +4,7 @@ class AppProductPriceText extends StatelessWidget
 {
   const AppProductPriceText({
     super.key,
-    this.currencySign = "Rs",
+    this.currencySign = "Rs ",
     required this.price,
     this.maxLines = 1,
   });
