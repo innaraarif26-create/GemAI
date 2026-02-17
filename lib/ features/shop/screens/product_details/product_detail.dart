@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/%20features/shop/screens/product_details/widgets/price_share_widget.dart';
 import 'package:gemai/%20features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
+import 'package:gemai/%20features/shop/screens/product_details/widgets/product_location.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
-
 import '../../../../widgets/texts/product_title_text.dart';
 
 
@@ -27,6 +27,7 @@ class ProductDetailScreen extends StatelessWidget
             Padding(
               padding: EdgeInsets.only(right: AppSizes.defaultSpace,left: AppSizes.defaultSpace,bottom: AppSizes.defaultSpace),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Price And share button
                   AppPriceAndShare(),
@@ -36,6 +37,9 @@ class ProductDetailScreen extends StatelessWidget
                   AppProductTitleText(title: 'Certified Natural Emerald Necklace',),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
+                  /// Location
+                  AppProductLocation(location: 'Danyore, Gilgit',)
+                  
                 ],
               ),
             )
@@ -45,4 +49,6 @@ class ProductDetailScreen extends StatelessWidget
     );
   }
 }
+
+
 

@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 import '../../core/constants/colors.dart';
 
 class AppProductTitleText extends StatelessWidget

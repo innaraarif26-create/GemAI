@@ -15,7 +15,7 @@ class AppPriceAndShare extends StatelessWidget {
         /// Price
         Row(
           children: [
-              AppProductPriceText(price: '50000'),
+              AppProductPriceText(price: '50,000'),
           ],
         ),
         /// Share Button

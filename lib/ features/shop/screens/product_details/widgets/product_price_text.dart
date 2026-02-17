@@ -20,7 +20,7 @@ class AppProductPriceText extends StatelessWidget
       currencySign + price,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.headlineSmall,
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }
