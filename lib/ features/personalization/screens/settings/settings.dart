@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/%20features/auth/login/login_screen.dart';
+import 'package:gemai/%20features/personalization/screens/address/widgets/address.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
@@ -44,7 +45,7 @@ class SettingScreen extends StatelessWidget
                   AppSectionHeading(title: "Account",showActionButton: false,),
                   SizedBox(height: AppSizes.spaceBtwItems,),
                   AppSettingMenuTile(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: ()=> Get.to(ProfileScreen())),
-                  AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: ()=> Get.to(UserAddressScreen())),
                   AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: ()=> Get.to(FavouriteScreen())),
                   AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers", onTap: (){}),
