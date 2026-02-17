@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gemai/%20features/shop/screens/product_details/widgets/price_share_widget.dart';
 import 'package:gemai/%20features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:gemai/%20features/shop/screens/product_details/widgets/product_location.dart';
+import 'package:gemai/%20features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/widgets/texts/section_heading.dart';
 import '../../../../widgets/texts/product_title_text.dart';
 
 
@@ -38,8 +40,10 @@ class ProductDetailScreen extends StatelessWidget
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
                   /// Location
-                  AppProductLocation(location: 'Danyore, Gilgit',)
-                  
+                  AppProductLocation(location: 'Danyore, Gilgit',),
+                  const SizedBox(height: AppSizes.defaultSpace),
+
+                  AppProductMetaData(),
                 ],
               ),
             )
