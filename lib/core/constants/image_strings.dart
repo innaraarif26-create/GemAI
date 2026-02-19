@@ -70,4 +70,13 @@ class AppImages
   // profile
   static const String user = "assets/images/user/user.png";
 
+  // popular Gems Details Image
+  static const String amethystBg = "assets/images/PopularGems/DetailsImages/AmethystBg.jpg";
+  static const String amethystGlass = "assets/images/PopularGems/DetailsImages/amethyst_glass.png";
+  static const String amethystPaste = "assets/images/PopularGems/DetailsImages/amethyst_paste.png";
+  static const String amethystQuartz = "assets/images/PopularGems/DetailsImages/amethyst_quartz.png";
+  static const String amethystSynthetic = "assets/images/PopularGems/DetailsImages/amethyst_synthetic.png";
+  static const String aquamarineBg = "assets/images/PopularGems/DetailsImages/AquamarineBg.jpg";
+
+
 }
