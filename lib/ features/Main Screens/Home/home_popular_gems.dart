@@ -9,7 +9,7 @@ class AppHomePopularGems extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final gems = [
-      {"image": AppImages.diamond, "title": "Diamond"},
+      {"image": AppImages.diamond, "title": ""},
       {"image": AppImages.amethyst, "title": "Amethyst"},
       {"image": AppImages.tanzanite, "title": "Tanzanite"},
       {"image": AppImages.citrine, "title": "Citrine"},
