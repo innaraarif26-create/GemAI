@@ -82,9 +82,10 @@ class AppHomePopularGems extends StatelessWidget {
           origins: ["Brazil", "Uruguay", "Zambia", "Russia (Siberia)"],
           imitations: [
             ImitationItem(img: AppImages.amethystGlass, title: "Glass", desc: "Common imitation with low hardness and weaker color.\n",),
-            ImitationItem(img: AppImages.amethystSynthetic, title: "Synthetic Amethyst", desc: "Lab-grown versions that look identical but cost much less.\n",),
             ImitationItem(img: AppImages.amethystQuartz, title: "Dyed Quartz", desc: "Quartz dyed purple to mimic Amethyst.\n",),
-            ImitationItem(img: AppImages.amethystPaste, title: "Glass Paste", desc: "Soft glass imitation used in low-cost jewelry.",),
+            ImitationItem(img: AppImages.amethystPaste, title: "Glass Paste", desc: "Soft glass imitation used in low-cost jewelry.\n",),
+            ImitationItem(img: AppImages.amethystSynthetic, title: "Synthetic Amethyst", desc: "Lab-grown versions that look identical but cost much less."),
+
           ],
           history: [
             "Ancient Greeks believed Amethyst protected from drunkenness.",
@@ -499,16 +500,8 @@ class AppHomePopularGems extends StatelessWidget {
             "USA (Utah & Texas)",
           ],
           imitations: [
-            ImitationItem(
-              img: AppImages.orangeGlass,
-              title: "Colored Glass",
-              desc: "Low-cost imitation, lacks hardness and brilliance.\n",
-            ),
-            ImitationItem(
-              img: AppImages.cubicZirconia1,
-              title: "Cubic Zirconia",
-              desc: "Synthetic stone may resemble topaz in color but softer.",
-            ),
+            ImitationItem(img: AppImages.orangeGlass, title: "Colored Glass", desc: "Low-cost imitation, lacks hardness and brilliance.\n",),
+            ImitationItem(img: AppImages.cubicZirconia1, title: "Cubic Zirconia", desc: "Synthetic stone may resemble topaz in color but softer.",),
           ],
           history: [
             "Topaz prized since ancient Egypt and Greece.",

@@ -104,7 +104,7 @@ Widget imitationItem(ImitationItem item) {
         child: RichText(
           text: TextSpan(
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               height: 1.4,
               fontFamily: 'TimesRomanFont',
               color: Colors.black,
