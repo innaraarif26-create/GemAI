@@ -29,7 +29,7 @@ class AppHomeRealFakeList extends StatelessWidget {
         width: 100,
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color: backgroundColor ?? (dark ? AppColors.black :AppColors.white),
+          color: backgroundColor ?? (dark ? AppColors.black : AppColors.white),
           borderRadius: BorderRadius.circular(AppSizes.sm),
         ),
         alignment: Alignment.center,

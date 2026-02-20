@@ -23,6 +23,7 @@ class AppArticlesList extends StatelessWidget {
           itemCount: articlesImages.length,
           itemBuilder: (_, index) {
             return AppHomeArticles(
+               backgroundColor: Color.fromARGB(255, 239, 239, 239),
               image: articlesImages[index]["image"]!,
               title: articlesImages[index]["title"]!,
               onTap: (){},

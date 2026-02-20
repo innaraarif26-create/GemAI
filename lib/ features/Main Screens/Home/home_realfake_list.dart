@@ -31,6 +31,7 @@ class AppRealFakeList extends StatelessWidget {
         itemCount: realFakeImages.length > 4 ? 5 :realFakeImages.length,
         itemBuilder: (_, index) {
           return AppHomeRealFakeList(
+            backgroundColor: Color.fromARGB(255, 239, 239, 239),
             image: realFakeImages[index]["image"]!,
             title: realFakeImages[index]["title"]!,
             onTap: (){},
