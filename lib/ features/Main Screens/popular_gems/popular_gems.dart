@@ -19,15 +19,16 @@ class GemsDetailScreen extends StatelessWidget
   {
     return Scaffold(
       appBar: AppAppBar(
-        title: Text(gem.name),
+        title: Text(gem.name,style: Theme.of(context).textTheme.headlineMedium),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(padding: EdgeInsets.all(AppSizes.defaultSpace),
+        child: Padding(padding: EdgeInsets.symmetric(horizontal:AppSizes.md, vertical: AppSizes.iconXs),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// image
-              AppRoundedImage(width: double.infinity, imageUrl: gem.image, applyImageRadius: true,),
+              AppRoundedImage(width: double.infinity,height: 200, imageUrl: gem.image, applyImageRadius: false,fit: BoxFit.fill),
               const SizedBox(height: AppSizes.spaceBtwSections,),
 
               /// Price

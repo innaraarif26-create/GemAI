@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../models/gemstone_model.dart';
@@ -23,20 +22,14 @@ class AppHomePopularGems extends StatelessWidget {
             PriceInfo(quality: "Fair", price: "\$500 – \$2000"),
           ],
           qualityFactors: [
-            QualityFactor(
-              title: "Color",
-              description: "D-F colors most valued",
-            ),
+            QualityFactor(title: "Color", description: "D-F colors most valued",),
             QualityFactor(title: "Clarity", description: "Flawless or VS"),
-            QualityFactor(
-              title: "Cut",
-              description: "Excellent cuts preferred",
-            ),
+            QualityFactor(title: "Cut", description: "Excellent cuts preferred",),
           ],
           origins: ["South Africa", "Botswana", "Russia", "Canada"],
           imitations: [
             ImitationItem(
-              img: AppImages.diamondSim,
+              img: AppImages.cubicZirconia,
               title: "Cubic Zirconia",
               desc: "Common imitation",
             ),
@@ -60,7 +53,7 @@ class AppHomePopularGems extends StatelessWidget {
         "title": "Aquamarine",
         "model": GemDetailModel(
           name: "Aquamarine",
-          image: AppImages.AquamarineBg,
+          image: AppImages.aquamarineBg,
           prices: [
             PriceInfo(quality: "Top", price: "\$200 – \$600"),
             PriceInfo(quality: "Good", price: "\$50 – \$200"),
@@ -124,7 +117,7 @@ class AppHomePopularGems extends StatelessWidget {
         "title": "Ruby",
         "model": GemDetailModel(
           name: "Ruby",
-          image: AppImages.RubyBg,
+          image: AppImages.rubyBg,
           prices: [
             PriceInfo(quality: "Top", price: "\$1000 – \$5000"),
             PriceInfo(quality: "Good", price: "\$300 – \$1000"),
@@ -145,7 +138,7 @@ class AppHomePopularGems extends StatelessWidget {
           origins: ["Myanmar", "Thailand", "Sri Lanka", "Mozambique"],
           imitations: [
             ImitationItem(
-              img: AppImages.rubyGlass,
+              img: AppImages.glassRed,
               title: "Glass Ruby",
               desc: "Artificial imitation",
             ),
@@ -179,14 +172,12 @@ class AppHomePopularGems extends StatelessWidget {
         itemBuilder: (_, index) {
           final gem = gems[index];
           return AppVerticalImageText(
-            image: gem["image"]!,
-            title: gem["title"]!,
+            image: gem["image"] as String,
+            title: gem["title"] as String,
             onTap: () {
-              Navigator.push(
-                _,
-                MaterialPageRoute(
-                  builder: (_) => GemsDetailScreen(gem: gem["model"]!),
-                ),
+              Navigator.push(context, MaterialPageRoute(
+                builder: (_) => GemsDetailScreen(gem: gem["model"] as GemDetailModel),
+              ),
               );
             },
           );

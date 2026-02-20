@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/images/onboarding_images/
     - assets/images/PopularGems/
+    - assets/images/PopularGems/DetailsImages/
     - assets/images/user/
     - assets/images/books/
     - assets/images/RealFake/
