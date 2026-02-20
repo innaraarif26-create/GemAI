@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gemai/%20features/personalization/screens/address/widgets/add_new_address.dart';
 import 'package:gemai/%20features/personalization/screens/address/widgets/single_address.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
-import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 

@@ -103,6 +103,7 @@ class AppImages
   static const String peridotQuartz = "assets/images/PopularGems/DetailsImages/peridot_quartz.png";
   static const String peridotSynthetic = "assets/images/PopularGems/DetailsImages/peridot_synthetic.png";
   static const String pinkGlass = "assets/images/PopularGems/DetailsImages/pink_glass.png";
+  static const String pinkTopaz = "assets/images/PopularGems/DetailsImages/pink_topaz.png";
   static const String pinkQuartz = "assets/images/PopularGems/DetailsImages/pink_quartz.png";
   static const String rubyBg = "assets/images/PopularGems/DetailsImages/RubyBg.jpg";
   static const String sapphireBg = "assets/images/PopularGems/DetailsImages/SapphireBg.jpg";
