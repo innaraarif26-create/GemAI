@@ -77,6 +77,41 @@ class AppImages
   static const String amethystQuartz = "assets/images/PopularGems/DetailsImages/amethyst_quartz.png";
   static const String amethystSynthetic = "assets/images/PopularGems/DetailsImages/amethyst_synthetic.png";
   static const String aquamarineBg = "assets/images/PopularGems/DetailsImages/AquamarineBg.jpg";
-
+  static const String beryl = "assets/images/PopularGems/DetailsImages/beryl.png";
+  static const String berylGreen = "assets/images/PopularGems/DetailsImages/beryl_green.png";
+  static const String blueGlass = "assets/images/PopularGems/DetailsImages/blue_glass.png";
+  static const String blueGlass1 = "assets/images/PopularGems/DetailsImages/blue_glass1.png";
+  static const String blueGlass2 = "assets/images/PopularGems/DetailsImages/blue_glass2.png";
+  static const String blueSpinel = "assets/images/PopularGems/DetailsImages/blue_spinel.png";
+  static const String blueZircon = "assets/images/PopularGems/DetailsImages/blue_zircon.png";
+  static const String citrineBg = "assets/images/PopularGems/DetailsImages/CitrineBg.jpg";
+  static const String cubicZirconia = "assets/images/PopularGems/DetailsImages/cubic_zirconia.png";
+  static const String cubicZirconia1 = "assets/images/PopularGems/DetailsImages/cubic_zirconia1.png";
+  static const String cubicZirconia2 = "assets/images/PopularGems/DetailsImages/cubic_zirconia2.png";
+  static const String diamondBg = "assets/images/PopularGems/DetailsImages/DiamondBg.jpg";
+  static const String emeraldBg = "assets/images/PopularGems/DetailsImages/EmeraldBg.jpg";
+  static const String glass = "assets/images/PopularGems/DetailsImages/glass.png";
+  static const String glassGreen = "assets/images/PopularGems/DetailsImages/glass_green.png";
+  static const String glassRed = "assets/images/PopularGems/DetailsImages/glass_red.png";
+  static const String glassYellow = "assets/images/PopularGems/DetailsImages/glass_yellow.png";
+  static const String heatAmethyst = "assets/images/PopularGems/DetailsImages/heat_amethyst.png";
+  static const String moissanite = "assets/images/PopularGems/DetailsImages/moissanite.png";
+  static const String morganiteBg = "assets/images/PopularGems/DetailsImages/MorganiteBg.jpg";
+  static const String orangeGlass = "assets/images/PopularGems/DetailsImages/orange_glass.png";
+  static const String peridotBg = "assets/images/PopularGems/DetailsImages/peridot_bg.jpg";
+  static const String peridotGlass = "assets/images/PopularGems/DetailsImages/peridot_glass.png";
+  static const String peridotQuartz = "assets/images/PopularGems/DetailsImages/peridot_quartz.png";
+  static const String peridotSynthetic = "assets/images/PopularGems/DetailsImages/peridot_synthetic.png";
+  static const String pinkGlass = "assets/images/PopularGems/DetailsImages/pink_glass.png";
+  static const String pinkQuartz = "assets/images/PopularGems/DetailsImages/pink_quartz.png";
+  static const String rubyBg = "assets/images/PopularGems/DetailsImages/RubyBg.jpg";
+  static const String sapphireBg = "assets/images/PopularGems/DetailsImages/SapphireBg.jpg";
+  static const String spinel = "assets/images/PopularGems/DetailsImages/spinel.png";
+  static const String tanzaniteBg = "assets/images/PopularGems/DetailsImages/TanzaniteBg.jpg";
+  static const String topazBg = "assets/images/PopularGems/DetailsImages/TopazBg.jpg";
+  static const String tourmaline = "assets/images/PopularGems/DetailsImages/Tourmaline.png";
+  static const String whiteSapphire = "assets/images/PopularGems/DetailsImages/white_sapphire.png";
+  static const String yellowTopaz = "assets/images/PopularGems/DetailsImages/yellow_topaz.png";
+  static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
 }
