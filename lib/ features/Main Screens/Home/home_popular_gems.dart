@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/image_strings.dart';
-import '../../../models/gemstone_model.dart';
+import '../../../models/popular_gemstone_model.dart';
 import '../../../widgets/image_text_Widget/vertical_image_text.dart';
-import '../popular_gems/popular_gems.dart';
+import '../popular_gems/popular_gems_detail_screen.dart';
 
 class AppHomePopularGems extends StatelessWidget {
   const AppHomePopularGems({super.key});
