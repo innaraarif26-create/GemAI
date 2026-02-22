@@ -115,4 +115,9 @@ class AppImages
   static const String yellowTopaz = "assets/images/PopularGems/DetailsImages/yellow_topaz.png";
   static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
+  /// Articles Pdfs
+  static const String  diamondGuide = "assets/pdfs/article1.pdf";
+  static const String  rockCollection = "assets/pdfs/article2.pdf";
+  static const String  gemInvestment = "assets/pdfs/article3.pdf";
+  static const String  buyingGems = "assets/pdfs/article4.pdf";
 }

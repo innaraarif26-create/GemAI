@@ -1,32 +1,31 @@
+import 'package:GemAI/%20features/Main%20Screens/Home/Articles/article_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
-import '../../../../core/constants/image_strings.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/Articles_Widget/articles_container.dart';
+import '../../../../widgets/data/articles_data.dart';
 
-class AppArticlesList extends StatelessWidget {
+class AppArticlesList extends StatelessWidget
+{
   const AppArticlesList({
-    super.key,
-  });
+    super.key, });
+
 
   @override
   Widget build(BuildContext context) {
-    final articlesImages = [
-      {"image": AppImages.article1, "title": "How to tell if a diamond is real."},
-      {"image": AppImages.article2, "title": "Educate kids about rock collection."},
-      {"image": AppImages.article3, "title": "Tips for gemstone investment."},
-      {"image": AppImages.article4, "title": "Guide to buying gemstones"},
-    ];
     return SizedBox(
       height: AppSizes.articlesHeight,
       child:  ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: articlesImages.length,
-          itemBuilder: (_, index) {
+          itemCount: articles.length,
+          itemBuilder: (_, index)
+          {
+            final article = articles[index];
             return AppHomeArticles(
-               backgroundColor: Color.fromARGB(255, 239, 239, 239),
-              image: articlesImages[index]["image"]!,
-              title: articlesImages[index]["title"]!,
-              onTap: (){},
+              image: articles[index]["image"]!,
+              title: articles[index]["title"]!,
+              onTap: () => Get.to(()=> ArticlePDFViewer(title: article["title"]!,  pdfPath: article["pdf"]!,),),
             );
           }
       ),

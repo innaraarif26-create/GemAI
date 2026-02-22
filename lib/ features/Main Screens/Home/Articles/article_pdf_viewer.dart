@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../../../widgets/appbar/appbar.dart';
+
 class ArticlePDFViewer extends StatelessWidget {
   final String title;
   final String pdfPath;
@@ -14,11 +16,8 @@ class ArticlePDFViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  const Color.fromARGB(255, 230, 227, 227),
-      appBar: AppBar(
-        title: Text(title,style: TextStyle(fontFamily: 'TimesRomanFont'),),
-        backgroundColor: const Color.fromARGB(255, 230, 227, 227),
-      ),
+      appBar: AppAppBar(title: Text(title),showBackArrow: true,),
+
       body: SfPdfViewer.asset(
         pdfPath,
         enableDoubleTapZooming: true,
