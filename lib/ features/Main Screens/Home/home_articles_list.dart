@@ -18,7 +18,6 @@ class AppArticlesList extends StatelessWidget {
     ];
     return SizedBox(
       height: AppSizes.articlesHeight,
-
       child:  ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: articlesImages.length,
