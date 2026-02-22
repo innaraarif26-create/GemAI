@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/%20features/Main%20Screens/realfake_gems/all_real_fake_gems.dart';
 import 'package:gemai/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:gemai/core/constants/sizes.dart';
+import 'package:get/get.dart';
 import '../../../widgets/custom_shapes/containers/search_container.dart';
 import 'package:gemai/ features/Main Screens/Home/home_books_list.dart';
 import '../../../widgets/texts/section_heading.dart';
@@ -63,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                  const SizedBox(height: AppSizes.md),
 
                   /// Real vs Fake Heading
-                 AppSectionHeading(title: 'Real vs Fake',showActionButton: true, onPressed: (){},),
+                 AppSectionHeading(title: 'Real vs Fake',showActionButton: true, onPressed: () => Get.to(() => const AllRealFakeGemsScreen()),),
                  const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Real vs Fake Horizontal List

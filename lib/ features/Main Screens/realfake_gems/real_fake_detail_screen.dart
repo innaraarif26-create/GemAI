@@ -55,7 +55,7 @@ class RealFakeDetailScreen extends StatelessWidget {
               buildSection(context, "Color", gem.colorReal, gem.colorFake),
               buildSection(context, "Touch Test", gem.touchReal, gem.touchFake),
               buildSection(context, "Specific Gravity", gem.gravityReal, gem.gravityFake),
-              buildSection(context, "Acid Test", gem.gravityReal, gem.gravityFake),
+              buildSection(context, "Acid Test", gem.acidReal, gem.acidFake),
               const SizedBox(height: AppSizes.md),
             ],
           ),

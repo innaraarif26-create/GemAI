@@ -34,7 +34,6 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget
             : leadingIcon != null ? IconButton(onPressed: leadingOnPressed,icon: Icon(leadingIcon,size: 18)): null,
         title: title,
         actions: actions,
-
         ),
       );
   }

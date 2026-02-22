@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import '../../core/constants/sizes.dart';
 
-class AppGridLayout extends StatelessWidget
-{
+class AppGridLayout extends StatelessWidget {
   const AppGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 270,
     required this.itemBuilder,
+    this.crossAxisCount = 2,
+    this.mainAxisExtent = 270,
   });
 
   final int itemCount;
+  final int crossAxisCount;
   final double? mainAxisExtent;
-  final Widget? Function(BuildContext, int ) itemBuilder;
+  final Widget Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +23,12 @@ class AppGridLayout extends StatelessWidget
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: AppSizes.gridViewSpacing,
         crossAxisSpacing: AppSizes.gridViewSpacing,
-        mainAxisExtent: 270,
+        mainAxisExtent: mainAxisExtent,
       ),
-      itemBuilder: itemBuilder );
+      itemBuilder: itemBuilder,
+    );
   }
 }
