@@ -34,17 +34,16 @@ class RealFakeDetailScreen extends StatelessWidget {
                  ],
                 ),
               ),
-              const SizedBox(height: AppSizes.xs),
+              const SizedBox(height: AppSizes.sm),
 
 
               /// NAME
               Text(gem.name,style: Theme.of(context).textTheme.headlineSmall),
-              const SizedBox(height: AppSizes.xs),
+              const SizedBox(height: AppSizes.sm),
 
-              const SizedBox(height: AppSizes.xs),
               /// IMAGE
               AppRoundedImage(width: double.infinity, height: 140, imageUrl: gem.image,),
-              const SizedBox(height: AppSizes.xs),
+              const SizedBox(height: AppSizes.sm),
 
               /// DESCRIPTION
               Text(gem.description),

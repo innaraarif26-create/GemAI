@@ -24,7 +24,7 @@ class AllRealFakeGemsScreen extends StatelessWidget {
           child: AppGridLayout(
             itemCount: realFakeGems.length,
             crossAxisCount: 2,
-            mainAxisExtent: 210,
+            mainAxisExtent: 220,
             itemBuilder: (_, index) {
               final gem = realFakeGems[index];
         
@@ -32,7 +32,7 @@ class AllRealFakeGemsScreen extends StatelessWidget {
                 onTap: () => Get.to(() => RealFakeDetailScreen(gem: gem["model"]),),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: dark ? Colors.grey.shade900 : Colors.white,
+                    color: dark ? Colors.grey.shade900 : const Color.fromARGB(255, 239, 239, 239),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(color: dark ? Colors.black26 : Colors.grey.withValues(alpha: 0.25), blurRadius: 6, spreadRadius: 1,)

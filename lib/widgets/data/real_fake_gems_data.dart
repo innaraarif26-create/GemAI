@@ -242,7 +242,8 @@ final List<Map<String, dynamic>> realFakeGems = [
       image: AppImages.pearl,
       description:
       "Pearls are organic gemstones formed inside mollusks. They are prized for their luster, smooth surface, and natural beauty. "
-          "Real pearls have subtle variations in color, shape, and surface texture, while fake pearls are often uniform and made from glass or plastic.",
+          "Real pearls have subtle variations in color, shape, and surface texture, while fake pearls are often uniform and made from glass or plastic."
+          "The main differences between real and fake pearl are illustrated in the table below:",
 
       overviewReal:
       "Real pearls are formed naturally and have unique luster and slight surface imperfections. They feel cool to touch initially and warm up slowly.",
@@ -318,9 +319,7 @@ final List<Map<String, dynamic>> realFakeGems = [
       name: "Moonstone",
       image: AppImages.moonstone,
       description:
-      "Moonstone is a feldspar mineral known for its pearly and opalescent schiller. "
-          "It has been used in jewelry for centuries and is prized for its natural glow.",
-
+      "Moonstone is a feldspar mineral known for its pearly and opalescent schiller.It has been used in jewelry for centuries and is prized for its natural glow.The main differences between real and fake Moonstone are illustrated below:",
       overviewReal:
       "Real moonstone has a soft pearly sheen called adularescence and is slightly translucent.",
       overviewFake:
@@ -390,7 +389,8 @@ final List<Map<String, dynamic>> realFakeGems = [
       description:
       "Gold is a precious metal widely used for jewelry, coins, and electronics. "
           "It is naturally bright yellow, heavy, and non-magnetic. "
-          "Fake gold is often made of alloys, plated metals, or painted surfaces.",
+          "Fake gold is often made of alloys, plated metals, or painted surfaces."
+          "The main differences between real and fake gold are illustrated in the table below:",
 
       overviewReal:
       "Real gold has a rich yellow luster, is heavy, and does not rust or tarnish. "
@@ -426,7 +426,8 @@ final List<Map<String, dynamic>> realFakeGems = [
       description:
       "Diamonds are the hardest natural gemstones known, prized for their brilliance and clarity. "
           "Natural diamonds form under high pressure and temperature deep within the Earth. "
-          "Synthetic or fake diamonds are often made of cubic zirconia or glass.",
+          "Synthetic or fake diamonds are often made of cubic zirconia or glass."
+          "The main differences between real and fake diamonds are illustrated in the table below:",
 
       overviewReal:
       "Real diamonds are hard, have a high refractive index, and show natural inclusions under magnification.",
@@ -461,7 +462,8 @@ final List<Map<String, dynamic>> realFakeGems = [
       description:
       "Fluorite is a colorful mineral that can appear in purple, green, yellow, and blue. "
           "It is prized for its fluorescence under UV light and its crystalline structure. "
-          "Fake fluorite is often made of colored glass or plastic.",
+          "Fake fluorite is often made of colored glass or plastic."
+          "The main differences between real and fake fluorite are illustrated in the table below:",
 
       overviewReal:
       "Real fluorite exhibits clear color zoning with natural variations. Crystals are usually transparent to translucent.",
