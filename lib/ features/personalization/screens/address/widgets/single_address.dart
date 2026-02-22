@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
-import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../core/constants/colors.dart';

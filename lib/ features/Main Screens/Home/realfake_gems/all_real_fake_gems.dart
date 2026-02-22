@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/widgets/layouts/grid_layout.dart';
+import 'package:GemAI/widgets/layouts/grid_layout.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';

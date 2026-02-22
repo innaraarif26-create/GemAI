@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import '../../../core/constants/image_strings.dart';
-import '../../../core/constants/sizes.dart';
-import '../../../widgets/Articles_Widget/articles_container.dart';
+import '../../../../core/constants/image_strings.dart';
+import '../../../../core/constants/sizes.dart';
+import '../../../../widgets/Articles_Widget/articles_container.dart';
 
 class AppArticlesList extends StatelessWidget {
   const AppArticlesList({

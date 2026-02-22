@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gemai/core/constants/colors.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/core/constants/colors.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import '../../core/constants/sizes.dart';
 
 class AppCircularImage extends StatelessWidget

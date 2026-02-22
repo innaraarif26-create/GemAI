@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/utils/devices/device_utility.dart';
+import 'package:GemAI/core/utils/devices/device_utility.dart';
 import '../../core/constants/colors.dart';
 import '../../core/utils/helpers/helper_functions.dart';
 

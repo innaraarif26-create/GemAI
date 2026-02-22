@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/constants/colors.dart';
+import 'package:GemAI/core/constants/colors.dart';
 
 class AppSettingMenuTile extends StatelessWidget
 {

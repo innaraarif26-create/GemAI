@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/image_strings.dart';

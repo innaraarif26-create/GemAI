@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/bottom_call_chat_widget.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/price_share_widget.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/product_location.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/product_meta_data.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/product_posted_by_widget.dart';
-import 'package:gemai/%20features/shop/screens/product_details/widgets/product_safety_widget.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/bottom_call_chat_widget.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/price_share_widget.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/product_location.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/product_meta_data.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/product_posted_by_widget.dart';
+import 'package:GemAI/%20features/shop/screens/product_details/widgets/product_safety_widget.dart';
+import 'package:GemAI/core/constants/sizes.dart';
 import 'package:readmore/readmore.dart';
 import '../../../../core/constants/image_strings.dart';
 import '../../../../widgets/texts/product_title_text.dart';
@@ -20,8 +19,6 @@ class ProductDetailScreen extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    final dark = AppHelperFunctions.isDarkMode(context);
-
     return Scaffold(
       bottomNavigationBar: AppBottomCallAndChat(),
       body: SingleChildScrollView(

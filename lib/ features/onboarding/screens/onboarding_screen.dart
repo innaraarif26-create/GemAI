@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/constants/image_strings.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/core/constants/text.dart';
-import 'package:gemai/core/utils/devices/device_utility.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/core/constants/image_strings.dart';
+import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/core/constants/text.dart';
+import 'package:GemAI/core/utils/devices/device_utility.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:gemai/core/constants/colors.dart';
+import 'package:GemAI/core/constants/colors.dart';
 import '../onboarding_controller.dart';
 
 class OnboardingScreen  extends StatelessWidget {

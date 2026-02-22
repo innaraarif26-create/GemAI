@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/theme/app_theme.dart';
-import 'package:gemai/ features/onboarding/screens/onboarding_screen.dart';
+import 'package:GemAI/core/theme/app_theme.dart';
+import 'package:GemAI/ features/onboarding/screens/onboarding_screen.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {

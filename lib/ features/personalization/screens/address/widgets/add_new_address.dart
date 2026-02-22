@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/widgets/appbar/appbar.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AddNewAddressScreen extends StatelessWidget

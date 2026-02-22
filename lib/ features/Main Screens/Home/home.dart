@@ -1,15 +1,15 @@
+import 'package:GemAI/%20features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
-import 'package:gemai/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:gemai/core/constants/sizes.dart';
 import 'package:get/get.dart';
+import '../../../core/constants/sizes.dart';
+import '../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../widgets/custom_shapes/containers/search_container.dart';
-import 'package:gemai/ features/Main Screens/Home/home_books_list.dart';
 import '../../../widgets/texts/section_heading.dart';
 import 'home_appbar.dart';
-import 'home_articles_list.dart';
-import 'popular_gems/home_popular_gems.dart';
-import 'home_realfake_list.dart';
+import 'Articles/home_articles_list.dart';
+import 'home_books_list.dart';
+import 'popular_gems/home_popular_gems_section.dart';
+import 'realfake_gems/home_realfake_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: AppSizes.spaceBtwItems),
 
                         /// Popular Gems List
-                        const AppHomePopularGems(),
+                        const AppHomePopularGemsSection(),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                       ],
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                  const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Real vs Fake Horizontal List
-                  const AppRealFakeList(),
+                  const AppHomeRealFakeSection(),
                   const SizedBox(height: AppSizes.md),
 
                   /// Articles Heading

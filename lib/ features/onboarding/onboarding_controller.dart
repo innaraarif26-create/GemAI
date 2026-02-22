@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:gemai/%20features/auth/login/login_screen.dart';
+import 'package:GemAI/%20features/auth/login/login_screen.dart';
 
 class OnboardingController extends GetxController {
   static OnboardingController get instance => Get.find();

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/auth/password_configuration/forgot_password_screen.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
-import 'package:gemai/core/constants/sizes.dart';
+import 'package:GemAI/%20features/auth/password_configuration/forgot_password_screen.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/core/constants/sizes.dart';
 import 'package:get/get.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/constants/text.dart';

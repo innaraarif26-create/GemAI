@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/auth/password_configuration/forgot_password_screen.dart';
-import 'package:gemai/%20features/auth/signup/signup.dart';
-import 'package:gemai/core/constants/colors.dart';
-import 'package:gemai/core/constants/image_strings.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/core/constants/text.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
-import 'package:gemai/navigation_menu.dart';
+import 'package:GemAI/%20features/auth/password_configuration/forgot_password_screen.dart';
+import 'package:GemAI/%20features/auth/signup/signup.dart';
+import 'package:GemAI/core/constants/colors.dart';
+import 'package:GemAI/core/constants/image_strings.dart';
+import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/core/constants/text.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 

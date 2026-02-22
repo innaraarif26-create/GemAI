@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/auth/password_configuration/reset_password.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/core/constants/text.dart';
+import 'package:GemAI/%20features/auth/password_configuration/reset_password.dart';
+import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/core/constants/text.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 

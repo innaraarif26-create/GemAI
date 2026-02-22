@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/auth/login/login_screen.dart';
-import 'package:gemai/%20features/auth/signup/success_screen.dart';
-import 'package:gemai/core/constants/image_strings.dart';
-import 'package:gemai/core/constants/sizes.dart';
-import 'package:gemai/core/constants/text.dart';
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:GemAI/%20features/auth/login/login_screen.dart';
+import 'package:GemAI/%20features/auth/signup/success_screen.dart';
+import 'package:GemAI/core/constants/image_strings.dart';
+import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/core/constants/text.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailScreen extends StatelessWidget

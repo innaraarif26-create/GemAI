@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/widgets/appbar/appbar.dart';
-import 'package:gemai/widgets/image_widget/rounded_image.dart';
-import 'package:gemai/widgets/texts/section_heading.dart';
+import 'package:GemAI/widgets/appbar/appbar.dart';
+import 'package:GemAI/widgets/image_widget/rounded_image.dart';
+import 'package:GemAI/widgets/texts/section_heading.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../models/real_fake_gem_model.dart';
 
