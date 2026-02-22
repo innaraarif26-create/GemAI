@@ -23,7 +23,7 @@ class AppArticlesList extends StatelessWidget
           {
             final article = articles[index];
             return AppHomeArticles(
-              image: articles[index]["image"]!,
+              image: articles[index]["imge"]!,
               title: articles[index]["title"]!,
               onTap: () => Get.to(()=> ArticlePDFViewer(title: article["title"]!,  pdfPath: article["pdf"]!,),),
             );
