@@ -15,9 +15,9 @@ class RealFakeGem {
   final String gravityReal;
   final String gravityFake;
 
-  final String extraTitle;
-  final String extraReal;
-  final String extraFake;
+  final String acidReal;
+  final String acidFake;
+
 
   RealFakeGem({
     required this.name,
@@ -31,8 +31,7 @@ class RealFakeGem {
     required this.touchFake,
     required this.gravityReal,
     required this.gravityFake,
-    required this.extraTitle,
-    required this.extraReal,
-    required this.extraFake,
+     required this.acidReal,
+    required this.acidFake,
   });
 }

@@ -1,109 +1,116 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:gemai/widgets/image_widget/rounded_image.dart';
+import 'package:gemai/widgets/texts/section_heading.dart';
+import '../../../core/constants/sizes.dart';
 import '../../../models/real_fake_gem_model.dart';
 
 class RealFakeDetailScreen extends StatelessWidget {
-  final RealFakeGem gem;
+  const RealFakeDetailScreen({
+    super.key,
+    required this.gem,
+  });
 
-  const RealFakeDetailScreen({super.key, required this.gem});
+  final RealFakeGem gem;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE6E3E3),
-      appBar: AppBar(
-        backgroundColor: const Color(0xffE6E3E3),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: AppAppBar(showBackArrow: true,),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-            /// TITLE
-            RichText(
-              text: const TextSpan(
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-                children: [
-                  TextSpan(text: "Real "),
-                  TextSpan(
-                      text: "V",
-                      style: TextStyle(color: Colors.orange)),
-                  TextSpan(
-                      text: "S",
-                      style: TextStyle(color: Colors.red)),
-                  TextSpan(text: " Fake"),
-                ],
+              RichText(
+                text: TextSpan( style: Theme.of(context).textTheme.headlineMedium,
+                children: const [
+                  TextSpan(text: "Real  "),
+                  TextSpan(text: "V", style: TextStyle(color: Colors.orange)),
+                  TextSpan(text: "S", style: TextStyle(color: Colors.red)),
+                  TextSpan(text: "  Fake"),
+                 ],
+                ),
               ),
-            ),
+              const SizedBox(height: AppSizes.xs),
 
-            const SizedBox(height: 8),
 
-            /// NAME
-            Text(gem.name,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w600)),
+              /// NAME
+              Text(gem.name,style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: AppSizes.xs),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: AppSizes.xs),
+              /// IMAGE
+              AppRoundedImage(width: double.infinity, height: 140, imageUrl: gem.image,),
+              const SizedBox(height: AppSizes.xs),
 
-            /// IMAGE
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(gem.image, height: 140),
-            ),
+              /// DESCRIPTION
+              Text(gem.description),
+              const SizedBox(height: AppSizes.md),
 
-            const SizedBox(height: 10),
-
-            Text(gem.description),
-
-            const SizedBox(height: 20),
-
-            section("Overview", gem.overviewReal, gem.overviewFake),
-            section("Color", gem.colorReal, gem.colorFake),
-            section("Touch Test", gem.touchReal, gem.touchFake),
-            section("Specific Gravity", gem.gravityReal, gem.gravityFake),
-            section(gem.extraTitle, gem.extraReal, gem.extraFake),
-          ],
+              /// SECTIONS
+              buildSection(context, "Overview", gem.overviewReal, gem.overviewFake),
+              buildSection(context, "Color", gem.colorReal, gem.colorFake),
+              buildSection(context, "Touch Test", gem.touchReal, gem.touchFake),
+              buildSection(context, "Specific Gravity", gem.gravityReal, gem.gravityFake),
+              buildSection(context, "Acid Test", gem.gravityReal, gem.gravityFake),
+              const SizedBox(height: AppSizes.md),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget section(String title, String real, String fake) {
+  /// SECTION WITH HEADING + EQUAL HEIGHT BOXES
+  Widget buildSection(BuildContext context, String title, String real, String fake) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 14),
-        Text(title,
-            style: const TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold)),
-        Row(
-          children: [
-            Expanded(child: box("Real", real, Colors.orange.shade100)),
-            Expanded(child: box("Fake", fake, Colors.red.shade100)),
-          ],
-        )
+        AppSectionHeading(title: title),
+        const SizedBox(height: AppSizes.spaceBtwItems),
+
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: infoBox(context, "Real", real, Colors.orange.shade50, isLeft: true,),),
+              Expanded(child: infoBox(context, "Fake", fake, Colors.red.shade50, isRight: true,),),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSizes.md),
       ],
     );
   }
 
-  Widget box(String title, String text, Color color) {
+  /// REAL & FAKE BOX WITH OUTER RADIUS
+  Widget infoBox(
+      BuildContext context,
+      String label,
+      String text,
+      Color color, {
+        bool isLeft = false,
+        bool isRight = false,
+      }) {
     return Container(
-      margin: const EdgeInsets.all(4),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.circular(12)),
+        color: color,
+        borderRadius: BorderRadius.only(
+          topLeft: isLeft ? const Radius.circular(12) : Radius.zero,
+          bottomLeft: isLeft ? const Radius.circular(12) : Radius.zero,
+          topRight: isRight ? const Radius.circular(12) : Radius.zero,
+          bottomRight: isRight ? const Radius.circular(12) : Radius.zero,
+        ),
+      ),
       child: Column(
         children: [
-          Text(title,
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 6),
-          Text(text, textAlign: TextAlign.center),
+          Text(label, style: Theme.of(context).textTheme.titleLarge,),
+          const SizedBox(height: AppSizes.sm),
+          Text(text),
         ],
       ),
     );
