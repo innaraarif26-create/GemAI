@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/%20features/Main%20Screens/realfake_gems/all_real_fake_gems.dart';
+import 'package:gemai/%20features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
 import 'package:gemai/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,7 @@ import 'package:gemai/ features/Main Screens/Home/home_books_list.dart';
 import '../../../widgets/texts/section_heading.dart';
 import 'home_appbar.dart';
 import 'home_articles_list.dart';
-import 'home_popular_gems.dart';
+import 'popular_gems/home_popular_gems.dart';
 import 'home_realfake_list.dart';
 
 class HomeScreen extends StatelessWidget {

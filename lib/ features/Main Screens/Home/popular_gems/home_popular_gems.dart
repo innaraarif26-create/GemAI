@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../models/popular_gemstone_model.dart';
-import '../../../widgets/data/popular_gems_data.dart';
-import '../../../widgets/image_text_Widget/vertical_image_text.dart';
-import '../popular_gems/popular_gems_detail_screen.dart';
+import 'package:gemai/%20features/Main%20Screens/Home/popular_gems/popular_gems_detail_screen.dart';
+import '../../../../models/popular_gemstone_model.dart';
+import '../../../../widgets/data/popular_gems_data.dart';
+import '../../../../widgets/image_text_Widget/vertical_image_text.dart';
 
 class AppHomePopularGems extends StatelessWidget {
   const AppHomePopularGems({super.key});
