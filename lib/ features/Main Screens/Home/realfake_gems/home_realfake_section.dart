@@ -1,3 +1,4 @@
+import 'package:GemAI/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:GemAI/%20features/Main%20Screens/Home/realfake_gems/real_fake_detail_screen.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -21,7 +22,6 @@ class AppHomeRealFakeSection extends StatelessWidget {
           final gem = realFakeGems[index];
 
           return AppHomeRealFakeList(
-            backgroundColor: const Color.fromARGB(255, 239, 239, 239),
             image: gem["image"],
             title: gem["title"],
 

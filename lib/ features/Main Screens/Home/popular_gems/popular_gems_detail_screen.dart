@@ -1,3 +1,4 @@
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
 import 'package:GemAI/widgets/image_widget/rounded_image.dart';
@@ -7,6 +8,7 @@ import '../../../../models/popular_gemstone_model.dart';
 
 class GemsDetailScreen extends StatelessWidget
 {
+
   const GemsDetailScreen({
     super.key,
     required this.gem
@@ -52,7 +54,7 @@ class GemsDetailScreen extends StatelessWidget
               /// Imitation
               AppSectionHeading(title: "Imitation"),
               const SizedBox(height: AppSizes.spaceBtwItems),
-              ...gem.imitations.map((i)=> imitationItem(i)),
+              ...gem.imitations.map((i)=> imitationItem(context,i)),
               const SizedBox(height: AppSizes.md),
 
               /// History and Lore
@@ -86,28 +88,26 @@ class GemsDetailScreen extends StatelessWidget
     );
   }
 }
-Widget imitationItem(ImitationItem item) {
+Widget imitationItem(BuildContext context,ImitationItem item)
+{
+  final bool dark =  AppHelperFunctions.isDarkMode(context);
+
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset(
-          item.img,
-          width: 55,
-          height: 50,
-          fit: BoxFit.cover,
-        ),
+        child: Image.asset(item.img, width: 55, height: 50, fit: BoxFit.cover,),
       ),
-      const SizedBox(width: 12),
+      const SizedBox(width: AppSizes.md),
       Expanded(
         child: RichText(
           text: TextSpan(
-            style: const TextStyle(
-              fontSize: 14,
-              height: 1.4,
+            style: TextStyle(
+              fontSize: 12,
+              height: 1.6,
               fontFamily: 'TimesRomanFont',
-              color: Colors.black,
+              color: dark ? Colors.white : Colors.black,
             ),
             children: [
               TextSpan(

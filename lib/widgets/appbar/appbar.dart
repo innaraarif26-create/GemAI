@@ -29,6 +29,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.xs),
       child: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: dark ? Colors.transparent : Colors.transparent,
         leading: showBackArrow
             ? IconButton(onPressed: () => Get.back(), icon: Icon(Icons.arrow_back_ios, color: dark ? AppColors.white : AppColors.dark, size: 20))
             : leadingIcon != null ? IconButton(onPressed: leadingOnPressed,icon: Icon(leadingIcon,size: 18)): null,

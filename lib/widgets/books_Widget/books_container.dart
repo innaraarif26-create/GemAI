@@ -1,3 +1,4 @@
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import '../../core/constants/sizes.dart';
 
@@ -15,6 +16,7 @@ class AppHomeBooks extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    final bool dark = AppHelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
@@ -25,10 +27,12 @@ class AppHomeBooks extends StatelessWidget
             Container(
               height: AppSizes.bookHeight,
               width: AppSizes.bookWidth,
-              margin:const EdgeInsets.only(right: 10),
+              margin:const EdgeInsets.only(right: AppSizes.spaceBtwItems),
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.circular(6),
+                BorderRadius.circular(AppSizes.xs),
+
+                border: Border.all(color: dark ? Colors.white : Colors.grey.shade400),
                 image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover,),
               ),
             ),

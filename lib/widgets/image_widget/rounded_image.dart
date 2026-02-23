@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import '../../core/constants/colors.dart';
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:flutter/material.dart';
 import '../../core/constants/sizes.dart';
 
 class AppRoundedImage extends StatelessWidget
@@ -10,7 +10,7 @@ class AppRoundedImage extends StatelessWidget
     required this.imageUrl,
     this.applyImageRadius = true,
     this.border,
-    this.backgroundColor = AppColors.white,
+    this.backgroundColor,
     this.fit = BoxFit.contain,
     this.padding,
     this.isNetworkImage = false,
@@ -22,7 +22,7 @@ class AppRoundedImage extends StatelessWidget
   final String imageUrl;
   final bool applyImageRadius;
   final BoxBorder? border;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final BoxFit fit;
   final EdgeInsetsGeometry? padding;
   final bool isNetworkImage;
@@ -34,6 +34,7 @@ class AppRoundedImage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    final bool dark = AppHelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -41,9 +42,9 @@ class AppRoundedImage extends StatelessWidget
         height: height,
         padding: padding,
         decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadius),),
+          border: Border.all(color: dark ? Colors.white : Colors.white),
+          color: backgroundColor ?? (dark ? Colors.black : Colors.white),
+          ),
         child: ClipRRect(
           borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
           child: Image(

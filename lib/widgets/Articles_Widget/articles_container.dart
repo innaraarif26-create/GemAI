@@ -20,16 +20,15 @@ class AppHomeArticles extends StatelessWidget {
   @override
   Widget build(BuildContext context)
   {
-    final dark = AppHelperFunctions.isDarkMode(context);
-
+     final bool dark = AppHelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 130,
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-            color: backgroundColor ?? (dark ? AppColors.black :AppColors.white),
             borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: dark ? Colors.white : Colors.grey.shade300),
             boxShadow: [ BoxShadow(color: Colors.grey.withValues(alpha: 0.2))]
         ),
         child:  Column(

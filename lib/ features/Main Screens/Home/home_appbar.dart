@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text.dart';
+import '../../../core/utils/helpers/helper_functions.dart';
 import '../../../widgets/appbar/appbar.dart';
 
 class AppHomeAppBar extends StatelessWidget {
@@ -11,7 +12,8 @@ class AppHomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context)
   {
-    return AppAppBar(title: Column(
+    return AppAppBar(
+      title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppTexts.homeAppBarTitle, style: Theme.of(context).textTheme.labelMedium!.apply(color: AppColors.grey),),

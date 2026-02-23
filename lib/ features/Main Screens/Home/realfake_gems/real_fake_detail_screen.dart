@@ -1,3 +1,4 @@
+import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
 import 'package:GemAI/widgets/image_widget/rounded_image.dart';
@@ -64,7 +65,8 @@ class RealFakeDetailScreen extends StatelessWidget {
   }
 
   /// SECTION WITH HEADING + EQUAL HEIGHT BOXES
-  Widget buildSection(BuildContext context, String title, String real, String fake) {
+  Widget buildSection(BuildContext context, String title, String real, String fake)
+  {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -94,6 +96,7 @@ class RealFakeDetailScreen extends StatelessWidget {
         bool isLeft = false,
         bool isRight = false,
       }) {
+    final bool dark = AppHelperFunctions.isDarkMode(context);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -107,9 +110,9 @@ class RealFakeDetailScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(label, style: Theme.of(context).textTheme.titleLarge,),
+          Text(label, style: Theme.of(context).textTheme.titleLarge?.copyWith(color: dark ? Colors.black : Colors.black),),
           const SizedBox(height: AppSizes.sm),
-          Text(text),
+          Text(text,style:TextStyle(color: dark ? Colors.black87 : Colors.black87,),),
         ],
       ),
     );

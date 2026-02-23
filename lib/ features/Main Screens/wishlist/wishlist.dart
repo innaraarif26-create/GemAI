@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/widgets/Products/product_cards/product_card_vertical.dart';
+import 'package:GemAI/widgets/Products/product_card/product_card_vertical.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
 import 'package:GemAI/widgets/icons/circular_icon.dart';
 import 'package:GemAI/widgets/layouts/grid_layout.dart';

@@ -40,6 +40,7 @@ class AppVerticalImageText extends StatelessWidget {
               decoration: BoxDecoration(
                 color: backgroundColor ?? (dark ? AppColors.black :AppColors.white),
                 borderRadius: BorderRadius.circular(borderRadius),
+                border: Border.all(color: dark ? Colors.white : Colors.grey.shade700)
               ),
               child: Center(
                 child: Image(image: AssetImage(image),fit: BoxFit.cover,),

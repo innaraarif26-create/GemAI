@@ -10,7 +10,7 @@ import 'package:GemAI/widgets/texts/section_heading.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../../widgets/Favorite_Products/favorite_icon.dart';
-import '../../../widgets/Products/product_cards/product_card_vertical.dart';
+import '../../../widgets/Products/product_card/product_card_vertical.dart';
 import '../../../widgets/layouts/grid_layout.dart';
 
 class Store extends StatelessWidget

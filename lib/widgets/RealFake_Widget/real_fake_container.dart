@@ -10,18 +10,17 @@ class AppHomeRealFakeList extends StatelessWidget {
     this.onTap,
     required this.title,
     this.textColor = AppColors.black,
-    this.backgroundColor = AppColors.primaryBackground,
+    this.backgroundColor,
   });
 
-  final String image,title;
+  final String image, title;
   final Color textColor;
   final Color? backgroundColor;
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context)
-  {
-    final dark = AppHelperFunctions.isDarkMode(context);
+  Widget build(BuildContext context) {
+    final bool dark = AppHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
       onTap: onTap,
@@ -29,8 +28,10 @@ class AppHomeRealFakeList extends StatelessWidget {
         width: 100,
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color: backgroundColor ?? (dark ? AppColors.black : AppColors.white),
+          color: backgroundColor ?? (dark ? AppColors.dark : AppColors.primaryBackground),
           borderRadius: BorderRadius.circular(AppSizes.sm),
+            border: Border.all(color: dark ? Colors.white : Colors.grey.shade300)
+
         ),
         alignment: Alignment.center,
         child: Column(
@@ -39,14 +40,14 @@ class AppHomeRealFakeList extends StatelessWidget {
             SizedBox(
               height: 80,
               width: 90,
-              child: Image(image: AssetImage(image),fit: BoxFit.cover,),
+              child: Image.asset(image, fit: BoxFit.cover),
             ),
-            Text("Real vs Fake", style: Theme.of(context).textTheme.bodySmall,),
-            Text(title, style: Theme.of(context).textTheme.bodyLarge,),
+            const SizedBox(height: 4),
+            Text("Real vs Fake", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: dark ? Colors.grey[400] : Colors.grey[700],),),
+            Text(title, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: dark ? Colors.white : Colors.black,),),
           ],
         ),
       ),
     );
   }
 }
-
