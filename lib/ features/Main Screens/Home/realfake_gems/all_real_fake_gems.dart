@@ -34,6 +34,7 @@ class AllRealFakeGemsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: dark ? Colors.grey.shade900 : const Color.fromARGB(255, 239, 239, 239),
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade400),
                     boxShadow: [
                       BoxShadow(color: dark ? Colors.black26 : Colors.grey.withValues(alpha: 0.25), blurRadius: 6, spreadRadius: 1,)
                     ],
