@@ -10,7 +10,6 @@ import 'package:GemAI/widgets/texts/product_title_text.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../icons/circular_icon.dart';
-import '../../styles/shadows.dart';
 
 class AppProductCardVertical extends StatelessWidget
 {
@@ -27,7 +26,14 @@ class AppProductCardVertical extends StatelessWidget
           width: 180,
           padding: const EdgeInsets.all(1),
           decoration:  BoxDecoration(
-           boxShadow: [AppShadowStyle.verticalProductShadow],
+           boxShadow: [
+             BoxShadow(
+               color: AppColors.darkGrey.withValues(alpha: 0.1),
+               blurRadius: 50,
+               spreadRadius: 7,
+               offset: const Offset(0, 2)
+           ),
+           ],
            borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
            color: dark ? AppColors.darkerGrey : AppColors.white,
          ),
@@ -36,7 +42,7 @@ class AppProductCardVertical extends StatelessWidget
            children: [
              /// Thumbnail,Wishlist button
               AppRoundedContainer(
-                height: 170,
+                height: 180,
                 padding: const EdgeInsets.all(AppSizes.sm),
                 backgroundColor: dark ? AppColors.dark : AppColors.light,
                 child: Stack(

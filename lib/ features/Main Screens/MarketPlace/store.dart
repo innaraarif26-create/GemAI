@@ -1,96 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/%20features/Main%20Screens/wishlist/wishlist.dart';
+import 'package:get/get.dart';
 import 'package:GemAI/core/constants/colors.dart';
 import 'package:GemAI/core/constants/sizes.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
-import 'package:GemAI/widgets/appbar/tabbar.dart';
 import 'package:GemAI/widgets/custom_shapes/containers/search_container.dart';
 import 'package:GemAI/widgets/texts/section_heading.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../../widgets/Favorite_Products/favorite_icon.dart';
 import '../../../widgets/Products/product_card/product_card_vertical.dart';
 import '../../../widgets/layouts/grid_layout.dart';
+import '../wishlist/wishlist.dart';
 
-class Store extends StatelessWidget
-{
+class Store extends StatelessWidget {
   const Store({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
-    return DefaultTabController(
-      length: 6,
-      child: Scaffold(
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppAppBar(
-      title: Text("Store",style: Theme.of(context).textTheme.headlineMedium),
+        title: Text(
+          "Store",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         actions: [
-          AppFavoriteCounterIcon(onPressed: () => Get.to(const FavouriteScreen()), iconColor: AppColors.black,),
-        ]
-       ),
-        body: NestedScrollView(
-            headerSliverBuilder: (_, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  automaticallyImplyLeading: false,
-                  pinned: true,
-                  floating: true,
-                  backgroundColor: AppHelperFunctions.isDarkMode(context) ? AppColors.black : AppColors.white,
-                  expandedHeight: 140,
-                  
-                  flexibleSpace: Padding(
-                    padding: EdgeInsets.all(AppSizes.defaultSpace),
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        /// Search bar
-                        const AppSearchContainer(text: 'Search in store',showBorder: true,showBackground: false,padding: EdgeInsets.zero,),
-                        const SizedBox(height: AppSizes.defaultSpace,),
-                      ],
-                    ),
-                  ),
-                  bottom: const AppTabBar(
-                      tabs: [
-                        Tab(child: Text("All"),),
-                        Tab(child: Text("Precious"),),
-                        Tab(child: Text("Semi Precious"),),
-                        Tab(child: Text("Jewelry"),),
-                        Tab(child: Text("Certified Gems"),),
-                        Tab(child: Text("Raw Stones"),),
-
-                      ]
-                  )
-                )
-              ];
-            }, 
-          body: TabBarView(
-           children:[
-             ListView(
-               shrinkWrap: true,
-               physics: const NeverScrollableScrollPhysics(),
-               children: [
-                 Padding(
-                 padding: EdgeInsets.all(AppSizes.spaceBtwItems),
-                 child: Column(
-                   children: [
-                     const SizedBox(height: AppSizes.spaceBtwItems,),
-                     AppSectionHeading(title: "All Products"),
-                     const SizedBox(height: AppSizes.spaceBtwItems,),
-                     AppGridLayout(itemCount: 4, itemBuilder: (_, index) => const AppProductCardVertical(),),
-                     const SizedBox(height: AppSizes.spaceBtwItems,)
-                   ],
-                 ),
-               ),
-               ],
-             )
-            ],
+          AppFavoriteCounterIcon(
+            onPressed: () => Get.to(const FavouriteScreen()),
+            iconColor: AppColors.black,
           ),
+        ],
+      ),
+
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            /// Search Bar
+            const AppSearchContainer(text: 'Search in store', showBorder: true, showBackground: false, padding: EdgeInsets.zero,),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Popular Products
+            const AppSectionHeading(title: "Popular Products",showActionButton: true),
+            const SizedBox(height: AppSizes.spaceBtwItems),
+
+            /// Grid Products
+            AppGridLayout(
+              itemCount: 4,
+              itemBuilder: (_, index) => const AppProductCardVertical(),
+            ),
+
+          ],
         ),
       ),
     );
   }
 }
-
-

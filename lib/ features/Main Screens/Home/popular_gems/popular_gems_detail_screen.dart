@@ -104,7 +104,7 @@ Widget imitationItem(BuildContext context,ImitationItem item)
         child: RichText(
           text: TextSpan(
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               height: 1.6,
               fontFamily: 'TimesRomanFont',
               color: dark ? Colors.white : Colors.black,
