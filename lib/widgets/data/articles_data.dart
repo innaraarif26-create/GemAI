@@ -1,24 +1,25 @@
 import '../../core/constants/image_strings.dart';
+import '../../core/constants/pdfs_strings.dart';
 
 final articles = [
   {
-    "image": AppImages.article1,
+    "image": AppImages.articleImage1,
     "title": "How to tell if a diamond is real.",
-    "pdf": "assets/pdfs/diamond_guide.pdf",
+    "pdf":   AppPdfs.diamondGuide,
   },
   {
-    "image": AppImages.article2,
+    "image": AppImages.articleImage2,
     "title": "Educate kids about rock collection.",
-    "pdf": "assets/pdfs/rock_collection.pdf",
+    "pdf":   AppPdfs.rockCollection,
   },
   {
-    "image": AppImages.article3,
+    "image": AppImages.articleImage3,
     "title": "Tips for gemstone investment.",
-    "pdf": "assets/pdfs/gem_investment.pdf",
+    "pdf": AppPdfs.gemInvestment,
   },
   {
-    "image": AppImages.article4,
+    "image": AppImages.articleImage4,
     "title": "Guide to buying gemstones",
-    "pdf": "assets/pdfs/buying_gems.pdf",
+    "pdf":   AppPdfs.buyingGems,
   },
 ];

@@ -54,11 +54,11 @@ class AppImages
   static const String citrine1 = "assets/images/RealFake/Citrine.png";
   static const String fluorite = "assets/images/RealFake/Fluorite.png";
 
-  // Articles
-  static const String article1 = "assets/images/Articles/article1.jpg";
-  static const String article2 = "assets/images/Articles/article2.jpg";
-  static const String article3 = "assets/images/Articles/article3.jpg";
-  static const String article4 = "assets/images/Articles/article4.jpg";
+  // Articles Images
+  static const String articleImage1 = "assets/images/Articles/article1.jpg";
+  static const String articleImage2 = "assets/images/Articles/article2.jpg";
+  static const String articleImage3 = "assets/images/Articles/article3.jpg";
+  static const String articleImage4 = "assets/images/Articles/article4.jpg";
 
   // MarketPlace
   static const String product1 = "assets/images/MarketPlace/topaz_pendant.jpg";
@@ -115,9 +115,4 @@ class AppImages
   static const String yellowTopaz = "assets/images/PopularGems/DetailsImages/yellow_topaz.png";
   static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
-  /// Articles Pdfs
-  static const String  diamondGuide = "assets/pdfs/article1.pdf";
-  static const String  rockCollection = "assets/pdfs/article2.pdf";
-  static const String  gemInvestment = "assets/pdfs/article3.pdf";
-  static const String  buyingGems = "assets/pdfs/article4.pdf";
 }
