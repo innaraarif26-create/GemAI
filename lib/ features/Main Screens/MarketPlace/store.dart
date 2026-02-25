@@ -40,12 +40,12 @@ class Store extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Popular Products
-            const AppSectionHeading(title: "Popular Products",showActionButton: true),
+            AppSectionHeading(title: "Popular Products",showActionButton: true,onPressed: (){},),
             const SizedBox(height: AppSizes.spaceBtwItems),
 
             /// Grid Products
             AppGridLayout(
-              itemCount: 4,
+              itemCount: 6,
               itemBuilder: (_, index) => const AppProductCardVertical(),
             ),
 

@@ -49,6 +49,7 @@ class AppProductCardVertical extends StatelessWidget
                   children: [
                     /// Thumbnail image
                     AppRoundedImage(imageUrl: AppImages.product3,applyImageRadius: true,),
+
                     /// Favorite Icon Button
                    const Positioned(
                       top: 0,
