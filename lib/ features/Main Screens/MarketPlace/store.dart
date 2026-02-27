@@ -1,3 +1,4 @@
+import 'package:GemAI/%20features/Main%20Screens/MarketPlace/all_products.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:GemAI/core/constants/colors.dart';
@@ -33,7 +34,7 @@ class Store extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Popular Products
-            AppSectionHeading(title: "Popular Products",showActionButton: true, onPressed: (){},),
+            AppSectionHeading(title: "Popular Products",showActionButton: true, onPressed: ()=> Get.to(()=> const AllProducts()),),
             const SizedBox(height: AppSizes.spaceBtwItems),
 
             /// Grid Products
