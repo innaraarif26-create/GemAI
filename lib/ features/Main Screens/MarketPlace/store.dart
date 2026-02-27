@@ -17,38 +17,28 @@ class Store extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppAppBar(
-        title: Text(
-          "Store",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        title: Text("Store", style: Theme.of(context).textTheme.headlineMedium,),
         actions: [
-          AppFavoriteCounterIcon(
-            onPressed: () => Get.to(const FavouriteScreen()),
-            iconColor: AppColors.black,
-          ),
+          AppFavoriteCounterIcon(onPressed: () => Get.to(const FavouriteScreen()),iconColor: AppColors.black,),
         ],
       ),
 
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSizes.defaultSpace),
+        padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
             /// Search Bar
-            const AppSearchContainer(text: 'Search in store', showBorder: true, showBackground: false, padding: EdgeInsets.zero,),
+            AppSearchContainer(text: "Search in store",showBackground: false,),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Popular Products
-            AppSectionHeading(title: "Popular Products",showActionButton: true,onPressed: (){},),
+            AppSectionHeading(title: "Popular Products",showActionButton: true, onPressed: (){},),
             const SizedBox(height: AppSizes.spaceBtwItems),
 
             /// Grid Products
-            AppGridLayout(
-              itemCount: 6,
-              itemBuilder: (_, index) => const AppProductCardVertical(),
-            ),
-
+            AppGridLayout(itemCount: 6, itemBuilder: (_, index) => const AppProductCardVertical(),),
+            const SizedBox(height: AppSizes.defaultSpace),
           ],
         ),
       ),

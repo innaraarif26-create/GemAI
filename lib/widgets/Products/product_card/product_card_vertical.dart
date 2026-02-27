@@ -28,13 +28,14 @@ class AppProductCardVertical extends StatelessWidget
           decoration:  BoxDecoration(
            boxShadow: [
              BoxShadow(
-               color: AppColors.darkGrey.withValues(alpha: 0.1),
+               color: AppColors.darkGrey.withValues(alpha: 0.01),
                blurRadius: 50,
                spreadRadius: 7,
                offset: const Offset(0, 2)
            ),
            ],
-           borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
+            border: Border.all(color: Colors.grey.shade200),
+            borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
            color: dark ? AppColors.darkerGrey : AppColors.white,
          ),
          child: Column(
