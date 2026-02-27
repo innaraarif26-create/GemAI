@@ -162,6 +162,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           child:  const Text(AppTexts.createAccount),
                         ),
                       ),
+
+                      const SizedBox(height: AppSizes.spaceBtwItems),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => const NavigationMenu()); // Navigate as guest
+                        },
+                        child: Text(
+                          "Continue as Guest",
+                          style: Theme.of(context).textTheme.bodySmall!.apply(color: AppColors.accent),
+                        ),
+                      ),
                     ],
                   ),
                 ),
