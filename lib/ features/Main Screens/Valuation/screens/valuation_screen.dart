@@ -155,11 +155,10 @@ class _ValuationScreenState extends State<ValuationScreen> {
 
     return Scaffold(
       appBar: AppAppBar(
-        title: Text("Estimate Price"),
-        showBackArrow: true,
+        title: Text("Estimate Price",style: Theme.of(context).textTheme.headlineMedium)
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSizes.defaultSpace),
+        padding: const EdgeInsets.symmetric(vertical:  AppSizes.spaceBtwItems, horizontal: AppSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -221,7 +220,7 @@ class _ValuationScreenState extends State<ValuationScreen> {
   }
 
   Widget sectionTitle(String title, Color textColor) => Padding(
-    padding: const EdgeInsets.only(top: AppSizes.sm, bottom: AppSizes.sm),
+    padding: const EdgeInsets.only(top: AppSizes.sm, bottom: AppSizes.sm,left: AppSizes.xs),
     child: Text(title, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.bold)),
   );
 
