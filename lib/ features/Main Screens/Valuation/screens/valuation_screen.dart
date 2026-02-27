@@ -1,3 +1,4 @@
+import 'package:GemAI/core/constants/colors.dart';
 import 'package:GemAI/core/constants/sizes.dart';
 import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
@@ -117,11 +118,9 @@ class _ValuationScreenState extends State<ValuationScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("PKR: ${pricePKR.toStringAsFixed(0)}",
-                style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 18)),
+            Text("PKR: ${pricePKR.toStringAsFixed(0)}", style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 10),
-            Text("USD: \$${priceUSD.toStringAsFixed(2)}",
-                style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 16)),
+            Text("USD: \$${priceUSD.toStringAsFixed(2)}", style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         actions: [
@@ -139,7 +138,7 @@ class _ValuationScreenState extends State<ValuationScreen> {
                 priceUSD = 0;
               });
             },
-            child: Text("Close", style: TextStyle(color: dark ? Colors.tealAccent : Colors.blue)),
+            child: Text("Close", style: TextStyle(color: dark ? AppColors.accent : AppColors.accent)),
           ),
         ],
       ),
@@ -238,7 +237,7 @@ class _ValuationScreenState extends State<ValuationScreen> {
         value: value,
         isExpanded: true,
         underline: Container(),
-        hint: Text("Select", style: TextStyle(color: textColor)),
+        hint: Text("Select", style: Theme.of(context).textTheme.bodySmall),
         items: items
             .map((e) => DropdownMenuItem(
           value: e,

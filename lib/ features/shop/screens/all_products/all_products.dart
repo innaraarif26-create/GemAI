@@ -21,6 +21,7 @@ class AllProducts extends StatelessWidget
             children: [
               /// Dropdown
               DropdownButtonFormField(
+                hint: Text("Sort by",style: Theme.of(context).textTheme.bodySmall),
                 decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort,color: Colors.grey,)),
                 onChanged: (value){},
                 items: ["Name", "Higher Price", "Lower Price","Newest","Popularity"].map((option)=> DropdownMenuItem(value: option,child: Text(option))).toList(),
