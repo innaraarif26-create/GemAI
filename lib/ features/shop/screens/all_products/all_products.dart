@@ -1,5 +1,7 @@
 import 'package:GemAI/core/constants/sizes.dart';
+import 'package:GemAI/widgets/Products/product_card/product_card_vertical.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
+import 'package:GemAI/widgets/layouts/grid_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -22,7 +24,10 @@ class AllProducts extends StatelessWidget
                 decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort,color: Colors.grey,)),
                 onChanged: (value){},
                 items: ["Name", "Higher Price", "Lower Price","Newest","Popularity"].map((option)=> DropdownMenuItem(value: option,child: Text(option))).toList(),
-              )
+              ),
+              SizedBox(height: AppSizes.spaceBtwSections,),
+              /// Products
+              AppGridLayout(itemCount: 10, itemBuilder: (_, index)=> AppProductCardVertical()),
             ],
           ),
         ),

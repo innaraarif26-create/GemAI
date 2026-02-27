@@ -1,4 +1,4 @@
-import 'package:GemAI/%20features/Main%20Screens/MarketPlace/all_products.dart';
+import 'package:GemAI/%20features/shop/screens/all_products/all_products.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:GemAI/core/constants/colors.dart';
@@ -38,7 +38,7 @@ class Store extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwItems),
 
             /// Grid Products
-            AppGridLayout(itemCount: 6, itemBuilder: (_, index) => const AppProductCardVertical(),),
+            AppGridLayout(itemCount: 4, itemBuilder: (_, index) => const AppProductCardVertical(),),
             const SizedBox(height: AppSizes.defaultSpace),
           ],
         ),

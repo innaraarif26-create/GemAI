@@ -68,7 +68,8 @@ class ProductDetailScreen extends StatelessWidget
                   /// Posted By
                     const AppPostedBy(
                     sellerName: "Tufail Haider",
-                    sellerImageUrl: AppImages.user,                  ),
+                    sellerImageUrl: AppImages.user,
+                    ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
                     const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),

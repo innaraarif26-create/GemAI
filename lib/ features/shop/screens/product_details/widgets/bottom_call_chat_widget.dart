@@ -16,7 +16,7 @@ class AppBottomCallAndChat extends StatelessWidget {
     final dark = AppHelperFunctions.isDarkMode(context);
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace, vertical: AppSizes.defaultSpace / 2,),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace, vertical: AppSizes.defaultSpace / 1.5,),
       decoration: BoxDecoration(
         color: dark ? AppColors.darkerGrey : AppColors.light,
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(AppSizes.cardRadiusLg), topRight: Radius.circular(AppSizes.cardRadiusLg),),

@@ -1,3 +1,4 @@
+import 'package:GemAI/%20features/Main%20Screens/Valuation/screens/valuation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:GemAI/%20features/Main%20Screens/Home/home.dart';
 import 'package:GemAI/%20features/Main%20Screens/MarketPlace/store.dart';
@@ -48,7 +49,7 @@ class NavigationController extends GetxController
     const HomeScreen(),
     const Store(),
     const CaptureImageScreen(),
-    Container(color: Colors.orange),
+    const ValuationScreen(),
     const SettingScreen(),
   ];
 }
