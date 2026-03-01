@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: AppSizes.defaultSpace),
 
-              /// Footer (Social Login)
+              /// Footer
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
