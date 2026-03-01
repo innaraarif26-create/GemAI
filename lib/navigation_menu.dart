@@ -1,13 +1,13 @@
-import 'package:GemAI/%20features/Main%20Screens/Valuation/screens/valuation_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:GemAI/%20features/Main%20Screens/Home/home.dart';
-import 'package:GemAI/%20features/Main%20Screens/MarketPlace/store.dart';
-import 'package:GemAI/%20features/Main%20Screens/detection/capture_image_screen.dart';
-import 'package:GemAI/%20features/personalization/screens/settings/settings.dart';
 import 'package:GemAI/core/constants/colors.dart';
 import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'features/Main Screens/Home/home.dart';
+import 'features/Main Screens/MarketPlace/store.dart';
+import 'features/Main Screens/Valuation/screens/valuation_screen.dart';
+import 'features/Main Screens/detection/capture_image_screen.dart';
+import 'features/personalization/screens/settings/settings.dart';
 
 class NavigationMenu extends StatelessWidget
 {

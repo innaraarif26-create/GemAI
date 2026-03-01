@@ -36,6 +36,9 @@ dependencies:
   readmore: ^3.0.0
   carousel_slider: ^5.1.2
 
+  # Firebase
+  firebase_core: ^4.4.0
+
 #--------------Packages End-------------#
 
 dev_dependencies:

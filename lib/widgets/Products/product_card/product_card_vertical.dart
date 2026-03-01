@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/%20features/shop/screens/product_details/product_detail.dart';
+import 'package:GemAI/features/shop/screens/product_details/product_detail.dart';
 import 'package:GemAI/core/constants/colors.dart';
 import 'package:GemAI/core/constants/image_strings.dart';
 import 'package:GemAI/core/constants/sizes.dart';
