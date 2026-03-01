@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: AppSizes.defaultSpace),
 
-                      /// Sign In Button
+                      /// Sign
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
