@@ -12,7 +12,20 @@
           "package_name": "com.example.gemai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "735650347383-7u5k3bf3klgbooafpgsib2u3u9nkuvi3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gemai",
+            "certificate_hash": "5fdf833e493a5165dfd203ec70d0cbdc9774ded6"
+          }
+        },
+        {
+          "client_id": "735650347383-e6leilea8n3a34nu1m96kgcb10de804n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD2duCg2aL4ZCVCSr8zRaZcI9WtrulpVhc"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735650347383-c7ivv8vnsklrh8c4mjlcv1asvr0jva57.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "735650347383-4rlvfhdm4buki11hbj68c2regaq5j9ot.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gemai"
+              }
+            }
+          ]
         }
       }
     }

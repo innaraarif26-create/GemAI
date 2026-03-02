@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '735650347383',
     projectId: 'gemai-cb042',
     storageBucket: 'gemai-cb042.firebasestorage.app',
+    androidClientId: '735650347383-7u5k3bf3klgbooafpgsib2u3u9nkuvi3.apps.googleusercontent.com',
+    iosClientId: '735650347383-4rlvfhdm4buki11hbj68c2regaq5j9ot.apps.googleusercontent.com',
     iosBundleId: 'com.example.gemai',
   );
+
 }
