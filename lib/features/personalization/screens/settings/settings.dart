@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/auth/login/login_screen.dart';
 import 'package:GemAI/features/personalization/screens/address/widgets/address.dart';
 import 'package:GemAI/widgets/appbar/appbar.dart';
 import 'package:GemAI/widgets/layouts/list_tiles/settings_menu_tile.dart';
@@ -11,6 +10,7 @@ import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
 import '../../../Main Screens/wishlist/wishlist.dart';
+import '../../../auth/screens/login/login_screen.dart';
 import '../profile/widgets/profile.dart';
 
 class SettingScreen extends StatelessWidget

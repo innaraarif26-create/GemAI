@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/auth/signup/signup.dart';
 import 'package:GemAI/core/constants/colors.dart';
 import 'package:GemAI/core/constants/image_strings.dart';
 import 'package:GemAI/core/constants/sizes.dart';
@@ -9,6 +8,7 @@ import 'package:GemAI/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../password_configuration/forgot_password_screen.dart';
+import '../signup/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

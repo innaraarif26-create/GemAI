@@ -115,4 +115,7 @@ class AppImages
   static const String yellowTopaz = "assets/images/PopularGems/DetailsImages/yellow_topaz.png";
   static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
+  // Animations
+  static const String docerAnimation = "assets/images/animations/decorAnimation.png";
+
 }

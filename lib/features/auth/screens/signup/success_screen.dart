@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/auth/login/login_screen.dart';
 import 'package:GemAI/core/constants/sizes.dart';
 import 'package:GemAI/core/constants/text.dart';
 import 'package:GemAI/core/constants/image_strings.dart';
 import 'package:GemAI/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
+
+import '../login/login_screen.dart';
 
 class SuccessScreen extends StatelessWidget
 {

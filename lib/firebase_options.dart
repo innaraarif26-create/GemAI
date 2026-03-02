@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -33,10 +30,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -66,6 +60,24 @@ class DefaultFirebaseOptions {
     androidClientId: '735650347383-7u5k3bf3klgbooafpgsib2u3u9nkuvi3.apps.googleusercontent.com',
     iosClientId: '735650347383-4rlvfhdm4buki11hbj68c2regaq5j9ot.apps.googleusercontent.com',
     iosBundleId: 'com.example.gemai',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBzuTlp6L8WpllXxWtTAhhT-S2D-znTN2M',
+    appId: '1:735650347383:web:a7b8386b688bc7bf6fc972',
+    messagingSenderId: '735650347383',
+    projectId: 'gemai-cb042',
+    authDomain: 'gemai-cb042.firebaseapp.com',
+    storageBucket: 'gemai-cb042.firebasestorage.app',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBzuTlp6L8WpllXxWtTAhhT-S2D-znTN2M',
+    appId: '1:735650347383:web:f5177b05985b3aba6fc972',
+    messagingSenderId: '735650347383',
+    projectId: 'gemai-cb042',
+    authDomain: 'gemai-cb042.firebaseapp.com',
+    storageBucket: 'gemai-cb042.firebasestorage.app',
   );
 
 }

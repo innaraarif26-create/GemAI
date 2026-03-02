@@ -1,6 +1,14 @@
 
 class AppValidator {
-  AppValidator._();
+
+  static String? validateEmptyText(String? fieldName, String? value)
+  {
+    if(value == null || value.isEmpty)
+      {
+        return "$fieldName is required.";
+      }
+    return null;
+  }
 
   /* -------------------- EMAIL -------------------- */
   static String? validateEmail(String? value) {
@@ -9,7 +17,7 @@ class AppValidator {
     }
 
     // Regular Expression
-    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegExp = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
     if (!emailRegExp.hasMatch(value)) {
       return 'Invalid Email Address';
@@ -36,7 +44,7 @@ class AppValidator {
     }
     // check for special characters
     if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return 'Password must contain at least one specail character';
+      return 'Password must contain at least one special character';
     }
     return null;
   }
@@ -55,39 +63,16 @@ class AppValidator {
   }
 
   /* -------------------- PHONE NUMBER -------------------- */
-    static String? validatePhoneNumber(String? value)
-    {
-      if(value==null || value.isEmpty)
-        {
-          return 'Phone Number is required';
-
-        }
-      final phoneRegExp = RegExp(r'^\d{11}$');
-
-      if(!phoneRegExp.hasMatch(value))
-        {
-          return 'Invalid phone number format (11 digits required';
-        }
-      return null;
+  static String? validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Phone Number is required';
     }
+    final phoneRegExp = RegExp(r'^\d{11}$');
 
-  /* -------------------- CNIC -------------------- */
-  static String? validateCNIC(String? value)
-  {
-    if (value == null || value.isEmpty)
-    {
-      return 'CNIC is required';
+    if (!phoneRegExp.hasMatch(value)) {
+      return 'Invalid phone number format (11 digits required';
     }
-
-    // Format: 12345-1234567-1
-    final cnicRegExp =
-    RegExp(r'^\d{5}-\d{7}-\d{1}$');
-
-    if (!cnicRegExp.hasMatch(value))
-    {
-      return 'Invalid CNIC format (XXXXX-XXXXXXX-X)';
-    }
-
     return null;
   }
+
 }
