@@ -1,10 +1,9 @@
+import 'package:GemAI/bindings/general_bindings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:GemAI/core/theme/app_theme.dart';
-import 'package:GemAI/features/onboarding/screens/onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'core/constants/colors.dart';
 import 'data/repositories_authentication/authentication_repository.dart';
@@ -40,6 +39,7 @@ class GemAi extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       home: const Scaffold(
         backgroundColor: AppColors.accent,
         body: Center(

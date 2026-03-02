@@ -3,9 +3,43 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../constants/colors.dart';
+import '../../utils/helpers/helper_functions.dart';
 
 class AppLoaders {
-  /// Success Snackbar
+  /// Hide the current SnackBar
+  static void hideSnackBar() {
+    ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+  }
+
+  /// Custom toast with transparent background
+  static void customToast({required String message}) {
+    ScaffoldMessenger.of(Get.context!).showSnackBar(
+      SnackBar(
+        elevation: 0,
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: AppHelperFunctions.isDarkMode(Get.context!)
+                ? AppColors.darkerGrey.withValues(alpha: 0.9)
+                : AppColors.grey.withValues(alpha: 0.9),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              style: Theme.of(Get.context!).textTheme.labelLarge,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Success snackbar
   static void successSnackBar({
     required String title,
     String message = "",
@@ -21,11 +55,11 @@ class AppLoaders {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(10),
-      icon: const Icon(Iconsax.tick_circle, color: AppColors.white),
+      icon: const Icon(Iconsax.check, color: AppColors.white),
     );
   }
 
-  /// Warning Snackbar
+  /// Warning snackbar
   static void warningSnackBar({
     required String title,
     String message = "",
@@ -45,7 +79,7 @@ class AppLoaders {
     );
   }
 
-  /// Error Snackbar (Recommended for FYP)
+  /// Error snackbar
   static void errorSnackBar({
     required String title,
     String message = "",
@@ -57,10 +91,10 @@ class AppLoaders {
       isDismissible: true,
       shouldIconPulse: true,
       colorText: Colors.white,
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.red.shade600,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(20),
       icon: const Icon(Iconsax.close_circle, color: AppColors.white),
     );
   }

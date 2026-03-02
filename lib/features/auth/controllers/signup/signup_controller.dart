@@ -1,6 +1,7 @@
 
 import 'package:GemAI/core/constants/image_strings.dart';
 import 'package:GemAI/core/utils/popups/full_screen_loader.dart';
+import 'package:GemAI/core/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class SignupController extends GetxController
   static SignupController get instance => Get.find();
 
   /// Variables
+  final hidePassword = true.obs;
   final email = TextEditingController();
   final lastName = TextEditingController();
   final username = TextEditingController();
@@ -30,18 +32,11 @@ class SignupController extends GetxController
 
       // Check Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
-      if(!isConnected)
-        {
-          AppFullScreenLoader.stopLoading();
-          return;
-        }
+      if(!isConnected) return;
 
       // Form Validation
-      if(signupFormKey.currentState!.validate())
-        {
-          AppFullScreenLoader.stopLoading();
-          return;
-        }
+      if(signupFormKey.currentState!.validate()) return;
+
 
       // Privacy Policy Check
 
@@ -54,9 +49,11 @@ class SignupController extends GetxController
       // Move to Verify Email Screen
     } catch (e) {
       // Show some Generic Error to the user
+      AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
 
     } finally {
       // Remove Loader
+      AppFullScreenLoader.stopLoading();
     }
   }
 }
