@@ -4,6 +4,8 @@ import 'package:GemAI/core/utils/popups/full_screen_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/utils/helpers/network_manager.dart';
+
 class SignupController extends GetxController
 {
   static SignupController get instance => Get.find();
@@ -24,10 +26,22 @@ class SignupController extends GetxController
   {
     try {
       // Start Loading
-      AppFullScreenLoader.openLoadingDialog("We are processing your information", AppImages.doco)
+      AppFullScreenLoader.openLoadingDialog("We are processing your information", AppImages.docerAnimation);
+
       // Check Internet Connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if(!isConnected)
+        {
+          AppFullScreenLoader.stopLoading();
+          return;
+        }
 
       // Form Validation
+      if(signupFormKey.currentState!.validate())
+        {
+          AppFullScreenLoader.stopLoading();
+          return;
+        }
 
       // Privacy Policy Check
 
@@ -37,7 +51,12 @@ class SignupController extends GetxController
 
       // show success Message
 
-      //
+      // Move to Verify Email Screen
+    } catch (e) {
+      // Show some Generic Error to the user
+
+    } finally {
+      // Remove Loader
     }
   }
 }
