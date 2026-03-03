@@ -116,6 +116,6 @@ class AppImages
   static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
   // Animations
-  static const String docerAnimation = "assets/images/animations/decorAnimation.png";
+  static const String docerAnimation = "assets/images/animations/docerAnimation.png";
 
 }

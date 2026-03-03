@@ -32,7 +32,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: AppSizes.defaultSpace),
 
               /// Form
-              AppFormField(),
+              SignupFormWidget(),
               const SizedBox(height: AppSizes.defaultSpace),
               /// Divider
               Row(

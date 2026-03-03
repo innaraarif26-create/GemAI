@@ -8,9 +8,9 @@ import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../core/constants/text.dart';
 
-class AppFormField extends StatelessWidget
+class SignupFormWidget extends StatelessWidget
 {
-  const AppFormField({
+  const SignupFormWidget({
     super.key,
   });
 

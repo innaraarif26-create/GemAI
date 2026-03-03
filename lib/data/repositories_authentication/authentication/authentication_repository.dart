@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../../../core/utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../core/utils/exceptions/firebase_exceptions.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
