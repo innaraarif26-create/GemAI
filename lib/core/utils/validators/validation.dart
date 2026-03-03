@@ -51,12 +51,12 @@ class AppValidator {
 
   /* -------------------- CONFIRM PASSWORD -------------------- */
   static String? validateConfirmPassword(String? password,
-      String? confirmPassword,) {
+      String? confirmPassword) {
     if (confirmPassword == null || confirmPassword.isEmpty) {
       return 'Confirm password is required';
     }
 
-    if (password != confirmPassword) {
+    if ((password ?? "").trim() != confirmPassword.trim()) {
       return 'Passwords do not match';
     }
     return null;
@@ -70,7 +70,7 @@ class AppValidator {
     final phoneRegExp = RegExp(r'^\d{11}$');
 
     if (!phoneRegExp.hasMatch(value)) {
-      return 'Invalid phone number format (11 digits required';
+      return 'Invalid phone number format (11 digits required)';
     }
     return null;
   }

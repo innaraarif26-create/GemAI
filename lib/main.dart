@@ -6,7 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'core/constants/colors.dart';
-import 'data/repositories_authentication/authentication_repository.dart';
+import 'data/repositories_authentication/authentication/authentication_repository.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,16 +16,15 @@ Future<void> main() async {
   // GetX Local Storage
    await GetStorage.init();
 
-  // Await Native Splash
+  // -- Await Splash until other items load
    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // Todo: Initialize Firebase
-
+  //  -- Initialize Firebase & Authentication Repository
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then(
       (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
-  // Todo: Initialize Authentication
 
+  // load all the Materia Design / Themes / Localizations / Bindings
   runApp(const GemAi());
 }
 

@@ -29,8 +29,6 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      case TargetPlatform.windows:
-        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -65,15 +63,6 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBzuTlp6L8WpllXxWtTAhhT-S2D-znTN2M',
     appId: '1:735650347383:web:a7b8386b688bc7bf6fc972',
-    messagingSenderId: '735650347383',
-    projectId: 'gemai-cb042',
-    authDomain: 'gemai-cb042.firebaseapp.com',
-    storageBucket: 'gemai-cb042.firebasestorage.app',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBzuTlp6L8WpllXxWtTAhhT-S2D-znTN2M',
-    appId: '1:735650347383:web:f5177b05985b3aba6fc972',
     messagingSenderId: '735650347383',
     projectId: 'gemai-cb042',
     authDomain: 'gemai-cb042.firebaseapp.com',

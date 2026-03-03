@@ -4,52 +4,78 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../popups/loaders.dart';
 
-class NetworkManager extends GetxController {
-
+class NetworkManager extends GetxController
+{
   static NetworkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+
+  final Rx<ConnectivityResult> _connectionStatus =
+      ConnectivityResult.none.obs;
 
   @override
-  void onInit()
-  {
+  void onInit() {
     super.onInit();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus as void Function(List<ConnectivityResult> event)?) as StreamSubscription<ConnectivityResult>;
+
+    // Listen to connectivity changes
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(
+              (List<ConnectivityResult> results) {
+            _updateConnectionStatus(results);
+          },
+        );
   }
 
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  // Update connection status
+  Future<void> _updateConnectionStatus(
+      List<ConnectivityResult> results) async {
+
+    ConnectivityResult result = ConnectivityResult.none;
+
+    if (results.contains(ConnectivityResult.wifi)) {
+      result = ConnectivityResult.wifi;
+    } else if (results.contains(ConnectivityResult.mobile)) {
+      result = ConnectivityResult.mobile;
+    } else if (results.contains(ConnectivityResult.ethernet)) {
+      result = ConnectivityResult.ethernet;
+    } else if (results.contains(ConnectivityResult.vpn)) {
+      result = ConnectivityResult.vpn;
+    }
+
     _connectionStatus.value = result;
-    if(_connectionStatus.value == ConnectivityResult.none)
-      {
-        AppLoaders.warningSnackBar(title: "No Internet Connection");
-      }
+
+    if (result == ConnectivityResult.none) {
+      AppLoaders.warningSnackBar(
+        title: "No Internet Connection",
+        message: "Please check your internet connection.",
+      );
+    }
   }
 
+  // Check internet manually
   Future<bool> isConnected() async {
-    try
-        {
-          final result = await _connectivity.checkConnectivity();
-          if(result == ConnectivityResult.none)
-            {
-              return false;
-            }
-          else
-            {
-                return true;
-            }
-        }
-    on PlatformException catch (_)
-    {
+    try {
+      final List<ConnectivityResult> results =
+      await _connectivity.checkConnectivity();
+
+      if (results.contains(ConnectivityResult.none) ||
+          results.isEmpty) {
+        return false;
+      }
+
+      return true;
+    } on PlatformException catch (_) {
       return false;
     }
   }
 
+  ConnectivityResult get connectionStatus =>
+      _connectionStatus.value;
+
   @override
-  void onClose()
-  {
-    super.onClose();
+  void onClose() {
     _connectivitySubscription.cancel();
+    super.onClose();
   }
 }

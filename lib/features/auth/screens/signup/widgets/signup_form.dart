@@ -70,23 +70,33 @@ class AppFormField extends StatelessWidget
           const SizedBox(height: AppSizes.spaceBtwInputFields,),
 
           /// Password
-          TextFormField(
-            validator: (value) => AppValidator.validatePassword(value),
-            controller: controller.password,
-            obscureText: true,
-            decoration: InputDecoration(labelText: AppTexts.password,prefixIcon: const Icon(Iconsax.password_check,size: 20),
-              suffixIcon:Icon(Iconsax.eye_slash)
+          Obx(
+            ()=> TextFormField(
+              validator: (value) => AppValidator.validatePassword(value),
+              controller: controller.password,
+              obscureText: controller.hidePassword.value,
+              decoration: InputDecoration(labelText: AppTexts.password,prefixIcon: const Icon(Iconsax.password_check,size: 20),
+                suffixIcon:IconButton(
+                  onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
+                  icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
+                ),
+               ),
               ),
-            ),
+          ),
           const SizedBox(height: AppSizes.spaceBtwInputFields,),
 
           /// Confirm Password
-          TextFormField(
-            validator: (value) => AppValidator.validateConfirmPassword("Not match", value),
-            controller: controller.confirmPassword,
-            obscureText: true,
-            decoration: InputDecoration(labelText: AppTexts.confirmPassword,prefixIcon: const Icon(Iconsax.password_check,size: 20),
-              suffixIcon: Icon(Iconsax.eye_slash),
+          Obx(
+             ()=> TextFormField(
+              validator: (value) => AppValidator.validateConfirmPassword(controller.password.text, value),
+              controller: controller.confirmPassword,
+              obscureText: controller.hideConfirmPassword.value,
+              decoration: InputDecoration(labelText: AppTexts.confirmPassword,prefixIcon: const Icon(Iconsax.password_check,size: 20),
+                suffixIcon: IconButton(
+                    onPressed: ()=> controller.hideConfirmPassword.value = !controller.hideConfirmPassword.value,
+                    icon: Icon(controller.hideConfirmPassword.value ? Iconsax.eye_slash : Iconsax.eye)
+                ),
+              ),
             ),
           ),
           const SizedBox(height: AppSizes.defaultSpace),
@@ -95,9 +105,11 @@ class AppFormField extends StatelessWidget
           Row(
             children: [
               SizedBox(width: 24, height: 24,
-                child: Checkbox(
-                  value: true,
-                  onChanged: (value) {},
+                child: Obx(
+                  ()=> Checkbox(
+                    value: controller.privacyPolicy.value,
+                    onChanged: (value) => controller.privacyPolicy.value = !controller.privacyPolicy.value,
+                  ),
                 ),
               ),
               const SizedBox(width: AppSizes.spaceBtwItems,),
