@@ -5,7 +5,6 @@ import 'package:gemai/data/repositories_authentication/authentication/authentica
 import 'package:gemai/features/auth/screens/signup/verify_email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/utils/helpers/network_manager.dart';
 import '../../../../data/repositories_authentication/user/user_repository.dart';
 import '../../../personalization/models/user_model.dart';
@@ -28,7 +27,7 @@ class SignupController extends GetxController {
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   /// SIGNUP
-  void signup() async {
+  Future<void> signup() async {
     try {
       // Start Loading
       AppFullScreenLoader.openLoadingDialog(
@@ -92,11 +91,9 @@ class SignupController extends GetxController {
       // Navigate to Verify Email Screen
       Get.to(() => const VerifyEmailScreen());
     } catch (e) {
-      // Remove loader
+      // Show some Generic Error to the user
       AppFullScreenLoader.stopLoading();
-
-      // Show error message
-      AppLoaders.errorSnackBar(title: "Oh snap", message: e.toString());
+      AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
 }

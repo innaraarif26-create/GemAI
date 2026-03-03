@@ -14,15 +14,15 @@ class UserRepository extends GetxController {
   /// Functions to save user data to firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {
-      await _db.collection("users").doc(user.id).set(user.toJson());
+      await _db.collection("Users").doc(user.id).set(user.toJson());
     } on FirebaseException catch (e) {
-      throw AppFirebaseException(e.code);
+      throw AppFirebaseException(e.code).message;
     } on FormatException catch (_) {
       throw const AppFormatException();
     } on PlatformException catch (e) {
-      throw AppPlatformException(e.code);
+      throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw Exception("Something went wrong. Please try again");
+      throw 'Something went wrong. Please try again';
     }
   }
 }
