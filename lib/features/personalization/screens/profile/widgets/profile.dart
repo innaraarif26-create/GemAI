@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/personalization/screens/profile/widgets/profile_menu.dart';
-import 'package:GemAI/widgets/appbar/appbar.dart';
-import 'package:GemAI/widgets/texts/section_heading.dart';
+import 'package:gemai/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../core/constants/image_strings.dart';

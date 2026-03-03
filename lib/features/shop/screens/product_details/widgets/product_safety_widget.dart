@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import '../../../../../core/constants/sizes.dart';
 
 class AppProductSafetyNotice extends StatelessWidget {

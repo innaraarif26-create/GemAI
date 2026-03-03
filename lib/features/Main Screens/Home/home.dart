@@ -1,4 +1,4 @@
-import 'package:GemAI/features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
+import 'package:gemai/features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/constants/sizes.dart';

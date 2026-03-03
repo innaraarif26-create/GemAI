@@ -1,6 +1,6 @@
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
-import 'package:GemAI/core/utils/validators/validation.dart';
-import 'package:GemAI/features/auth/controllers/signup/signup_controller.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/core/utils/validators/validation.dart';
+import 'package:gemai/features/auth/controllers/signup/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

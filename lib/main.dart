@@ -1,11 +1,11 @@
-import 'package:GemAI/bindings/general_bindings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:GemAI/core/theme/app_theme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'bindings/general_bindings.dart';
 import 'core/constants/colors.dart';
+import 'core/theme/app_theme.dart';
 import 'data/repositories_authentication/authentication/authentication_repository.dart';
 import 'firebase_options.dart';
 

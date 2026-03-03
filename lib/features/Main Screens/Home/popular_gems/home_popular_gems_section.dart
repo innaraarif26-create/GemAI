@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/Main%20Screens/Home/popular_gems/popular_gems_detail_screen.dart';
+import 'package:gemai/features/Main%20Screens/Home/popular_gems/popular_gems_detail_screen.dart';
 import '../../../../models/popular_gemstone_model.dart';
 import '../../../../widgets/data/popular_gems_data.dart';
 import '../../../../widgets/image_text_Widget/vertical_image_text.dart';

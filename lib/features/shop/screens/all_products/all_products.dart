@@ -1,7 +1,7 @@
-import 'package:GemAI/core/constants/sizes.dart';
-import 'package:GemAI/widgets/Products/product_card/product_card_vertical.dart';
-import 'package:GemAI/widgets/appbar/appbar.dart';
-import 'package:GemAI/widgets/layouts/grid_layout.dart';
+import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/widgets/Products/product_card/product_card_vertical.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:gemai/widgets/layouts/grid_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

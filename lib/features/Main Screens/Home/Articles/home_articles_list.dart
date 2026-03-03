@@ -1,4 +1,4 @@
-import 'package:GemAI/features/Main%20Screens/Home/Articles/article_pdf_viewer.dart';
+import 'package:gemai/features/Main%20Screens/Home/Articles/article_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

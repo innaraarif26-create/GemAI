@@ -1,10 +1,10 @@
-import 'package:GemAI/features/auth/screens/signup/success_screen.dart';
+import 'package:gemai/features/auth/screens/signup/success_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:GemAI/core/constants/image_strings.dart';
-import 'package:GemAI/core/constants/sizes.dart';
-import 'package:GemAI/core/constants/text.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/core/constants/image_strings.dart';
+import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/core/constants/text.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
 import '../login/login_screen.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/personalization/screens/address/widgets/address.dart';
-import 'package:GemAI/widgets/appbar/appbar.dart';
-import 'package:GemAI/widgets/layouts/list_tiles/settings_menu_tile.dart';
-import 'package:GemAI/widgets/texts/section_heading.dart';
+import 'package:gemai/features/personalization/screens/address/widgets/address.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
+import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/constants/colors.dart';

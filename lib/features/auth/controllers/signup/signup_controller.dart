@@ -1,8 +1,8 @@
-import 'package:GemAI/core/constants/image_strings.dart';
-import 'package:GemAI/core/utils/popups/full_screen_loader.dart';
-import 'package:GemAI/core/utils/popups/loaders.dart';
-import 'package:GemAI/data/repositories_authentication/authentication/authentication_repository.dart';
-import 'package:GemAI/features/auth/screens/signup/verify_email.dart';
+import 'package:gemai/core/constants/image_strings.dart';
+import 'package:gemai/core/utils/popups/full_screen_loader.dart';
+import 'package:gemai/core/utils/popups/loaders.dart';
+import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/features/auth/screens/signup/verify_email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -56,8 +56,7 @@ class SignupController extends GetxController {
         AppFullScreenLoader.stopLoading();
         AppLoaders.warningSnackBar(
           title: "Accept Privacy Policy",
-          message:
-          "In order to create account, you must read and accept the Privacy Policy & Terms of Use.",
+          message: "In order to create account, you must read and accept the Privacy Policy & Terms of Use.",
         );
         return;
       }
@@ -78,7 +77,7 @@ class SignupController extends GetxController {
         profilePicture: "",
       );
 
-      final userRepository = Get.find<UserRepository>();
+      final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
       // Remove loader

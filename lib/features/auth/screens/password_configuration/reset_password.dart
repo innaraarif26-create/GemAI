@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
-import 'package:GemAI/core/constants/sizes.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/core/constants/sizes.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/image_strings.dart';

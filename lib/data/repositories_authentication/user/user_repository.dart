@@ -16,13 +16,13 @@ class UserRepository extends GetxController {
     try {
       await _db.collection("users").doc(user.id).set(user.toJson());
     } on FirebaseException catch (e) {
-      throw AppFirebaseException(e.code).message;
+      throw AppFirebaseException(e.code);
     } on FormatException catch (_) {
       throw const AppFormatException();
     } on PlatformException catch (e) {
-      throw AppPlatformException(e.code).message;
+      throw AppPlatformException(e.code);
     } catch (e) {
-      throw " Something went wrong. Please try again";
+      throw "Something went wrong. Please try again";
     }
   }
 }

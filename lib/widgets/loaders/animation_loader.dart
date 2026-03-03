@@ -1,4 +1,4 @@
-import 'package:GemAI/core/constants/colors.dart';
+import 'package:gemai/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/constants/sizes.dart';

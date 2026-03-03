@@ -1,9 +1,9 @@
-import 'package:GemAI/features/auth/screens/signup/widgets/signup_form.dart';
+import 'package:gemai/features/auth/screens/signup/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
-import 'package:GemAI/core/constants/colors.dart';
-import 'package:GemAI/core/constants/sizes.dart';
-import 'package:GemAI/core/constants/text.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/core/constants/colors.dart';
+import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/core/constants/text.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/image_strings.dart';
 import '../login/login_screen.dart';

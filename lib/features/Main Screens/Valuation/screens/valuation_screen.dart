@@ -1,7 +1,7 @@
-import 'package:GemAI/core/constants/colors.dart';
-import 'package:GemAI/core/constants/sizes.dart';
-import 'package:GemAI/core/utils/helpers/helper_functions.dart';
-import 'package:GemAI/widgets/appbar/appbar.dart';
+import 'package:gemai/core/constants/colors.dart';
+import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:flutter/material.dart';
 
 class ValuationScreen extends StatefulWidget {

@@ -1,6 +1,5 @@
-import 'package:GemAI/features/onboarding/screens/onboarding_screen.dart';
+import 'package:gemai/features/onboarding/screens/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -27,7 +26,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// Functions to show Relevant Screen
-  screenRedirect() async {
+  Future<void> screenRedirect() async {
     // Local Storage
     deviceStorage.writeIfNull("IsFirstTime", true);
     deviceStorage.read("IsFirstTime") != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(const OnboardingScreen());
@@ -38,21 +37,22 @@ class AuthenticationRepository extends GetxController {
     /// [EmailAuthentication] - signIn
 
    /// [EmailAuthentication] - Register
-   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
-     try {
-       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
-     } on FirebaseAuthException catch (e) {
-       throw AppFirebaseAuthException(e.code).message;
-     } on FirebaseException catch (e) {
-       throw AppFirebaseException(e.code).message;
-     } on FormatException catch (_){
-       throw const AppFormatException();
-     } on PlatformException catch (e) {
-       throw AppPlatformException(e.code).message;
-     } catch (e) {
-       throw "Something went wrong. Please try again";
-     }
-   }
+  Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      // Wrap it in an Exception object, not just String
+      throw AppFirebaseAuthException(e.code);
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code);
+    } on FormatException {
+      throw const AppFormatException();
+    } on PlatformException catch (e) {
+      throw AppPlatformException(e.code);
+    } catch (e) {
+      throw Exception("Something went wrong. Please try again");
+    }
+  }
 
    /// [ReAuthenticate] - ReAuthenticate User
 

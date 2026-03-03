@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:GemAI/features/personalization/screens/address/widgets/add_new_address.dart';
-import 'package:GemAI/features/personalization/screens/address/widgets/single_address.dart';
-import 'package:GemAI/widgets/appbar/appbar.dart';
+import 'package:gemai/features/personalization/screens/address/widgets/add_new_address.dart';
+import 'package:gemai/features/personalization/screens/address/widgets/single_address.dart';
+import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
