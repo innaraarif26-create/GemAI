@@ -1,4 +1,3 @@
-import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/core/utils/validators/validation.dart';
 import 'package:gemai/features/auth/controllers/signup/signup_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +12,12 @@ class SignupFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = AppHelperFunctions.isDarkMode(context);
     final controller = Get.put(SignupController());
 
     return Form(
       key: controller.signupFormKey,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // ✅ Important
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
@@ -222,31 +220,6 @@ class SignupFormWidget extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// Reusable social button
-class SocialButton extends StatelessWidget {
-  final String image;
-
-  const SocialButton({super.key, required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.grey),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: IconButton(
-        onPressed: () {},
-        icon: Image(
-          width: AppSizes.iconMd,
-          height: AppSizes.iconMd,
-          image: AssetImage(image),
-        ),
       ),
     );
   }

@@ -10,13 +10,13 @@ import 'data/repositories_authentication/authentication/authentication_repositor
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  // Widgets Binding
+  /// Widgets Binding
    final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  // GetX Local Storage
+  /// GetX Local Storage
    await GetStorage.init();
 
-  // -- Await Splash until other items load
+  /// -- Await Splash until other items load
    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   //  -- Initialize Firebase & Authentication Repository
@@ -24,7 +24,7 @@ Future<void> main() async {
       (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 
-  // load all the Material Design / Themes / Localizations / Bindings
+  /// load all the Material Design / Themes / Localizations / Bindings
   runApp(const GemAi());
 }
 

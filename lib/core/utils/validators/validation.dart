@@ -10,10 +10,29 @@ class AppValidator {
     return null;
   }
 
+  /*-------------------- Username Validation ----------------- */
+
+  static String? validateUsername(String? username) {
+    if (username == null || username.isEmpty) {
+      return 'Username is required.';
+    }
+
+    const pattern = r"^[a-zA-Z0-9_-]{3,20}$";
+    final regex = RegExp(pattern);
+    bool isValid = regex.hasMatch(username);
+    if (isValid) {
+      isValid = !username.startsWith('_') && !username.startsWith('-') && !username.endsWith('_') && !username.endsWith('-');
+    }
+    if (!isValid) {
+      return 'Username is not valid.';
+    }
+    return null;
+  }
+
   /* -------------------- EMAIL -------------------- */
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email s required.';
+      return 'Email is required.';
     }
 
     // Regular Expression
@@ -67,6 +86,16 @@ class AppValidator {
     if (value == null || value.isEmpty) {
       return 'Phone Number is required';
     }
+    final returnValue = validatePhoneNumberFormat(value);
+
+    return returnValue;
+   }
+
+  static String? validatePhoneNumberFormat(String? value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
     final phoneRegExp = RegExp(r'^\d{11}$');
 
     if (!phoneRegExp.hasMatch(value)) {

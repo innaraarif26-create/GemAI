@@ -7,6 +7,7 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/image_strings.dart';
 import '../login/login_screen.dart';
+import '../login/widgets/social_button_widget.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

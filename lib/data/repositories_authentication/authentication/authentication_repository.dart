@@ -3,6 +3,7 @@ import 'package:gemai/features/onboarding/screens/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../core/utils/exceptions/firebase_auth_exceptions.dart';
@@ -32,7 +33,7 @@ class AuthenticationRepository extends GetxController {
       {
         if(user.emailVerified)
           {
-            Get.offAll(() => const LoginScreen());
+            Get.offAll(() => const NavigationMenu());
           }
         else
           {
@@ -47,9 +48,26 @@ class AuthenticationRepository extends GetxController {
       }
    }
 
+
+
   /* ---------------------- Email And Password sign in ------------------- */
 
     /// [EmailAuthentication] - signIn
+  Future<UserCredential> loginWIthEmailAndPassword(String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw AppFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const AppFormatException();
+    } on PlatformException catch (e) {
+      throw AppPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
    /// [EmailAuthentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
