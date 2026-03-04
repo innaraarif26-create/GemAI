@@ -3,7 +3,6 @@ import 'package:gemai/features/onboarding/screens/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../core/utils/exceptions/firebase_auth_exceptions.dart';
@@ -33,7 +32,7 @@ class AuthenticationRepository extends GetxController {
       {
         if(user.emailVerified)
           {
-            Get.offAll(() => const NavigationMenu());
+            Get.offAll(() => const LoginScreen());
           }
         else
           {
