@@ -1,4 +1,5 @@
-import 'package:gemai/features/auth/screens/signup/success_screen.dart';
+import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/features/auth/controllers/signup/verify_email_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/image_strings.dart';
@@ -6,20 +7,22 @@ import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/constants/text.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
-
-import '../login/login_screen.dart';
+import '../../../../widgets/appbar/appbar.dart';
 
 class VerifyEmailScreen extends StatelessWidget
 {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
 
+  final String? email;
   @override
   Widget build(BuildContext context)
   {
+    final controller = Get.put(VerifyEmailController());
+
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppAppBar(
         actions: [
-          IconButton(onPressed: () => Get.offAll(()=>LoginScreen()),icon: Icon(CupertinoIcons.clear),iconSize: 20,color: Color(0xFFB48B54))
+          IconButton(onPressed: () => AuthenticationRepository.instance.logout() ,icon: Icon(CupertinoIcons.clear),iconSize: 20,)
         ],
       ),
       body: SingleChildScrollView(
@@ -33,14 +36,14 @@ class VerifyEmailScreen extends StatelessWidget
               /// Title and Sub title
               Text(AppTexts.confirmEmail, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center,),
               const SizedBox(height: AppSizes.spaceBtwItems,),
-              Text('tufailhyder21@gmail.com',style: Theme.of(context).textTheme.labelLarge,textAlign: TextAlign.center,),
+              Text(email ?? "",style: Theme.of(context).textTheme.labelLarge,textAlign: TextAlign.center,),
               const SizedBox(height: AppSizes.spaceBtwItems,),
               Text(AppTexts.confirmEmailSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),
               const SizedBox(height: AppSizes.spaceBtwSections,),
               /// Buttons
-              SizedBox(width: double.infinity, child: ElevatedButton(onPressed: ()=> Get.to(() => SuccessScreen()), child: Text('Continue'),),),
+              SizedBox(width: double.infinity, child: ElevatedButton(onPressed: ()=> controller.checkEmailVerificationStatus(), child: const Text("Continue"))),
               const SizedBox(height: AppSizes.spaceBtwItems,),
-              SizedBox(width: double.infinity, child:  TextButton(onPressed: (){}, child: Text(AppTexts.resendEmail)),)
+              SizedBox(width: double.infinity, child:  TextButton(onPressed: () => controller.sendEmailVerification(), child: Text(AppTexts.resendEmail)),)
             ],
           ),
         ),

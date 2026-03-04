@@ -115,7 +115,7 @@ class AppImages
   static const String yellowTopaz = "assets/images/PopularGems/DetailsImages/yellow_topaz.png";
   static const String zirconRed = "assets/images/PopularGems/DetailsImages/zircon_red.png";
 
-  // -- Phone Authentication Images
-  static String docerAnimation = "assets/images/animations/141594-animation-of-docer.json";
-
+  // -- Lottie Animations
+  static String docerAnimation = "assets/images/animations/docerAnimation.json";
+  static String successfullyRegisterAnimation = "assets/images/animations/check-register.json";
 }
