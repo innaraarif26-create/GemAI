@@ -71,8 +71,6 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-
-
    /// [EmailAuthentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
     try {
@@ -89,8 +87,6 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
-
-
 
    /// [EmailVerification] - Mail Verification
    Future<void> sendEmailVerification() async {
@@ -113,41 +109,37 @@ class AuthenticationRepository extends GetxController {
 
    /// [EmailAuthentication] - Forget Password
 
-
-
   /* ---------------------- Federated identity and social sign-in ------------------- */
 
    /// [GoogleAuthentication] - Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      final GoogleSignInAccount account = await GoogleSignIn.instance.authenticate();
+      // obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
-      final GoogleSignInAuthentication googleAuth = account.authentication;
+      // create a new credential
+      final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
-      final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken,);
+      // Once signed in, return the UserCredential
+      return await _auth.signInWithCredential(credentials);
 
-      return await _auth.signInWithCredential(credential);
 
     } on FirebaseAuthException catch (e) {
       throw AppFirebaseAuthException(e.code).message;
-
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
-
     } on FormatException {
       throw const AppFormatException();
-
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
-
     } catch (e) {
-      if (kDebugMode) print("Something went wrong: $e");
+      debugPrint("Something went wrong: $e");
       return null;
     }
   }
-
-
 
    /// [FacebookAuthentication] - Facebook
 
@@ -171,5 +163,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
    /// Delete User - Remove user Auth and Firestore Account
+
+
 
 }
