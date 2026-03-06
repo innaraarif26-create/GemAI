@@ -9,8 +9,6 @@ class AppFirebaseAuthException implements Exception {
   /// Get the corresponding error message based on the error code.
   String get message {
     switch (code) {
-      case 'too-many-requests':
-        return 'Temporarily unavailable. We have blocked all requests from this device due to unusual activity.';
       case 'email-already-in-use':
         return 'The email address is already registered. Please use a different email.';
       case 'invalid-email':

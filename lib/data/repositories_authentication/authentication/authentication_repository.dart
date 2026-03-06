@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:gemai/features/auth/screens/signup/verify_email.dart';
 import 'package:gemai/features/onboarding/screens/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../core/utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../core/utils/exceptions/firebase_exceptions.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
@@ -110,6 +112,34 @@ class AuthenticationRepository extends GetxController {
   /* ---------------------- Federated identity and social sign-in ------------------- */
 
    /// [GoogleAuthentication] - Google
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      // obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+
+      // create a new credential
+      final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+      // Once signed in, return the UserCredential
+      return await _auth.signInWithCredential(credentials);
+
+
+    } on FirebaseAuthException catch (e) {
+      throw AppFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code).message;
+    } on FormatException {
+      throw const AppFormatException();
+    } on PlatformException catch (e) {
+      throw AppPlatformException(e.code).message;
+    } catch (e) {
+      if(kDebugMode) print("Something went wrong: $e");
+      return null;
+    }
+  }
 
    /// [FacebookAuthentication] - Facebook
 

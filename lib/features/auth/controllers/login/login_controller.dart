@@ -6,6 +6,7 @@ import 'package:gemai/data/repositories_authentication/authentication/authentica
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../../core/constants/image_strings.dart';
+import '../../../personalization/controllers/user_controller.dart';
 
 class LoginController extends GetxController{
 
@@ -30,7 +31,7 @@ class LoginController extends GetxController{
       // Start Loading
       AppFullScreenLoader.openLoadingDialog("Logging you in ...", AppImages.docerAnimation);
 
-    // Check Internet Connection
+   /// Check Internet Connection
     final isConnected = await NetworkManager.instance.isConnected();
     if(!isConnected)
     {
@@ -42,7 +43,7 @@ class LoginController extends GetxController{
     return;
     }
 
-    // Form Validation
+    /// Form Validation
     if(!loginFormKey.currentState!.validate())
     {
     AppFullScreenLoader.stopLoading();
@@ -69,9 +70,36 @@ class LoginController extends GetxController{
       AppFullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: "Oh Snap", message: e.toString());
     }
-
   }
 
+  /// [GoogleSignInAuthentication]
+  Future<void> googleSignIn() async {
+    try {
+      // Start Loading
+      AppFullScreenLoader.openLoadingDialog('Logging you in...', AppImages.docerAnimation);
 
+      // Check Internet Connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Sign In with Google
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      final userController = Get.put(UserController());
+      // Save Authenticated user data in the Firebase Firestore
+      await userController.saveUserRecord(userCredentials);
+      // Remove Loader
+      AppFullScreenLoader.stopLoading();
+
+      // Redirect
+      await AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      AppFullScreenLoader.stopLoading();
+      AppLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+    }
+  }
 
 }

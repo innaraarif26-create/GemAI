@@ -6,9 +6,7 @@ import 'package:gemai/core/constants/text.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/features/auth/screens/login/widgets/login_form.dart';
 import 'package:gemai/features/auth/screens/login/widgets/social_button_widget.dart';
-import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
-import '../signup/signup.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -55,31 +53,6 @@ class LoginScreen extends StatelessWidget {
 
               /// Form
               const AppLoginForm(),
-              const SizedBox(height: AppSizes.spaceBtwItems),
-
-              /// Create Account Button
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {
-                    Get.off(() => const SignupScreen());
-                  },
-                  child: const Text(AppTexts.createAccount),
-                ),
-              ),
-
-              const SizedBox(height: AppSizes.spaceBtwItems),
-
-              /// Continue as Guest
-              TextButton(
-                onPressed: () {
-                  Get.to(() => const NavigationMenu());
-                },
-                child: Text("Continue as Guest", style: Theme.of(context).textTheme.bodySmall!.apply(color: AppColors.accent),
-                ),
-              ),
-
-              const SizedBox(height: AppSizes.defaultSpace),
 
               /// Divider
               Row(
@@ -110,15 +83,8 @@ class LoginScreen extends StatelessWidget {
 
               const SizedBox(height: AppSizes.defaultSpace),
 
-              /// Social Login
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SocialButton(image: AppImages.google),
-                  const SizedBox(width: AppSizes.spaceBtwItems),
-                  SocialButton(image: AppImages.facebook),
-                ],
-              ),
+              /// Footer: Social Login
+             const AppSocialButton(),
             ],
           ),
         ),

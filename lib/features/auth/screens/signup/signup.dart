@@ -48,14 +48,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: AppSizes.defaultSpace),
 
               /// Footer (Social Login)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SocialButton(image: AppImages.google),
-                  const SizedBox(width: AppSizes.spaceBtwItems),
-                  SocialButton(image: AppImages.facebook),
-                ],
-              ),
+              const AppSocialButton(),
             ],
           ),
         ),

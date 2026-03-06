@@ -3,9 +3,12 @@ import 'package:gemai/core/utils/validators/validation.dart';
 import 'package:gemai/features/auth/controllers/login/login_controller.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../core/constants/text.dart';
+import '../../../../../navigation_menu.dart';
 import '../../password_configuration/forgot_password_screen.dart';
+import '../../signup/signup.dart';
 
 class AppLoginForm extends StatelessWidget
 {
@@ -95,6 +98,28 @@ class AppLoginForm extends StatelessWidget
                  child: const Text(AppTexts.signIn),
                ),
              ),
+                 const SizedBox(height: AppSizes.spaceBtwItems),
+                 /// Create Account Button
+                 SizedBox(
+                   width: double.infinity,
+                   child: OutlinedButton(
+                     onPressed: () {
+                       Get.off(() => const SignupScreen());
+                     },
+                     child: const Text(AppTexts.createAccount),
+                   ),
+                 ),
+
+                 const SizedBox(height: AppSizes.spaceBtwItems),
+
+                 /// Continue as Guest
+                 TextButton(
+                   onPressed: () {
+                     Get.to(() => const NavigationMenu());
+                   },
+                   child: Text("Continue as Guest", style: Theme.of(context).textTheme.bodySmall!.apply(color: AppColors.accent),
+                   ),
+                 ),
              ]
          ),
        ),
