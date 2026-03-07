@@ -21,6 +21,9 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  /// Get Authenticated User Data
+  User? get authUser => _auth.currentUser;
+
   /// called from main.dart on app launch
   @override
   void onReady() {
@@ -132,14 +135,19 @@ class AuthenticationRepository extends GetxController {
       // Trigger the authentication flow
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
+      // USER CANCELLED LOGIN
+      if (userAccount == null) {
+        return null;
+      }
+
       // obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+      final GoogleSignInAuthentication googleAuth = await userAccount.authentication;
 
       // create a new credential
-      final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      final credential = GoogleAuthProvider.credential(accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
       // Once signed in, return the UserCredential
-      return await _auth.signInWithCredential(credentials);
+      return await _auth.signInWithCredential(credential);
 
 
     } on FirebaseAuthException catch (e) {

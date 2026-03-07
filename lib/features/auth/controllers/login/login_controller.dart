@@ -88,6 +88,12 @@ class LoginController extends GetxController{
       // Sign In with Google
       final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
 
+      /// USER CANCELLED GOOGLE LOGIN
+      if (userCredentials == null) {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
+
       final userController = Get.put(UserController());
       // Save Authenticated user data in the Firebase Firestore
       await userController.saveUserRecord(userCredentials);
