@@ -16,14 +16,9 @@ class AppFullScreenLoader {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          color: AppHelperFunctions.isDarkMode(Get.context!)
-              ? AppColors.dark
-              : AppColors.white,
+          color: AppHelperFunctions.isDarkMode(Get.context!) ? AppColors.dark : AppColors.white,
           child: Center(
-            child: AppAnimationLoaderWidget(
-              text: text,
-              animation: animation,
-            ),
+            child: AppAnimationLoaderWidget(text: text, animation: animation,),
           ),
         ),
       ),

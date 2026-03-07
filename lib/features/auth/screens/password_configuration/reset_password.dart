@@ -8,8 +8,10 @@ import '../../../../core/constants/image_strings.dart';
 import '../../../../core/constants/text.dart';
 import 'forgot_password_screen.dart';
 
-class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+class ResetPasswordScreen extends StatelessWidget {
+  const ResetPasswordScreen ({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,10 @@ class ResetPassword extends StatelessWidget {
                 /// Image
                 Image(image: AssetImage(AppImages.emailVerified),width: AppHelperFunctions.screenWidth() * 0.6,),
                 const SizedBox(height: AppSizes.spaceBtwItems,),
-                /// Title and Sub title
+
+                /// Email Title and Sub title
+                Text(email,style: Theme.of(context).textTheme.bodyMedium,textAlign: TextAlign.center,),
+                const SizedBox(height: AppSizes.spaceBtwItems,),
                 Text(AppTexts.changeYourPasswordTitle, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center,),
                 const SizedBox(height: AppSizes.spaceBtwItems,),
                 Text(AppTexts.changeYourPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),

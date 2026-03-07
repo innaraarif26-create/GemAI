@@ -32,11 +32,7 @@ class AppAnimationLoaderWidget extends StatelessWidget {
 
         const SizedBox(height: AppSizes.defaultSpace),
 
-        Text(
-          text,
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
+        Text(text, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center,),
 
         const SizedBox(height: AppSizes.defaultSpace),
 
@@ -48,13 +44,7 @@ class AppAnimationLoaderWidget extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 backgroundColor: AppColors.dark,
               ),
-              child: Text(
-                actionText ?? "",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .apply(color: AppColors.light),
-              ),
+              child: Text(actionText ?? "", style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.light),),
             ),
           ),
       ],

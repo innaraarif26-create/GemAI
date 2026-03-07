@@ -17,65 +17,42 @@ class NetworkManager extends GetxController
   @override
   void onInit() {
     super.onInit();
-
-    // Listen to connectivity changes
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(
-              (List<ConnectivityResult> results) {
-            _updateConnectionStatus(results);
-          },
-        );
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
-  // Update connection status
-  Future<void> _updateConnectionStatus(
-      List<ConnectivityResult> results) async {
-
-    ConnectivityResult result = ConnectivityResult.none;
-
-    if (results.contains(ConnectivityResult.wifi)) {
-      result = ConnectivityResult.wifi;
-    } else if (results.contains(ConnectivityResult.mobile)) {
-      result = ConnectivityResult.mobile;
-    } else if (results.contains(ConnectivityResult.ethernet)) {
-      result = ConnectivityResult.ethernet;
-    } else if (results.contains(ConnectivityResult.vpn)) {
-      result = ConnectivityResult.vpn;
-    }
-
-    _connectionStatus.value = result;
-
-    if (result == ConnectivityResult.none) {
-      AppLoaders.warningSnackBar(
-        title: "No Internet Connection",
-        message: "Please check your internet connection.",
-      );
+  // Update connection status based on changes in connectivity and show a relevant popup for no internet Connection.
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> results) async {
+    if (results.contains(ConnectivityResult.none)) {
+      _connectionStatus.value = ConnectivityResult.none;
+      AppLoaders.customToast(message: "No Internet Connection");
+    } else {
+      _connectionStatus.value = results.first;
     }
   }
 
-  // Check internet manually
+  // Check internet connection status.
   Future<bool> isConnected() async {
     try {
-      final List<ConnectivityResult> results =
-      await _connectivity.checkConnectivity();
+      final List<ConnectivityResult> results = await _connectivity.checkConnectivity();
 
-      if (results.contains(ConnectivityResult.none) ||
-          results.isEmpty) {
+      if (results.contains(ConnectivityResult.none) || results.isEmpty)
+      {
         return false;
       }
+      else
+        {
+          return true;
+        }
 
-      return true;
-    } on PlatformException catch (_) {
+    } on PlatformException
+    {
       return false;
     }
   }
 
-  ConnectivityResult get connectionStatus =>
-      _connectionStatus.value;
-
   @override
   void onClose() {
-    _connectivitySubscription.cancel();
     super.onClose();
+    _connectivitySubscription.cancel();
   }
 }
