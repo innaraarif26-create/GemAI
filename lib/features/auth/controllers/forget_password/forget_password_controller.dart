@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:gemai/core/utils/popups/full_screen_loader.dart';
@@ -13,48 +12,69 @@ class ForgetPasswordController extends GetxController {
   static ForgetPasswordController get instance => Get.find();
 
   /// Variables
-  final email = TextEditingController();
-  GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
+  final TextEditingController email = TextEditingController();
+  final GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
 
   /// Send Reset Password Email
-  sendPasswordResetEmail() async {
-    try
-        {
-          AppFullScreenLoader.openLoadingDialog("Processing your request...", AppImages.docerAnimation);
+  Future<void> sendPasswordResetEmail() async {
+    try {
+      AppFullScreenLoader.openLoadingDialog("Processing your request...", AppImages.docerAnimation);
 
-          // Check Internet Connection
-          final isConnected = await NetworkManager.instance.isConnected();
-          if(!isConnected)
-            {
-              AppFullScreenLoader.stopLoading();
-              return;
-            }
+      /// Check Internet Connection
+      final bool isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
 
-          // Form Validation
-          if(!forgetPasswordFormKey.currentState!.validate())
-            {
-              AppFullScreenLoader.stopLoading();
-              return;
-            }
+      /// Form Validation
+      if (!forgetPasswordFormKey.currentState!.validate()) {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
 
-          // Send Email to Reset Password
-          await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
+      /// Send Email
+      await AuthenticationRepository.instance
+          .sendPasswordResetEmail(email.text.trim());
 
-          // Remove loader
-          AppFullScreenLoader.stopLoading();
+      /// Remove loader
+      AppFullScreenLoader.stopLoading();
 
-          // Show Success Screen
-          AppLoaders.successSnackBar(title: "Email Sent",message: "Email link sent to Reset your Password".tr);
+      /// Success message
+      AppLoaders.successSnackBar(title: "Email Sent", message: "Email link sent to Reset your Password".tr);
 
-          // Redirect
-          Get.to(() => ResetPasswordScreen(email: email.text.trim()));
-        }
-    catch (e)
-    {
-
+      /// Redirect
+      Get.to(() => ResetPasswordScreen(email: email.text.trim()));
+    } catch (e) {
+      AppFullScreenLoader.stopLoading();
+      AppLoaders.errorSnackBar(title: "Oh Snap", message: e.toString());
     }
   }
-   resendPasswordREserEmail(String email) async {
 
-   }
+  /// Resend Reset Password Email
+  Future<void> resendPasswordResetEmail(String email) async {
+    try {
+      AppFullScreenLoader.openLoadingDialog("Processing your request...", AppImages.docerAnimation);
+
+      /// Check Internet Connection
+      final bool isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
+
+      /// Send Email
+      await AuthenticationRepository.instance
+          .sendPasswordResetEmail(email);
+
+      /// Remove loader
+      AppFullScreenLoader.stopLoading();
+
+      /// Success message
+      AppLoaders.successSnackBar(title: "Email Sent", message: "Email link sent to Reset your Password".tr);
+    } catch (e) {
+      AppFullScreenLoader.stopLoading();
+      AppLoaders.errorSnackBar(title: "Oh Snap", message: e.toString());
+    }
+  }
 }
