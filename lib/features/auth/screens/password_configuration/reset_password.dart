@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/features/auth/controllers/forget_password/forget_password_controller.dart';
+import 'package:gemai/features/auth/screens/login/login_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/image_strings.dart';
@@ -45,9 +47,9 @@ class ResetPasswordScreen extends StatelessWidget {
                 Text(AppTexts.changeYourPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),
                 const SizedBox(height: AppSizes.spaceBtwSections,),
                 /// Buttons
-                SizedBox(width: double.infinity,child: ElevatedButton(onPressed: () {}, child: const Text('Done')),),
+                SizedBox(width: double.infinity,child: ElevatedButton(onPressed: () => Get.offAll(()=> const LoginScreen()), child: const Text('Done')),),
                 const SizedBox(height: AppSizes.spaceBtwItems,),
-                SizedBox(width: double.infinity,child: TextButton(onPressed: () {}, child: const Text('Resend Email')),)
+                SizedBox(width: double.infinity,child: TextButton(onPressed: () => ForgetPasswordController.instance.resendPasswordResetEmail(email) , child: const Text('Resend Email')),)
               ],
             ),
           ),

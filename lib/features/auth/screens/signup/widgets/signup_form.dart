@@ -168,39 +168,10 @@ class SignupFormWidget extends StatelessWidget {
                 child: Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(
-                        text: AppTexts.iAgreeTo,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall,
-                      ),
-                      TextSpan(
-                        text: AppTexts.privacyPolicy,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .apply(
-                          color: AppColors.accent,
-                          decoration:
-                          TextDecoration.underline,
-                        ),
-                      ),
-                      TextSpan(
-                        text: AppTexts.and,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall,
-                      ),
-                      TextSpan(
-                        text: AppTexts.termOfUse,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .apply(
-                          color: AppColors.accent,
-                          decoration:
-                          TextDecoration.underline,
-                        ),
+                      TextSpan(text: AppTexts.iAgreeTo, style: Theme.of(context).textTheme.bodySmall,),
+                      TextSpan(text: AppTexts.privacyPolicy, style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.accent,),),
+                      TextSpan(text: AppTexts.and, style: Theme.of(context).textTheme.bodySmall,),
+                      TextSpan(text: AppTexts.termOfUse, style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.accent,),
                       ),
                     ],
                   ),
