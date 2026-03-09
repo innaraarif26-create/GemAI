@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:iconsax/iconsax.dart';
@@ -35,8 +36,12 @@ class ProfileScreen extends StatelessWidget
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const AppCircularImage(image: AppImages.user,width: 80,height: 80,),
-                    TextButton(onPressed: (){}, child: const Text("Change Profile Picture"))
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty ? networkImage : AppImages.user;
+                      return AppCircularImage(image: image,width: 80,height: 80, isNetworkImage: networkImage.isNotEmpty);
+                    }),
+                    TextButton(onPressed: () => controller.uploadUserProfilePicture(), child: const Text("Change Profile Picture"))
                   ]
                 ),
               ),

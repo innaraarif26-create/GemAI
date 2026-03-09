@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import '../../core/constants/sizes.dart';
+import '../shimmer/app_shimmer_effect.dart';
 
 class AppCircularImage extends StatelessWidget
 {
@@ -36,11 +38,21 @@ class AppCircularImage extends StatelessWidget
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(
-        child: Image(image: isNetworkImage ? NetworkImage(image) : AssetImage(image) as ImageProvider,
+        child: isNetworkImage ? CachedNetworkImage (
           color: overlayColor,
           fit: fit,
-        ),
+          imageUrl: image,
+          progressIndicatorBuilder: (context, url, downloadProgress) => const AppShimmerEffect(width: 55, height: 55,radius: 55),
+          errorWidget: (context,url,error) => const Icon(Icons.error),
+        ) :
+            Image(
+              fit: fit,
+              image: AssetImage(image),
+              color: overlayColor,
+            )
       ),
     );
   }
 }
+
+

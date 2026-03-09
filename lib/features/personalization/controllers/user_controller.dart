@@ -7,6 +7,7 @@ import 'package:gemai/data/repositories_authentication/authentication/authentica
 import 'package:gemai/features/auth/screens/login/login_screen.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/re_authentication_user_login_form.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/utils/popups/loaders.dart';
 import '../../../data/repositories_authentication/user/user_repository.dart';
@@ -50,23 +51,33 @@ class UserController extends GetxController
   /// Save user Record from any Registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        final nameParts = UserModel.nameParts(userCredentials.user!.displayName ?? "");
-        final username = UserModel.generateUsername(userCredentials.user!.displayName ?? "");
+      // Refresh User Record
+      await fetchUserRecord();
 
-        // Map Data
-        final user = UserModel(
-          id: userCredentials.user!.uid,
-          phoneNumber: userCredentials.user!.phoneNumber ?? "",
-          firstName: nameParts.isNotEmpty ? nameParts[0] : "",
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "",
-          username: username,
-          email: userCredentials.user!.email ?? "",
-          profilePicture: userCredentials.user!.photoURL ?? "",
-        );
+      if(user.value.id.isEmpty) {
+        if (userCredentials != null) {
+          // convert name to firstname and last name
+          final nameParts = UserModel.nameParts(
+              userCredentials.user!.displayName ?? "");
+          final username = UserModel.generateUsername(
+              userCredentials.user!.displayName ?? "");
 
-        // Save to Firestore
-        await UserRepository.instance.saveUserRecord(user);
+          // Map Data
+          final user = UserModel(
+            id: userCredentials.user!.uid,
+            phoneNumber: userCredentials.user!.phoneNumber ?? "",
+            firstName: nameParts.isNotEmpty ? nameParts[0] : "",
+            lastName: nameParts.length > 1
+                ? nameParts.sublist(1).join(" ")
+                : "",
+            username: username,
+            email: userCredentials.user!.email ?? "",
+            profilePicture: userCredentials.user!.photoURL ?? "",
+          );
+
+          // Save to Firestore
+          await UserRepository.instance.saveUserRecord(user);
+        }
       }
     } catch (e) {
       AppLoaders.warningSnackBar(
@@ -156,5 +167,30 @@ class UserController extends GetxController
         AppFullScreenLoader.stopLoading();
         AppLoaders.warningSnackBar(title: "Oh Snap", message: e.toString());
       }
+   }
+
+   /// Upload Profile Image
+   uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+        // Upload Image
+        final imageUrl = await userRepository.uploadImages(
+            "users/Images/Profile/", image);
+
+        // update User Image Record
+        Map<String, dynamic> json = {"ProfilePicture": imageUrl};
+        await userRepository.updateSingleField(json);
+
+        user.value.profilePicture = imageUrl;
+        AppLoaders.successSnackBar(title: "Congratulations",
+            message: "Your Profile Image has been updated");
+      }
+    } catch (e) {
+      AppLoaders.errorSnackBar(title: "Oh Snap",message: "Something went wrong: $e");
+    }
    }
   }
