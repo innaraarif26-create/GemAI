@@ -10,6 +10,7 @@ import '../../../../../core/constants/image_strings.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../widgets/image_widget/circular_image.dart';
 import '../../../controllers/user_controller.dart';
+import 'change_name.dart';
 
 class ProfileScreen extends StatelessWidget
 {
