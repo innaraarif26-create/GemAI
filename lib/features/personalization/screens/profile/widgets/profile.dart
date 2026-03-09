@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../core/constants/image_strings.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../widgets/image_widget/circular_image.dart';
+import '../../../controllers/user_controller.dart';
 
 class ProfileScreen extends StatelessWidget
 {
@@ -15,6 +18,7 @@ class ProfileScreen extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: const AppAppBar(
         showBackArrow: true, title: Text("Profile"),
@@ -42,8 +46,8 @@ class ProfileScreen extends StatelessWidget
                const AppSectionHeading(title: "Profile Information", showActionButton: false),
                const SizedBox(height: AppSizes.spaceBtwItems,),
               
-               AppProfileMenu(onPressed: (){}, title: "Name", value: "Coding with T"),
-               AppProfileMenu(onPressed: (){}, title: "Username", value: "coding_with_t"),
+               AppProfileMenu(title: "Name", value:controller.user.value.fullName,onPressed: () => Get.to(() => const ChangeName())),
+               AppProfileMenu(onPressed: (){}, title: "Username", value:controller.user.value.email ),
 
               const SizedBox(height: AppSizes.spaceBtwItems,),
               const Divider(),
@@ -53,9 +57,9 @@ class ProfileScreen extends StatelessWidget
               const AppSectionHeading(title: "Personal Information",showActionButton: false,),
               const SizedBox(height: AppSizes.spaceBtwItems,),
 
-              AppProfileMenu(onPressed: (){}, title: "User ID", value: "45689",icon: Iconsax.copy,),
-              AppProfileMenu(onPressed: (){}, title: "Email", value: "coding_with_t"),
-              AppProfileMenu(onPressed: (){}, title: "Phone Number", value: "+92-340-0189816"),
+              AppProfileMenu(onPressed: (){}, title: "User ID", value:controller.user.value.id,icon: Iconsax.copy,),
+              AppProfileMenu(onPressed: (){}, title: "Email", value: controller.user.value.email),
+              AppProfileMenu(onPressed: (){}, title: "Phone Number", value: controller.user.value.phoneNumber),
               AppProfileMenu(onPressed: (){}, title: "Gender", value: "Male"),
               AppProfileMenu(onPressed: (){}, title: "Date of Birth", value: "21 Aug, 2021"),
 

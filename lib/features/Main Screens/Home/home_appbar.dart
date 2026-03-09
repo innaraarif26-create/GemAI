@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text.dart';
-import '../../../core/utils/helpers/helper_functions.dart';
 import '../../../widgets/appbar/appbar.dart';
 
 class AppHomeAppBar extends StatelessWidget {
