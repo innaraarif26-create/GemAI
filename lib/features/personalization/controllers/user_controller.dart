@@ -170,7 +170,7 @@ class UserController extends GetxController
    }
 
    /// Upload Profile Image
-   uploadUserProfilePicture() async {
+   Future<void> uploadUserProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery,
           imageQuality: 70,

@@ -3,8 +3,6 @@ import 'package:gemai/features/personalization/screens/profile/widgets/profile_m
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../core/constants/image_strings.dart';
