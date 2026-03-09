@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/controllers/user_controller.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/image_strings.dart';
@@ -18,11 +19,12 @@ final VoidCallback onPressed;
   Widget build(BuildContext context)
   {
     final controller = Get.put(UserController());
-    return ListTile(
-      leading: AppCircularImage(image: AppImages.user, width: 50, height: 50, padding: 0,),
-      title: Text(controller.user.value.fullName,style: Theme.of(context).textTheme.headlineSmall!.apply(color: AppColors.white)),
-      subtitle: Text(controller.user.value.email,style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.white)),
-      trailing: IconButton(onPressed: onPressed, icon: const Icon(Iconsax.edit,color: AppColors.white,),),
+    return Obx(() => ListTile(
+        leading: AppCircularImage(image: AppImages.user, width: 50, height: 50, padding: 0,),
+        title: Text(controller.user.value.fullName,style: Theme.of(context).textTheme.headlineSmall!.apply(color: AppColors.white)),
+        subtitle: Text(controller.user.value.email,style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.white)),
+        trailing: IconButton(onPressed: onPressed, icon: const Icon(Iconsax.edit,color: AppColors.white,),),
+      ),
     );
   }
 }

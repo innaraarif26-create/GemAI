@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget
                const SizedBox(height: AppSizes.spaceBtwItems,),
               
                AppProfileMenu(title: "Name", value:controller.user.value.fullName,onPressed: () => Get.to(() => const ChangeName())),
-               AppProfileMenu(onPressed: (){}, title: "Username", value:controller.user.value.email ),
+               AppProfileMenu(title: "Username", value:controller.user.value.username,onPressed: (){}),
 
               const SizedBox(height: AppSizes.spaceBtwItems,),
               const Divider(),
@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget
               const SizedBox(height: AppSizes.spaceBtwItems,),
 
               Center(
-                child: TextButton(onPressed: (){}, child: const Text("Delete Account",style: TextStyle(color: Colors.red),)),
+                child: TextButton(onPressed: () => controller.deleteAccountWarningPopup(), child: const Text("Delete Account",style: TextStyle(color: Colors.red),)),
               )
 
             ],

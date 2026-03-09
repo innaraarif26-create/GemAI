@@ -29,8 +29,8 @@ class SettingScreen extends StatelessWidget
                 child: Column(
                   children: [
                     AppAppBar(title: Text("Account", style: Theme.of(context).textTheme.headlineMedium!.apply(color: AppColors.white))),
-                    const SizedBox(height: AppSizes.spaceBtwSections,),
-                    
+                    const SizedBox(height: AppSizes.spaceBtwItems,),
+
                     /// User Profile Card
                     AppUserProfileTile(onPressed: ()=> Get.to(ProfileScreen())),
                     const SizedBox(height: AppSizes.spaceBtwSections,),

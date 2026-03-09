@@ -16,6 +16,7 @@ class AppPrimaryHeaderContainer extends StatelessWidget {
     return AppCurvedEdgeWidget(
       child: Container(
         color: AppColors.accent,
+          padding: const EdgeInsets.only(bottom: 0),
           child: Stack(
             children: [
               Positioned(top: -150, right: -250,child: AppCircularContainer( backgroundColor: AppColors.textWhite.withValues(alpha: 0.1),),),
