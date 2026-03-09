@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/controllers/user_controller.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/image_strings.dart';
@@ -15,7 +17,7 @@ final VoidCallback onPressed;
   @override
   Widget build(BuildContext context)
   {
-    final controller = UserController.instance;
+    final controller = Get.put(UserController());
     return ListTile(
       leading: AppCircularImage(image: AppImages.user, width: 50, height: 50, padding: 0,),
       title: Text(controller.user.value.fullName,style: Theme.of(context).textTheme.headlineSmall!.apply(color: AppColors.white)),

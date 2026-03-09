@@ -23,14 +23,11 @@ class UserController extends GetxController
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
-
-      final userId = FirebaseAuth.instance.currentUser!.uid;
-
-      final fetchedUser = await userRepository.fetchUserDetails(userId);
-
-      user.value = fetchedUser;
-
-    } catch (e) {
+      final user = await userRepository.fetchUserDetails();
+      this.user(user);
+    }
+    catch (e)
+    {
       user(UserModel.empty());
     } finally {
       profileLoading.value = false;
