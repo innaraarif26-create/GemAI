@@ -25,7 +25,7 @@ class LoginController extends GetxController{
     super.onInit();
   }
 
-  /// --
+  /// -- Email and Password SignIn
   Future<void> emailAndPasswordSignIn() async {
     try {
       // Start Loading
