@@ -21,9 +21,10 @@ class UserController extends GetxController
   Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
-  final userRepository = Get.put(UserRepository());
+  final userRepository = UserRepository.instance;
   GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
 
   @override
@@ -63,20 +64,18 @@ class UserController extends GetxController
               userCredentials.user!.displayName ?? "");
 
           // Map Data
-          final user = UserModel(
+          final newUser = UserModel(
             id: userCredentials.user!.uid,
             phoneNumber: userCredentials.user!.phoneNumber ?? "",
             firstName: nameParts.isNotEmpty ? nameParts[0] : "",
-            lastName: nameParts.length > 1
-                ? nameParts.sublist(1).join(" ")
-                : "",
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "",
             username: username,
             email: userCredentials.user!.email ?? "",
             profilePicture: userCredentials.user!.photoURL ?? "",
           );
 
           // Save to Firestore
-          await UserRepository.instance.saveUserRecord(user);
+          await UserRepository.instance.saveUserRecord(newUser);
         }
       }
     } catch (e) {
@@ -98,7 +97,7 @@ class UserController extends GetxController
        confirm: ElevatedButton(
            onPressed: () async => deleteUserAccount(),
            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, side: const BorderSide(color: Colors.red)),
-           child:  const Padding(padding: EdgeInsetsGeometry.symmetric(horizontal: AppSizes.lg), child: Text("Delete"),),
+           child:  const Padding(padding: EdgeInsets.symmetric(horizontal: AppSizes.lg), child: Text("Delete"),),
        ),
        cancel: OutlinedButton(
            onPressed: () => Navigator.of(Get.overlayContext!).pop(),
@@ -177,6 +176,7 @@ class UserController extends GetxController
           maxHeight: 512,
           maxWidth: 512);
       if (image != null) {
+        imageUploading.value = true;
         // Upload Image
         final imageUrl = await userRepository.uploadImages(
             "users/Images/Profile/", image);
@@ -185,12 +185,15 @@ class UserController extends GetxController
         Map<String, dynamic> json = {"ProfilePicture": imageUrl};
         await userRepository.updateSingleField(json);
 
-        user.value.profilePicture = imageUrl;
+        user.update((val) {val!.profilePicture = imageUrl;});
+
         AppLoaders.successSnackBar(title: "Congratulations",
             message: "Your Profile Image has been updated");
       }
     } catch (e) {
       AppLoaders.errorSnackBar(title: "Oh Snap",message: "Something went wrong: $e");
-    }
+    } finally {
+      imageUploading.value = false;
+     }
    }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
+import 'package:gemai/widgets/shimmer/app_shimmer_effect.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -37,7 +38,9 @@ class ProfileScreen extends StatelessWidget
                     Obx(() {
                       final networkImage = controller.user.value.profilePicture;
                       final image = networkImage.isNotEmpty ? networkImage : AppImages.user;
-                      return AppCircularImage(image: image,width: 80,height: 80, isNetworkImage: networkImage.isNotEmpty);
+                      return controller.imageUploading.value
+                          ? const AppShimmerEffect(width: 80, height: 80, radius: 80)
+                          : AppCircularImage(image: image,width: 80,height: 80,isNetworkImage: networkImage.isNotEmpty);
                     }),
                     TextButton(onPressed: () => controller.uploadUserProfilePicture(), child: const Text("Change Profile Picture"))
                   ]
@@ -49,20 +52,20 @@ class ProfileScreen extends StatelessWidget
                const SizedBox(height: AppSizes.spaceBtwItems,),
                const AppSectionHeading(title: "Profile Information", showActionButton: false),
                const SizedBox(height: AppSizes.spaceBtwItems,),
-              
-               AppProfileMenu(title: "Name", value:controller.user.value.fullName,onPressed: () => Get.to(() => const ChangeName())),
-               AppProfileMenu(title: "Username", value:controller.user.value.username,onPressed: (){}),
 
+              Obx(() => AppProfileMenu(title: "Name", value: controller.user.value.fullName, onPressed: () => Get.to(() => const ChangeName()),)),
+              Obx(() => AppProfileMenu(title: "Username", value: controller.user.value.username, onPressed: () {},)),
               const SizedBox(height: AppSizes.spaceBtwItems,),
               const Divider(),
               const SizedBox(height: AppSizes.spaceBtwItems,),
 
-              /// Heading OPersonal Info
+              /// Heading Personal Info
               const AppSectionHeading(title: "Personal Information",showActionButton: false,),
               const SizedBox(height: AppSizes.spaceBtwItems,),
 
               AppProfileMenu(onPressed: (){}, title: "User ID", value:controller.user.value.id,icon: Iconsax.copy,),
-              AppProfileMenu(onPressed: (){}, title: "Email", value: controller.user.value.email),
+              Obx(() => AppProfileMenu(onPressed: () {}, title: "Email", value: controller.user.value.email,)),
+              Obx(() => AppProfileMenu(onPressed: () {}, title: "Phone Number", value: controller.user.value.phoneNumber,)),
               AppProfileMenu(onPressed: (){}, title: "Phone Number", value: controller.user.value.phoneNumber),
               AppProfileMenu(onPressed: (){}, title: "Gender", value: "Male"),
               AppProfileMenu(onPressed: (){}, title: "Date of Birth", value: "21 Aug, 2021"),

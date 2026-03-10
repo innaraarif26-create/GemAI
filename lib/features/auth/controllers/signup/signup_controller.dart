@@ -76,7 +76,7 @@ class SignupController extends GetxController {
         profilePicture: "",
       );
 
-      final userRepository = Get.put(UserRepository());
+      final userRepository = UserRepository.instance;
       await userRepository.saveUserRecord(newUser);
 
       // Remove loader
