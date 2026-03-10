@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
 import 'package:gemai/features/personalization/screens/address/widgets/address.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
@@ -69,7 +70,7 @@ class SettingScreen extends StatelessWidget
                   const SizedBox(height: AppSizes.spaceBtwSections,),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(onPressed: ()=> Get.to(LoginScreen()), child: const Text("Logout")),
+                    child: OutlinedButton(onPressed: ()=> AuthenticationRepository.instance.logout(), child: const Text("Logout")),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwSections )
                 ],

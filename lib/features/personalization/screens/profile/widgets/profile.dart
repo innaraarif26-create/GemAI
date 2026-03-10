@@ -12,19 +12,18 @@ import '../../../../../widgets/image_widget/circular_image.dart';
 import '../../../controllers/user_controller.dart';
 import 'change_name.dart';
 
-class ProfileScreen extends StatelessWidget
-{
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     final controller = UserController.instance;
+
     return Scaffold(
       appBar: const AppAppBar(
-        showBackArrow: true, title: Text("Profile"),
+        showBackArrow: true,
+        title: Text("Profile"),
       ),
-      /// Body
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -38,50 +37,83 @@ class ProfileScreen extends StatelessWidget
                     Obx(() {
                       final networkImage = controller.user.value.profilePicture;
                       final image = networkImage.isNotEmpty ? networkImage : AppImages.user;
+
                       return controller.imageUploading.value
                           ? const AppShimmerEffect(width: 80, height: 80, radius: 80)
-                          : AppCircularImage(image: image,width: 80,height: 80,isNetworkImage: networkImage.isNotEmpty);
+                          : AppCircularImage(
+                        image: image,
+                        width: 80,
+                        height: 80,
+                        isNetworkImage: networkImage.isNotEmpty,
+                      );
                     }),
-                    TextButton(onPressed: () => controller.uploadUserProfilePicture(), child: const Text("Change Profile Picture"))
-                  ]
+                    TextButton(
+                      onPressed: () => controller.uploadUserProfilePicture(),
+                      child: const Text("Change Profile Picture"),
+                    ),
+                  ],
                 ),
               ),
-              /// Divider
-               const SizedBox(height: AppSizes.spaceBtwItems / 2,),
-               const Divider(),
-               const SizedBox(height: AppSizes.spaceBtwItems,),
-               const AppSectionHeading(title: "Profile Information", showActionButton: false),
-               const SizedBox(height: AppSizes.spaceBtwItems,),
 
-              Obx(() => AppProfileMenu(title: "Name", value: controller.user.value.fullName, onPressed: () => Get.to(() => const ChangeName()),)),
-              Obx(() => AppProfileMenu(title: "Username", value: controller.user.value.username, onPressed: () {},)),
-              const SizedBox(height: AppSizes.spaceBtwItems,),
+              const SizedBox(height: AppSizes.spaceBtwItems / 2),
               const Divider(),
-              const SizedBox(height: AppSizes.spaceBtwItems,),
+              const SizedBox(height: AppSizes.spaceBtwItems),
+              const AppSectionHeading(title: "Profile Information", showActionButton: false),
+              const SizedBox(height: AppSizes.spaceBtwItems),
 
-              /// Heading Personal Info
-              const AppSectionHeading(title: "Personal Information",showActionButton: false,),
-              const SizedBox(height: AppSizes.spaceBtwItems,),
+              /// Reactive Profile Fields
+              Obx(() => AppProfileMenu(
+                title: "Name",
+                value: controller.user.value.fullName,
+                onPressed: () => Get.to(() => const ChangeName()),
+              )),
+              Obx(() => AppProfileMenu(
+                title: "Username",
+                value: controller.user.value.username,
+                onPressed: () {},
+              )),
 
-              AppProfileMenu(onPressed: (){}, title: "User ID", value:controller.user.value.id,icon: Iconsax.copy,),
-              Obx(() => AppProfileMenu(onPressed: () {}, title: "Email", value: controller.user.value.email,)),
-              Obx(() => AppProfileMenu(onPressed: () {}, title: "Phone Number", value: controller.user.value.phoneNumber,)),
-              AppProfileMenu(onPressed: (){}, title: "Phone Number", value: controller.user.value.phoneNumber),
-              AppProfileMenu(onPressed: (){}, title: "Gender", value: "Male"),
-              AppProfileMenu(onPressed: (){}, title: "Date of Birth", value: "21 Aug, 2021"),
+              const SizedBox(height: AppSizes.spaceBtwItems),
+              const Divider(),
+              const SizedBox(height: AppSizes.spaceBtwItems),
+
+              const AppSectionHeading(title: "Personal Information", showActionButton: false),
+              const SizedBox(height: AppSizes.spaceBtwItems),
+
+              /// Reactive personal info fields
+              Obx(() => AppProfileMenu(
+                title: "User ID",
+                value: controller.user.value.id,
+                icon: Iconsax.copy,
+                onPressed: () {},
+              )),
+              Obx(() => AppProfileMenu(
+                title: "Email",
+                value: controller.user.value.email,
+                onPressed: () {},
+              )),
+              Obx(() => AppProfileMenu(
+                title: "Phone Number",
+                value: controller.user.value.phoneNumber,
+                onPressed: () {},
+              )),
+              AppProfileMenu(title: "Gender", value: "Male", onPressed: () {}),
+              AppProfileMenu(title: "Date of Birth", value: "21 Aug, 2021", onPressed: () {}),
 
               const Divider(),
-              const SizedBox(height: AppSizes.spaceBtwItems,),
+              const SizedBox(height: AppSizes.spaceBtwItems),
 
+              /// Delete Account Button
               Center(
-                child: TextButton(onPressed: () => controller.deleteAccountWarningPopup(), child: const Text("Delete Account",style: TextStyle(color: Colors.red),)),
-              )
-
+                child: TextButton(
+                  onPressed: () => controller.deleteAccountWarningPopup(),
+                  child: const Text("Delete Account", style: TextStyle(color: Colors.red)),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
-
   }
 }

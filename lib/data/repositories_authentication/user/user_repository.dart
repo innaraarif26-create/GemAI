@@ -34,14 +34,13 @@ class UserRepository extends GetxController {
   /// Functions to fetch user details based on user ID
   Future<UserModel> fetchUserDetails() async {
     try {
-      final uid = AuthenticationRepository.instance.authUser?.uid;
-      if(uid == null) return UserModel.empty();
-
-      final documentSnapshot = await _db.collection("Users").doc(uid).get();
-
-      if (documentSnapshot.exists) {
+    final documentSnapshot =  await _db.collection("Users").doc(AuthenticationRepository.instance.authUser?.uid).get();
+    if(documentSnapshot.exists)
+      {
         return UserModel.fromSnapshot(documentSnapshot);
-      } else {
+      }
+    else
+      {
         return UserModel.empty();
       }
     } on FirebaseException catch (e) {
@@ -117,6 +116,7 @@ class UserRepository extends GetxController {
       throw AppPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again';
+
     }
   }
 }

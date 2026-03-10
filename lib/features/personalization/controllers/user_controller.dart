@@ -17,14 +17,14 @@ class UserController extends GetxController
 {
   static UserController get instance => Get.find();
 
-  final profileLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
 
+  final profileLoading = false.obs;
   final hidePassword = false.obs;
   final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
-  final userRepository = UserRepository.instance;
+  final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
 
   @override
@@ -58,13 +58,11 @@ class UserController extends GetxController
       if(user.value.id.isEmpty) {
         if (userCredentials != null) {
           // convert name to firstname and last name
-          final nameParts = UserModel.nameParts(
-              userCredentials.user!.displayName ?? "");
-          final username = UserModel.generateUsername(
-              userCredentials.user!.displayName ?? "");
+          final nameParts = UserModel.nameParts(userCredentials.user!.displayName ?? "");
+          final username = UserModel.generateUsername(userCredentials.user!.displayName ?? "");
 
           // Map Data
-          final newUser = UserModel(
+          final user = UserModel(
             id: userCredentials.user!.uid,
             phoneNumber: userCredentials.user!.phoneNumber ?? "",
             firstName: nameParts.isNotEmpty ? nameParts[0] : "",
@@ -75,7 +73,7 @@ class UserController extends GetxController
           );
 
           // Save to Firestore
-          await UserRepository.instance.saveUserRecord(newUser);
+          await UserRepository.instance.saveUserRecord(user);
         }
       }
     } catch (e) {
@@ -97,7 +95,7 @@ class UserController extends GetxController
        confirm: ElevatedButton(
            onPressed: () async => deleteUserAccount(),
            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, side: const BorderSide(color: Colors.red)),
-           child:  const Padding(padding: EdgeInsets.symmetric(horizontal: AppSizes.lg), child: Text("Delete"),),
+           child:  const Padding(padding: EdgeInsetsGeometry.symmetric(horizontal: AppSizes.lg), child: Text("Delete"),),
        ),
        cancel: OutlinedButton(
            onPressed: () => Navigator.of(Get.overlayContext!).pop(),
@@ -171,21 +169,18 @@ class UserController extends GetxController
    /// Upload Profile Image
    Future<void> uploadUserProfilePicture() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery,
-          imageQuality: 70,
-          maxHeight: 512,
-          maxWidth: 512);
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 70, maxHeight: 512, maxWidth: 512);
       if (image != null) {
         imageUploading.value = true;
         // Upload Image
-        final imageUrl = await userRepository.uploadImages(
-            "users/Images/Profile/", image);
+        final imageUrl = await userRepository.uploadImages("Users/Images/Profile/", image);
 
         // update User Image Record
         Map<String, dynamic> json = {"ProfilePicture": imageUrl};
         await userRepository.updateSingleField(json);
 
-        user.update((val) {val!.profilePicture = imageUrl;});
+        user.value.profilePicture = imageUrl;
+        user.refresh();
 
         AppLoaders.successSnackBar(title: "Congratulations",
             message: "Your Profile Image has been updated");

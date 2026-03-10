@@ -43,7 +43,7 @@ class AppCircularImage extends StatelessWidget
           child: isNetworkImage ? CachedNetworkImage (
             color: overlayColor,
             fit: fit,
-            imageUrl: "$image?${DateTime.now().millisecondsSinceEpoch}",
+            imageUrl: image,
             progressIndicatorBuilder: (context, url, downloadProgress) => const AppShimmerEffect(width: 55, height: 55,radius: 55),
             errorWidget: (context,url,error) => const Icon(Icons.error),
           ) :
