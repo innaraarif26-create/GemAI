@@ -1,5 +1,4 @@
-class GemDetailModel
-{
+class GemDetailModel {
   final String name;
   final String image;
   final List<PriceInfo> prices;
@@ -23,6 +22,31 @@ class GemDetailModel
     required this.uses,
     required this.buyingTips,
   });
+
+  factory GemDetailModel.fromJson(Map<String, dynamic> json) {
+    return GemDetailModel(
+      name: json["name"],
+      image: json["image"],
+
+      prices: (json["prices"] as List)
+          .map((e) => PriceInfo.fromJson(e))
+          .toList(),
+
+      qualityFactors: (json["qualityFactors"] as List)
+          .map((e) => QualityFactor.fromJson(e))
+          .toList(),
+
+      origins: List<String>.from(json["origins"]),
+      history: List<String>.from(json["history"]),
+      care: List<String>.from(json["care"]),
+      uses: List<String>.from(json["uses"]),
+      buyingTips: List<String>.from(json["buyingTips"]),
+
+      imitations: (json["imitations"] as List)
+          .map((e) => ImitationItem.fromJson(e))
+          .toList(),
+    );
+  }
 }
 
 class PriceInfo {
@@ -30,6 +54,13 @@ class PriceInfo {
   final String price;
 
   PriceInfo({required this.quality, required this.price});
+
+  factory PriceInfo.fromJson(Map<String, dynamic> json) {
+    return PriceInfo(
+      quality: json["quality"],
+      price: json["price"],
+    );
+  }
 }
 
 class QualityFactor {
@@ -37,6 +68,13 @@ class QualityFactor {
   final String description;
 
   QualityFactor({required this.title, required this.description});
+
+  factory QualityFactor.fromJson(Map<String, dynamic> json) {
+    return QualityFactor(
+      title: json["title"],
+      description: json["description"],
+    );
+  }
 }
 
 class ImitationItem {
@@ -44,5 +82,17 @@ class ImitationItem {
   final String title;
   final String desc;
 
-  ImitationItem({required this.img, required this.title, required this.desc});
+  ImitationItem({
+    required this.img,
+    required this.title,
+    required this.desc,
+  });
+
+  factory ImitationItem.fromJson(Map<String, dynamic> json) {
+    return ImitationItem(
+      img: json["img"],
+      title: json["title"],
+      desc: json["desc"],
+    );
+  }
 }
