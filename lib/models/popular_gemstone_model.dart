@@ -1,4 +1,5 @@
-class GemDetailModel {
+class GemDetailModel
+{
   final String name;
   final String image;
   final List<PriceInfo> prices;
@@ -22,27 +23,6 @@ class GemDetailModel {
     required this.uses,
     required this.buyingTips,
   });
-
-  factory GemDetailModel.fromMap(Map<String, dynamic> data) {
-    return GemDetailModel(
-      name: data['name'] ?? '',
-      image: data['image'] ?? '',
-      prices: (data['prices'] as List<dynamic>)
-          .map((e) => PriceInfo.fromMap(e))
-          .toList(),
-      qualityFactors: (data['qualityFactors'] as List<dynamic>)
-          .map((e) => QualityFactor.fromMap(e))
-          .toList(),
-      origins: List<String>.from(data['origins'] ?? []),
-      imitations: (data['imitations'] as List<dynamic>)
-          .map((e) => ImitationItem.fromMap(e))
-          .toList(),
-      history: List<String>.from(data['history'] ?? []),
-      care: List<String>.from(data['care'] ?? []),
-      uses: List<String>.from(data['uses'] ?? []),
-      buyingTips: List<String>.from(data['buyingTips'] ?? []),
-    );
-  }
 }
 
 class PriceInfo {
@@ -50,13 +30,6 @@ class PriceInfo {
   final String price;
 
   PriceInfo({required this.quality, required this.price});
-
-  factory PriceInfo.fromMap(Map<String, dynamic> data) {
-    return PriceInfo(
-      quality: data['quality'] ?? '',
-      price: data['price'] ?? '',
-    );
-  }
 }
 
 class QualityFactor {
@@ -64,13 +37,6 @@ class QualityFactor {
   final String description;
 
   QualityFactor({required this.title, required this.description});
-
-  factory QualityFactor.fromMap(Map<String, dynamic> data) {
-    return QualityFactor(
-      title: data['title'] ?? '',
-      description: data['description'] ?? '',
-    );
-  }
 }
 
 class ImitationItem {
@@ -79,12 +45,4 @@ class ImitationItem {
   final String desc;
 
   ImitationItem({required this.img, required this.title, required this.desc});
-
-  factory ImitationItem.fromMap(Map<String, dynamic> data) {
-    return ImitationItem(
-      img: data['img'] ?? '',
-      title: data['title'] ?? '',
-      desc: data['desc'] ?? '',
-    );
-  }
 }

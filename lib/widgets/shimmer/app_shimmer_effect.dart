@@ -12,7 +12,7 @@ class AppShimmerEffect extends StatelessWidget {
     this.color,
   });
 
-  final double width, height, radius;
+      final double width, height, radius;
   final Color? color;
 
   @override
