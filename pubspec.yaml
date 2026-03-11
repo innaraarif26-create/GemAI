@@ -71,7 +71,6 @@ flutter:
     - assets/images/animations/
     - assets/logos/
     - assets/pdfs/
-    - assets/json/popular_gems_data.json
     - assets/docs/terms_of_use.html
     - assets/docs/privacy_policy.html
 

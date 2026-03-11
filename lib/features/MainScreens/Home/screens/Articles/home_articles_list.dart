@@ -1,10 +1,11 @@
-import 'package:gemai/features/Main%20Screens/Home/Articles/article_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import '../../../../core/constants/sizes.dart';
-import '../../../../widgets/Articles_Widget/articles_container.dart';
-import '../../../../widgets/data/articles_data.dart';
+
+import '../../../../../core/constants/sizes.dart';
+import '../../../../../widgets/Articles_Widget/articles_container.dart';
+import '../../../../../widgets/data/articles_data.dart';
+import 'article_pdf_viewer.dart';
 
 class AppArticlesList extends StatelessWidget
 {

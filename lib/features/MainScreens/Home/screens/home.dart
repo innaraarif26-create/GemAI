@@ -1,15 +1,15 @@
-import 'package:gemai/features/Main%20Screens/Home/realfake_gems/all_real_fake_gems.dart';
 import 'package:flutter/material.dart';
+import 'package:gemai/features/MainScreens/Home/screens/popular_gems/home_popular_gems_section.dart';
+import 'package:gemai/features/MainScreens/Home/screens/realfake_gems/all_real_fake_gems.dart';
+import 'package:gemai/features/MainScreens/Home/screens/realfake_gems/home_realfake_section.dart';
 import 'package:get/get.dart';
-import '../../../core/constants/sizes.dart';
-import '../../../widgets/custom_shapes/containers/primary_header_container.dart';
-import '../../../widgets/custom_shapes/containers/search_container.dart';
-import '../../../widgets/texts/section_heading.dart';
-import 'home_appbar.dart';
+import '../../../../core/constants/sizes.dart';
+import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
+import '../../../../widgets/custom_shapes/containers/search_container.dart';
+import '../../../../widgets/texts/section_heading.dart';
 import 'Articles/home_articles_list.dart';
+import 'home_appbar.dart';
 import 'home_books_list.dart';
-import 'popular_gems/home_popular_gems_section.dart';
-import 'realfake_gems/home_realfake_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

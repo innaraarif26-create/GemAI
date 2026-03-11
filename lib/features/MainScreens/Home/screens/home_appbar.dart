@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/text.dart';
-import '../../../widgets/appbar/appbar.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/text.dart';
+import '../../../../widgets/appbar/appbar.dart';
 
 class AppHomeAppBar extends StatelessWidget {
   const AppHomeAppBar({

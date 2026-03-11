@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/widgets/image_widget/circular_image.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/sizes.dart';
 import '../../core/utils/helpers/helper_functions.dart';
@@ -12,12 +13,14 @@ class AppVerticalImageText extends StatelessWidget {
     this.backgroundColor,
     this.onTap,
     this.borderRadius = 100,
+     this.isNetworkImage = true,
   });
 
   final String image,title;
   final Color textColor;
   final Color? backgroundColor;
   final double borderRadius;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
 
@@ -33,20 +36,14 @@ class AppVerticalImageText extends StatelessWidget {
         child: Column(
           children: [
             /// Circular Icon
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(AppSizes.sm),
-              decoration: BoxDecoration(
-                color: backgroundColor ?? (dark ? AppColors.black :AppColors.white),
-                borderRadius: BorderRadius.circular(borderRadius),
-                border: Border.all(color: dark ? Colors.white : Colors.grey.shade700)
-              ),
-              child: Center(
-                child: Image(image: AssetImage(image),fit: BoxFit.cover,),
-              ),
+            AppCircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: AppSizes.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: AppHelperFunctions.isDarkMode(context) ? AppColors.light : AppColors.dark,
             ),
-            /// Text
             const SizedBox(height: AppSizes.spaceBtwItems/2),
             SizedBox(
               width: 60,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/image_strings.dart';
-import '../../../widgets/books_Widget/books_container.dart';
+import '../../../../core/constants/image_strings.dart';
+import '../../../../widgets/books_Widget/books_container.dart';
 
 class AppHomeBooksList extends StatelessWidget {
   const AppHomeBooksList({super.key});

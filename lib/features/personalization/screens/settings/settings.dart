@@ -10,7 +10,7 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
-import '../../../Main Screens/wishlist/wishlist.dart';
+import '../../../MainScreens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
 import '../profile/widgets/profile.dart';
 

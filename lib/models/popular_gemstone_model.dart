@@ -1,6 +1,6 @@
 class GemDetailModel {
   final String name;
-  final String image;
+  String image;
   final List<PriceInfo> prices;
   final List<QualityFactor> qualityFactors;
   final List<String> origins;

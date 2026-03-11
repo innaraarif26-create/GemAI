@@ -24,6 +24,7 @@ Future<void> main() async {
       (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 
+
   /// load all the Material Design / Themes / Localizations / Bindings
   runApp(const GemAi());
 }

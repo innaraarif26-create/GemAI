@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import '../../../../widgets/appbar/appbar.dart';
+import '../../../../../widgets/appbar/appbar.dart';
 
 class ArticlePDFViewer extends StatelessWidget {
   final String title;

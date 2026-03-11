@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/widgets/layouts/grid_layout.dart';
 import 'package:get/get.dart';
-import '../../../../core/constants/sizes.dart';
-import '../../../../core/utils/helpers/helper_functions.dart';
-import '../../../../widgets/appbar/appbar.dart';
-import '../../../../widgets/data/real_fake_gems_data.dart';
-import '../../../../widgets/image_widget/rounded_image.dart';
+import '../../../../../core/constants/sizes.dart';
+import '../../../../../core/utils/helpers/helper_functions.dart';
+import '../../../../../widgets/appbar/appbar.dart';
+import '../../../../../widgets/data/real_fake_gems_data.dart';
+import '../../../../../widgets/image_widget/rounded_image.dart';
 import 'real_fake_detail_screen.dart';
 
 class AllRealFakeGemsScreen extends StatelessWidget {
