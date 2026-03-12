@@ -39,12 +39,12 @@ class AppVerticalImageText extends StatelessWidget {
             AppCircularImage(
               image: image,
               fit: BoxFit.fitWidth,
-              padding: AppSizes.sm * 1.4,
+              padding: AppSizes.xs,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
               overlayColor: null,
             ),
-            const SizedBox(height: AppSizes.spaceBtwItems/2),
+            const SizedBox(height: AppSizes.spaceBtwItems/1.5),
             SizedBox(
               width: 60,
               child: Center(

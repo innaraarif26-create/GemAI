@@ -11,7 +11,7 @@ class GemsRepository extends GetxController {
 
   Future<List<GemDetailModel>> fetchGems() async {
     try {
-      final snapshot = await _db.collection("popular_gems").get();
+      final snapshot = await _db.collection("popular_gems").orderBy("order", descending: false).get();
 
       return snapshot.docs.map((doc) {
         final data = doc.data();

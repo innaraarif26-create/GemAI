@@ -16,7 +16,7 @@ class AppCircularImage extends StatelessWidget
     this.backgroundColor,
     this.width = 56,
     this.height = 56,
-    this.padding = AppSizes.sm,
+    this.padding = AppSizes.xs,
   });
 
   final BoxFit fit;
