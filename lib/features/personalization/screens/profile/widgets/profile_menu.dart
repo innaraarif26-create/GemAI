@@ -23,7 +23,7 @@ class AppProfileMenu extends StatelessWidget
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-          padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwItems / 1.5),
+        padding: EdgeInsets.symmetric(vertical: AppSizes.spaceBtwItems / 1.5),
         child: Row(
           children: [
             Expanded(flex:3,child: Text(title , style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)),

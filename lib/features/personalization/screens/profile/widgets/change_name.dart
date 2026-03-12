@@ -49,7 +49,7 @@ class ChangeName extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSizes.spaceBtwSections,),
-            
+
             /// Save Button
             SizedBox(
               width: double.infinity,

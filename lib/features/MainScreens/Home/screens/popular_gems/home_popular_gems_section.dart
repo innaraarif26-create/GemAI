@@ -27,8 +27,9 @@ class AppHomePopularGemsSection extends StatelessWidget {
             final gem = controller.allGems[index];
 
             return AppVerticalImageText(
-              image: gem.image,
+              image: gem.thumbImage,
               title: gem.name,
+              isNetworkImage: true,
               onTap: () => Get.to(() => GemsDetailScreen(gem: gem)),
             );
           },

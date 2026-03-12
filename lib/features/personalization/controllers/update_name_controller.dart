@@ -21,60 +21,60 @@ class UpdateNameController extends GetxController
   GlobalKey<FormState> updateUserNameFormKey = GlobalKey<FormState>();
 
   /// init user data when home screen appears
- @override
+  @override
   void onInit()
- {
-   initializeNames();
-  super.onInit();
- }
+  {
+    initializeNames();
+    super.onInit();
+  }
 
- /// Fetch user record
- Future<void> initializeNames() async
- {
-   firstName.text = userController.user.value.firstName;
-   lastName.text = userController.user.value.lastName;
- }
+  /// Fetch user record
+  Future<void> initializeNames() async
+  {
+    firstName.text = userController.user.value.firstName;
+    lastName.text = userController.user.value.lastName;
+  }
 
- Future<void> updateUserName() async {
-   try {
-     // Start Loading
-     AppFullScreenLoader.openLoadingDialog("We are updating your information...", AppImages.docerAnimation);
+  Future<void> updateUserName() async {
+    try {
+      // Start Loading
+      AppFullScreenLoader.openLoadingDialog("We are updating your information...", AppImages.docerAnimation);
 
-     // Check Internet Connection
-     final isConnected = await NetworkManager.instance.isConnected();
-     if(!isConnected)
-       {
+      // Check Internet Connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if(!isConnected)
+      {
         AppFullScreenLoader.stopLoading();
         return;
-       }
-     // Form validation
-     if(!updateUserNameFormKey.currentState!.validate())
-       {
-         AppFullScreenLoader.stopLoading();
-         return;
-       }
+      }
+      // Form validation
+      if(!updateUserNameFormKey.currentState!.validate())
+      {
+        AppFullScreenLoader.stopLoading();
+        return;
+      }
 
-     // Update users first and last name in the firestore firebase
-     Map<String, dynamic> name = {"FirstName":firstName.text.trim(), "LastName": lastName.text.trim()};
-     await userRepository.updateSingleField(name);
+      // Update users first and last name in the firestore firebase
+      Map<String, dynamic> name = {"FirstName":firstName.text.trim(), "LastName": lastName.text.trim()};
+      await userRepository.updateSingleField(name);
 
-     // update the Rx User value
-     userController.user.value.firstName = firstName.text.trim();
-     userController.user.value.lastName = lastName.text.trim();
+      // update the Rx User value
+      userController.user.value.firstName = firstName.text.trim();
+      userController.user.value.lastName = lastName.text.trim();
 
-     // Remove Loader
-     AppFullScreenLoader.stopLoading();
+      // Remove Loader
+      AppFullScreenLoader.stopLoading();
 
-     // show Success Message
-     AppLoaders.successSnackBar(title: "Congratulations",message: "Your Name has been update.");
+      // show Success Message
+      AppLoaders.successSnackBar(title: "Congratulations",message: "Your Name has been update.");
 
-     // Move to previous Screen.
-     Get.off(() => const ProfileScreen());
-   } catch (e)
-   {
-     AppFullScreenLoader.stopLoading();
-     AppLoaders.errorSnackBar(title: "Oh Snap",message: e.toString());
-   }
- }
+      // Move to previous Screen.
+      Get.off(() => const ProfileScreen());
+    } catch (e)
+    {
+      AppFullScreenLoader.stopLoading();
+      AppLoaders.errorSnackBar(title: "Oh Snap",message: e.toString());
+    }
+  }
 
 }

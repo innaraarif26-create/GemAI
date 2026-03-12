@@ -13,7 +13,7 @@ class AppVerticalImageText extends StatelessWidget {
     this.backgroundColor,
     this.onTap,
     this.borderRadius = 100,
-     this.isNetworkImage = true,
+    this.isNetworkImage = true,
   });
 
   final String image,title;
@@ -42,7 +42,7 @@ class AppVerticalImageText extends StatelessWidget {
               padding: AppSizes.sm * 1.4,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
-              overlayColor: AppHelperFunctions.isDarkMode(context) ? AppColors.light : AppColors.dark,
+              overlayColor: null,
             ),
             const SizedBox(height: AppSizes.spaceBtwItems/2),
             SizedBox(

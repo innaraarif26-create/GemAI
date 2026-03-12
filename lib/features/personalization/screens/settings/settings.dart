@@ -36,7 +36,7 @@ class SettingScreen extends StatelessWidget
                     AppUserProfileTile(onPressed: ()=> Get.to(ProfileScreen())),
                     const SizedBox(height: AppSizes.spaceBtwSections,),
                   ],
-            )),
+                )),
             /// Body
             Padding(
               padding: EdgeInsets.all(AppSizes.defaultSpace),

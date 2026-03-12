@@ -31,7 +31,7 @@ class GemsDetailScreen extends StatelessWidget
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// image
-              AppRoundedImage(width: double.infinity,height: 200, imageUrl: gem.image, applyImageRadius: false,fit: BoxFit.fill),
+              AppRoundedImage(width: double.infinity,height: 200, imageUrl: gem.detailImage, applyImageRadius: false,fit: BoxFit.fill,isNetworkImage: true),
               const SizedBox(height: AppSizes.md,),
 
               /// Price
@@ -98,7 +98,7 @@ Widget imitationItem(BuildContext context,ImitationItem item)
     children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset(item.img, width: 55, height: 50, fit: BoxFit.cover,),
+        child: Image.network(item.img, width: 55, height: 50, fit: BoxFit.cover,errorBuilder: (_,__,___)=> const Icon(Icons.error)),
       ),
       const SizedBox(width: AppSizes.md),
       Expanded(

@@ -36,29 +36,29 @@ class AuthenticationRepository extends GetxController {
   Future<void> screenRedirect() async {
     final user = _auth.currentUser;
     if(user != null)
+    {
+      if(user.emailVerified)
       {
-        if(user.emailVerified)
-          {
-            Get.offAll(() => const NavigationMenu());
-          }
-        else
-          {
-            Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email,));
-          }
+        Get.offAll(() => const NavigationMenu());
       }
+      else
+      {
+        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email,));
+      }
+    }
     else
-      {
-        // Local Storage
-        deviceStorage.writeIfNull("IsFirstTime", true);
-        deviceStorage.read("IsFirstTime") != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(const OnboardingScreen());
-      }
-   }
+    {
+      // Local Storage
+      deviceStorage.writeIfNull("IsFirstTime", true);
+      deviceStorage.read("IsFirstTime") != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(const OnboardingScreen());
+    }
+  }
 
 
 
   /* ---------------------- Email And Password sign in ------------------- */
 
-    /// [EmailAuthentication] - Login
+  /// [EmailAuthentication] - Login
   Future<UserCredential> loginWIthEmailAndPassword(String email, String password) async {
     try {
       return await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -75,7 +75,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   /// [EmailAuthentication] - Register
+  /// [EmailAuthentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
     try {
       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -92,8 +92,8 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   /// [EmailVerification] - Mail Verification
-   Future<void> sendEmailVerification() async {
+  /// [EmailVerification] - Mail Verification
+  Future<void> sendEmailVerification() async {
     try {
       await _auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch(e) {
@@ -107,9 +107,9 @@ class AuthenticationRepository extends GetxController {
     } catch (e) {
       throw 'Something went wrong. Please try again';
     }
-   }
+  }
 
-   /// [EmailAuthentication] - Forget Password
+  /// [EmailAuthentication] - Forget Password
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -149,7 +149,7 @@ class AuthenticationRepository extends GetxController {
 
   /* ---------------------- Federated identity and social sign-in ------------------- */
 
-   /// [GoogleAuthentication] - Google
+  /// [GoogleAuthentication] - Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
@@ -184,11 +184,11 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   /// [FacebookAuthentication] - Facebook
+  /// [FacebookAuthentication] - Facebook
 
   /* ---------------------- .end Federated identity & social sign-in ------------------- */
 
-   /// [LogoutUser] - valid for any authentication.
+  /// [LogoutUser] - valid for any authentication.
   Future<void> logout() async {
     try {
       await GoogleSignIn().signOut();
@@ -207,8 +207,8 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-   /// Delete User - Remove user Auth and Firestore Account
-   Future<void> deleteAccount() async {
+  /// Delete User - Remove user Auth and Firestore Account
+  Future<void> deleteAccount() async {
     try {
       await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
       await _auth.currentUser?.delete();
@@ -223,7 +223,7 @@ class AuthenticationRepository extends GetxController {
     } catch (e) {
       throw 'Something went wrong. Please try again';
     }
-   }
+  }
 
 
 }

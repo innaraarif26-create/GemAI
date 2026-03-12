@@ -35,6 +35,8 @@ class AppRoundedImage extends StatelessWidget
   Widget build(BuildContext context)
   {
     final bool dark = AppHelperFunctions.isDarkMode(context);
+    final bool network = isNetworkImage || imageUrl.startsWith('http');
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -45,12 +47,12 @@ class AppRoundedImage extends StatelessWidget
           border: border,
           borderRadius: BorderRadius.circular(borderRadius),
           color: backgroundColor ?? (dark ? Colors.black : Colors.white),
-          ),
+        ),
         child: ClipRRect(
           borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
           child: Image(
               fit: fit,
-              image: isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider),
+              image: network ? NetworkImage(imageUrl) : AssetImage(imageUrl)  as ImageProvider),
         ),
       ),
     );

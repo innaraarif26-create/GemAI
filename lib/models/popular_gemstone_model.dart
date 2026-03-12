@@ -1,6 +1,12 @@
 class GemDetailModel {
   final String name;
-  String image;
+
+  /// thumb for home list (small image)
+  final String thumbImage;
+
+  /// detail image for detail screen (large image)
+  final String detailImage;
+
   final List<PriceInfo> prices;
   final List<QualityFactor> qualityFactors;
   final List<String> origins;
@@ -12,7 +18,8 @@ class GemDetailModel {
 
   GemDetailModel({
     required this.name,
-    required this.image,
+    required this.thumbImage,
+    required this.detailImage,
     required this.prices,
     required this.qualityFactors,
     required this.origins,
@@ -25,25 +32,26 @@ class GemDetailModel {
 
   factory GemDetailModel.fromJson(Map<String, dynamic> json) {
     return GemDetailModel(
-      name: json["name"],
-      image: json["image"],
+      name: (json["name"] ?? "") as String,
+      thumbImage: (json["thumbImage"] ?? "") as String,
+      detailImage: (json["detailImage"] ?? "") as String,
 
-      prices: (json["prices"] as List)
-          .map((e) => PriceInfo.fromJson(e))
+      prices: ((json["prices"] ?? []) as List)
+          .map((e) => PriceInfo.fromJson(Map<String, dynamic>.from(e)))
           .toList(),
 
-      qualityFactors: (json["qualityFactors"] as List)
-          .map((e) => QualityFactor.fromJson(e))
+      qualityFactors: ((json["qualityFactors"] ?? []) as List)
+          .map((e) => QualityFactor.fromJson(Map<String, dynamic>.from(e)))
           .toList(),
 
-      origins: List<String>.from(json["origins"]),
-      history: List<String>.from(json["history"]),
-      care: List<String>.from(json["care"]),
-      uses: List<String>.from(json["uses"]),
-      buyingTips: List<String>.from(json["buyingTips"]),
+      origins: List<String>.from(json["origins"] ?? const []),
+      history: List<String>.from(json["history"] ?? const []),
+      care: List<String>.from(json["care"] ?? const []),
+      uses: List<String>.from(json["uses"] ?? const []),
+      buyingTips: List<String>.from(json["buyingTips"] ?? const []),
 
-      imitations: (json["imitations"] as List)
-          .map((e) => ImitationItem.fromJson(e))
+      imitations: ((json["imitations"] ?? []) as List)
+          .map((e) => ImitationItem.fromJson(Map<String, dynamic>.from(e)))
           .toList(),
     );
   }
@@ -57,8 +65,8 @@ class PriceInfo {
 
   factory PriceInfo.fromJson(Map<String, dynamic> json) {
     return PriceInfo(
-      quality: json["quality"],
-      price: json["price"],
+      quality: (json["quality"] ?? "") as String,
+      price: (json["price"] ?? "") as String,
     );
   }
 }
@@ -71,8 +79,8 @@ class QualityFactor {
 
   factory QualityFactor.fromJson(Map<String, dynamic> json) {
     return QualityFactor(
-      title: json["title"],
-      description: json["description"],
+      title: (json["title"] ?? "") as String,
+      description: (json["description"] ?? "") as String,
     );
   }
 }
@@ -90,9 +98,9 @@ class ImitationItem {
 
   factory ImitationItem.fromJson(Map<String, dynamic> json) {
     return ImitationItem(
-      img: json["img"],
-      title: json["title"],
-      desc: json["desc"],
+      img: (json["img"] ?? "") as String,
+      title: (json["title"] ?? "") as String,
+      desc: (json["desc"] ?? "") as String,
     );
   }
 }
