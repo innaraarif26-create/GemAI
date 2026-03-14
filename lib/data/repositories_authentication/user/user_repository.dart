@@ -27,7 +27,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw e.toString();
     }
   }
 
@@ -50,7 +50,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw e.toString();
     }
   }
 
@@ -65,7 +65,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw e.toString();
     }
   }
 
@@ -80,7 +80,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw e.toString();
     }
   }
 
@@ -95,27 +95,21 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw e.toString();
     }
   }
 
   // Upload any image
-  Future<String> uploadImages(String path, XFile image) async
-  {
+  Future<String> uploadImages(String path, XFile image) async {
     try {
-      final ref = FirebaseStorage.instance.ref(path).child(image.name);
-      await ref.putFile(File(image.path));
-      final url = await ref.getDownloadURL();
-      return url;
-    }on FirebaseException catch (e) {
-      throw AppFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const AppFormatException();
-    } on PlatformException catch (e) {
-      throw AppPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong. Please try again';
+      final uid = AuthenticationRepository.instance.authUser!.uid;
+      final fileName = 'profile_${uid}_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
+      final ref = FirebaseStorage.instance.ref(path).child(fileName);
+      await ref.putFile(File(image.path));
+      return await ref.getDownloadURL();
+    } catch (e) {
+      throw e.toString();
     }
   }
 }
