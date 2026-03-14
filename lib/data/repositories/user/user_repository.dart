@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
-import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../core/utils/exceptions/firebase_exceptions.dart';

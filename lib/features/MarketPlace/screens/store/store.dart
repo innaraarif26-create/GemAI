@@ -1,4 +1,3 @@
-import 'package:gemai/features/shop/screens/all_products/all_products.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gemai/core/constants/colors.dart';
@@ -6,9 +5,10 @@ import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/custom_shapes/containers/search_container.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
-import '../../../widgets/Favorite_Products/favorite_icon.dart';
-import '../../../widgets/Products/product_card/product_card_vertical.dart';
-import '../../../widgets/layouts/grid_layout.dart';
+import '../../../../widgets/layouts/grid_layout.dart';
+import '../all_products/all_products.dart';
+import '../product_details/widgets/product_card_vertical.dart';
+import '../wishlist/favorite_icon.dart';
 import '../wishlist/wishlist.dart';
 
 class Store extends StatelessWidget {

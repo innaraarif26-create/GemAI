@@ -6,8 +6,7 @@ import 'package:gemai/core/constants/text.dart';
 import 'package:gemai/core/utils/popups/loaders.dart';
 import 'package:gemai/features/auth/screens/signup/success_screen.dart';
 import 'package:get/get.dart';
-
-import '../../../../data/repositories_authentication/authentication/authentication_repository.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
 
 class VerifyEmailController extends GetxController
 {

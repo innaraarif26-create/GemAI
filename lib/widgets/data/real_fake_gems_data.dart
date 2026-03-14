@@ -1,6 +1,6 @@
 
 import '../../core/constants/image_strings.dart';
-import '../../models/real_fake_gem_model.dart';
+import '../../features/MainScreens/Home/models/real_fake_gem_model.dart';
 
 final List<Map<String, dynamic>> realFakeGems = [
 

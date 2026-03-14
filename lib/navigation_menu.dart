@@ -4,9 +4,9 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'features/MainScreens/Home/screens/home.dart';
-import 'features/MainScreens/MarketPlace/store.dart';
 import 'features/MainScreens/Valuation/screens/valuation_screen.dart';
 import 'features/MainScreens/detection/capture_image_screen.dart';
+import 'features/MarketPlace/screens/store/store.dart';
 import 'features/personalization/screens/settings/settings.dart';
 
 class NavigationMenu extends StatelessWidget

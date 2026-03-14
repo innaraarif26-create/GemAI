@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/features/shop/screens/product_details/widgets/product_price_text.dart';
+import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_price_text.dart';
 import '../../../../../core/constants/sizes.dart';
 
 class AppPriceAndShare extends StatelessWidget {

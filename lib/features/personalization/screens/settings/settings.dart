@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/features/personalization/screens/address/widgets/address.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/layouts/list_tiles/settings_menu_tile.dart';
@@ -10,7 +10,7 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
-import '../../../MainScreens/wishlist/wishlist.dart';
+import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
 import '../profile/widgets/profile.dart';
 

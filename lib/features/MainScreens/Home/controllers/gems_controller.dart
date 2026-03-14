@@ -1,7 +1,7 @@
 import 'package:gemai/core/utils/popups/loaders.dart';
 import 'package:get/get.dart';
-import '../../../../data/repositories_authentication/gems/gems_repository.dart';
-import '../../../../models/popular_gemstone_model.dart';
+import '../../../../data/repositories/gems/gems_repository.dart';
+import '../models/popular_gemstone_model.dart';
 
 class GemsController extends GetxController {
   static GemsController get instance => Get.find();

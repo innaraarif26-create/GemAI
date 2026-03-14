@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gemai/data/repositories_authentication/user/user_repository.dart';
+import 'package:gemai/data/repositories/user/user_repository.dart';
 import 'package:gemai/features/auth/screens/signup/verify_email.dart';
 import 'package:gemai/features/onboarding/screens/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

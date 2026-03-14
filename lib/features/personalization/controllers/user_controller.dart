@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:gemai/core/utils/popups/full_screen_loader.dart';
-import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/features/auth/screens/login/login_screen.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/re_authentication_user_login_form.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/utils/popups/loaders.dart';
-import '../../../data/repositories_authentication/user/user_repository.dart';
+import '../../../data/repositories/user/user_repository.dart';
 import '../models/user_model.dart';
 
 class UserController extends GetxController

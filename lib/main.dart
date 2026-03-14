@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'bindings/general_bindings.dart';
 import 'core/constants/colors.dart';
 import 'core/theme/app_theme.dart';
-import 'data/repositories_authentication/authentication/authentication_repository.dart';
+import 'data/repositories/authentication/authentication_repository.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

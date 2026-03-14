@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:gemai/core/utils/popups/full_screen_loader.dart';
 import 'package:gemai/core/utils/popups/loaders.dart';
-import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/image_strings.dart';

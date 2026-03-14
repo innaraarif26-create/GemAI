@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../core/utils/exceptions/firebase_exceptions.dart';
 import '../../../core/utils/exceptions/platform_exceptions.dart';
-import '../../../models/popular_gemstone_model.dart';
+import '../../../features/MainScreens/Home/models/popular_gemstone_model.dart';
 
 class GemsRepository extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

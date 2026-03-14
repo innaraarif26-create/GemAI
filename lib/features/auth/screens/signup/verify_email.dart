@@ -1,4 +1,4 @@
-import 'package:gemai/data/repositories_authentication/authentication/authentication_repository.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/features/auth/controllers/signup/verify_email_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
