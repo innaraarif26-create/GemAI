@@ -43,7 +43,7 @@ class ChangeName extends StatelessWidget {
                     controller: controller.lastName,
                     validator: (value) => AppValidator.validateEmptyText("Last Name", value),
                     expands: false,
-                    decoration: const InputDecoration(labelText: AppTexts.firstName, prefixIcon: Icon(Iconsax.user)),
+                    decoration: const InputDecoration(labelText: AppTexts.lastName, prefixIcon: Icon(Iconsax.user)),
                   )
                 ],
               ),
