@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/features/MarketPlace/controllers/product_controller.dart';
+import 'package:gemai/features/MarketPlace/models/product_model.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/bottom_call_chat_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/price_share_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_detail_image_slider.dart';
@@ -8,74 +10,85 @@ import 'package:gemai/features/MarketPlace/screens/product_details/widgets/produ
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_posted_by_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_safety_widget.dart';
 import 'package:readmore/readmore.dart';
-import '../../../../core/constants/image_strings.dart';
 import '../../../../widgets/texts/product_title_text.dart';
 
+class ProductDetailScreen extends StatelessWidget {
+  const ProductDetailScreen({super.key, required this.product});
 
-class ProductDetailScreen extends StatelessWidget
-{
-  const ProductDetailScreen({super.key});
+  final ProductModel product;
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
+    // increment views once when opening
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ProductController.instance.repo.incrementViews(product.id);
+    });
+
     return Scaffold(
-      bottomNavigationBar: AppBottomCallAndChat(),
+      bottomNavigationBar: const AppBottomCallAndChat(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            /// Product Image Slider
-            AppProductImageSlider(),
+            /// Product Image Slider (dynamic)
+            AppProductImageSlider(imageUrls: product.imageUrls),
 
             /// Product Details
             Padding(
-              padding: EdgeInsets.only(right: AppSizes.defaultSpace,left: AppSizes.defaultSpace,bottom: AppSizes.defaultSpace),
+              padding: const EdgeInsets.only(
+                right: AppSizes.defaultSpace,
+                left: AppSizes.defaultSpace,
+                bottom: AppSizes.defaultSpace,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Price And share button
-                  AppPriceAndShare(),
+                  AppPriceAndShare(price: product.price),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
-                  ///Title,
-                  AppProductTitleText(title: 'Certified Natural Emerald Necklace',),
+                  /// Title
+                  AppProductTitleText(title: product.title),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
                   /// Location
-                  AppProductLocation(location: 'Danyore, Gilgit',),
+                  AppProductLocation(location: product.location),
                   const SizedBox(height: AppSizes.defaultSpace),
 
-                  /// Product Details
-                  AppProductMetaData(),
+                  /// Product Details (dynamic)
+                  AppProductMetaData(product: product),
                   const SizedBox(height: AppSizes.defaultSpace),
 
                   /// Description
-                  Text("Description", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600,),),
+                  Text(
+                    "Description",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
-                  const ReadMoreText(
-                    "Discover the elegance and beauty of a Certified Natural Emerald Necklace, a true masterpiece that combines natural splendor with sophisticated craftsmanship. Each emerald has been carefully selected for its vibrant green hue, clarity, and brilliance, ensuring a necklace that exudes luxury and style.",
+                  ReadMoreText(
+                    product.description,
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: "Show more",
                     trimExpandedText: " Less",
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
-
-                  /// Posted By
-                    const AppPostedBy(
-                    sellerName: "Tufail Haider",
-                    sellerImageUrl: AppImages.user,
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwItems),
-                    const Divider(),
+                  /// Posted By (dynamic)
+                  AppPostedBy(
+                    sellerName: product.sellerName,
+                    sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
+                  ),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
+                  const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Safety Notice Section
-                  AppProductSafetyNotice(),
+                  const AppProductSafetyNotice(),
                 ],
               ),
             )

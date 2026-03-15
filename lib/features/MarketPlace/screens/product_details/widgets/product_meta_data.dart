@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/features/MarketPlace/models/product_model.dart';
 import '../../../../../core/constants/sizes.dart';
 
 class AppProductMetaData extends StatelessWidget {
-  const AppProductMetaData({super.key});
+  const AppProductMetaData({super.key, required this.product});
+
+  final ProductModel product;
 
   Widget buildRow(String title, String value, BuildContext context) {
     return Padding(
@@ -10,24 +13,17 @@ class AppProductMetaData extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Title
           SizedBox(
             width: 120,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),
             ),
           ),
-
-          /// Value
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                height: 1.4,
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(height: 1.4),
             ),
           ),
         ],
@@ -42,15 +38,10 @@ class AppProductMetaData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// Section Title
         Text(
           "Product Details",
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
         ),
-
-        /// Card Container
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(AppSizes.sm),
@@ -67,21 +58,21 @@ class AppProductMetaData extends StatelessWidget {
           ),
           child: Column(
             children: [
-              buildRow("Gem Type", "Natural Emerald", context),
+              buildRow("Gem Type", product.gemType, context),
               divider(),
-              buildRow("Color", "Rich Green", context),
+              buildRow("Color", product.color, context),
               divider(),
-              buildRow("Origin", "Pakistan", context),
+              buildRow("Origin", product.origin, context),
               divider(),
-              buildRow("Weight(Carat)", "5.2 Carats", context),
+              buildRow("Weight(Carat)", product.weightCarat.toString(), context),
               divider(),
-              buildRow("Cut", "Oval Cut", context),
+              buildRow("Cut", product.cut, context),
               divider(),
-              buildRow("Clarity", "VVS", context),
+              buildRow("Clarity", product.clarity, context),
               divider(),
-              buildRow("Treatment", "Untreated", context),
+              buildRow("Treatment", product.treatment, context),
               divider(),
-              buildRow("Certification", "Yes", context),
+              buildRow("Certification", product.certification ? "Yes" : "No", context),
               divider(),
             ],
           ),

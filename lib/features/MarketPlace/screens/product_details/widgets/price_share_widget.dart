@@ -3,9 +3,9 @@ import 'package:gemai/features/MarketPlace/screens/product_details/widgets/produ
 import '../../../../../core/constants/sizes.dart';
 
 class AppPriceAndShare extends StatelessWidget {
-  const AppPriceAndShare({
-    super.key,
-  });
+  const AppPriceAndShare({super.key, required this.price});
+
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,15 @@ class AppPriceAndShare extends StatelessWidget {
         /// Price
         Row(
           children: [
-              AppProductPriceText(price: '50,000'),
+            AppProductPriceText(price: price.toStringAsFixed(0)),
           ],
         ),
+
         /// Share Button
-        IconButton(onPressed: (){}, icon: const Icon(Icons.share_outlined,size: AppSizes.iconMd,))
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.share_outlined, size: AppSizes.iconMd),
+        )
       ],
     );
   }
