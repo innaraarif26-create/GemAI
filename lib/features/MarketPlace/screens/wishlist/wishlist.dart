@@ -33,7 +33,6 @@ class FavouriteScreen extends StatelessWidget {
   Stream<List<ProductModel>> _productsStreamByIds(List<String> ids) {
     if (ids.isEmpty) return Stream.value(<ProductModel>[]);
 
-    // Firestore whereIn supports max 10 ids
     final limitedIds = ids.take(10).toList();
 
     return FirebaseFirestore.instance
@@ -42,8 +41,6 @@ class FavouriteScreen extends StatelessWidget {
         .snapshots()
         .map((snap) {
       final products = snap.docs.map((d) => ProductModel.fromSnapshot(d)).toList();
-
-      // Keep wishlist order
       final map = {for (final p in products) p.id: p};
       return limitedIds.map((id) => map[id]).whereType<ProductModel>().toList();
     });
@@ -54,15 +51,9 @@ class FavouriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppAppBar(
         showBackArrow: true,
-        title: Text(
-          "Wishlist",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        title: Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          AppCircularIcon(
-            icon: Iconsax.add,
-            onPressed: () => Get.to(const NavigationMenu()),
-          )
+          AppCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(const NavigationMenu())),
         ],
       ),
       body: SingleChildScrollView(
@@ -77,9 +68,7 @@ class FavouriteScreen extends StatelessWidget {
               if (wishSnap.hasError) return Text("Error: ${wishSnap.error}");
 
               final ids = wishSnap.data ?? [];
-              if (ids.isEmpty) {
-                return const Center(child: Text("No items in wishlist."));
-              }
+              if (ids.isEmpty) return const Center(child: Text("No items in wishlist."));
 
               return StreamBuilder<List<ProductModel>>(
                 stream: _productsStreamByIds(ids),
@@ -90,19 +79,11 @@ class FavouriteScreen extends StatelessWidget {
                   if (prodSnap.hasError) return Text("Error: ${prodSnap.error}");
 
                   final products = prodSnap.data ?? [];
-                  if (products.isEmpty) {
-                    return const Center(child: Text("No products found."));
-                  }
+                  if (products.isEmpty) return const Center(child: Text("No products found."));
 
-                  return Column(
-                    children: [
-                      AppGridLayout(
-                        itemCount: products.length,
-                        itemBuilder: (_, index) => AppProductCardVertical(
-                          product: products[index], // ✅ real ProductModel
-                        ),
-                      ),
-                    ],
+                  return AppGridLayout(
+                    itemCount: products.length,
+                    itemBuilder: (_, index) => AppProductCardVertical(product: products[index]),
                   );
                 },
               );

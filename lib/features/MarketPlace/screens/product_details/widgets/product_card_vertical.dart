@@ -19,7 +19,6 @@ class AppProductCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
-
     final thumb = product.imageUrls.isNotEmpty ? product.imageUrls.first : null;
 
     return GestureDetector(
@@ -43,20 +42,16 @@ class AppProductCardVertical extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Thumbnail,Wishlist button
             AppRoundedContainer(
               height: 180,
               padding: const EdgeInsets.all(AppSizes.sm),
               backgroundColor: dark ? AppColors.dark : AppColors.light,
               child: Stack(
                 children: [
-                  /// Thumbnail image
                   if (thumb != null)
                     AppRoundedImage(imageUrl: thumb, applyImageRadius: true, isNetworkImage: true)
                   else
                     const Center(child: Icon(Iconsax.image, size: 40)),
-
-                  /// Favorite Icon Button (UI same, but functionality optional)
                   const Positioned(
                     top: 0,
                     right: 0,
@@ -66,8 +61,6 @@ class AppProductCardVertical extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSizes.spaceBtwItems / 2),
-
-            /// Details
             Padding(
               padding: const EdgeInsets.only(left: AppSizes.xs),
               child: Column(

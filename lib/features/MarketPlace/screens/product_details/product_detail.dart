@@ -19,7 +19,6 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // increment views once when opening
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ProductController.instance.repo.incrementViews(product.id);
     });
@@ -29,10 +28,7 @@ class ProductDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            /// Product Image Slider (dynamic)
             AppProductImageSlider(imageUrls: product.imageUrls),
-
-            /// Product Details
             Padding(
               padding: const EdgeInsets.only(
                 right: AppSizes.defaultSpace,
@@ -42,28 +38,17 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// Price And share button
                   AppPriceAndShare(price: product.price),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
-
-                  /// Title
                   AppProductTitleText(title: product.title),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
-
-                  /// Location
                   AppProductLocation(location: product.location),
                   const SizedBox(height: AppSizes.defaultSpace),
-
-                  /// Product Details (dynamic)
                   AppProductMetaData(product: product),
                   const SizedBox(height: AppSizes.defaultSpace),
-
-                  /// Description
                   Text(
                     "Description",
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
                   ReadMoreText(
@@ -77,8 +62,6 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
-
-                  /// Posted By (dynamic)
                   AppPostedBy(
                     sellerName: product.sellerName,
                     sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
@@ -86,8 +69,6 @@ class ProductDetailScreen extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwItems),
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
-
-                  /// Safety Notice Section
                   const AppProductSafetyNotice(),
                 ],
               ),

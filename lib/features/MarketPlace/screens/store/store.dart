@@ -22,10 +22,7 @@ class Store extends StatelessWidget {
 
     return Scaffold(
       appBar: AppAppBar(
-        title: Text(
-          "Store",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        title: Text("Store", style: Theme.of(context).textTheme.headlineMedium),
         actions: [
           AppFavoriteCounterIcon(
             onPressed: () => Get.to(const FavouriteScreen()),
@@ -33,45 +30,30 @@ class Store extends StatelessWidget {
           ),
         ],
       ),
-
-      // Bottom-right icon for listing products (ONLY ADD THIS)
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.black,
         onPressed: () => Get.to(() => const CreateListingScreen()),
         child: const Icon(Icons.add, color: Colors.white),
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
         child: Column(
           children: [
-            /// Search Bar (kept UI)
-            AppSearchContainer(
-              text: "Search in store",
-              showBackground: false,
-              // If your AppSearchContainer supports onChanged, connect it here.
-              // If not, we keep as-is and do searching in AllProducts.
-            ),
+            AppSearchContainer(text: "Search in store", showBackground: false),
             const SizedBox(height: AppSizes.spaceBtwSections),
-
-            /// Popular Products (dynamic)
             AppSectionHeading(
               title: "Popular Products",
               showActionButton: true,
               onPressed: () => Get.to(() => const AllProducts()),
             ),
             const SizedBox(height: AppSizes.spaceBtwItems),
-
             StreamBuilder(
               stream: controller.popularStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
-                if (snapshot.hasError) {
-                  return Text("Error: ${snapshot.error}");
-                }
+                if (snapshot.hasError) return Text("Error: ${snapshot.error}");
 
                 final items = snapshot.data ?? [];
                 if (items.isEmpty) return const Text("No products yet.");
@@ -82,7 +64,6 @@ class Store extends StatelessWidget {
                 );
               },
             ),
-
             const SizedBox(height: AppSizes.defaultSpace),
           ],
         ),

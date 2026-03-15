@@ -15,8 +15,8 @@ class AllProducts extends StatelessWidget {
     final controller = ProductController.instance;
 
     return Scaffold(
-      appBar: AppAppBar(
-        title: const Text("Popular Products"),
+      appBar: const AppAppBar(
+        title: Text("Popular Products"),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -24,9 +24,9 @@ class AllProducts extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: Column(
             children: [
-              /// Dropdown (same UI)
               Obx(() {
-                final selected = _dropdownValueFromController(controller.sortBy.value, controller.descending.value);
+                final selected =
+                _dropdownValueFromController(controller.sortBy.value, controller.descending.value);
 
                 return DropdownButtonFormField<String>(
                   initialValue: selected,
@@ -36,8 +36,6 @@ class AllProducts extends StatelessWidget {
                     if (value == null) return;
 
                     if (value == "Name") {
-                      // Firestore sorting by title requires indexing & storing lowercased title.
-                      // We'll keep Name as client-side sorting later if needed.
                       controller.sortBy.value = "createdAt";
                       controller.descending.value = true;
                       return;
@@ -65,7 +63,6 @@ class AllProducts extends StatelessWidget {
 
               const SizedBox(height: AppSizes.spaceBtwSections),
 
-              /// Products (dynamic)
               Obx(() {
                 return StreamBuilder(
                   stream: controller.allStream(),
@@ -75,10 +72,7 @@ class AllProducts extends StatelessWidget {
                     }
                     if (snapshot.hasError) return Text("Error: ${snapshot.error}");
 
-                    var items = snapshot.data ?? [];
-
-                    // Optional: client-side "Name" sorting if you want it truly
-                    // (currently dropdown maps Name to Newest)
+                    final items = snapshot.data ?? [];
                     return AppGridLayout(
                       itemCount: items.length,
                       itemBuilder: (_, index) => AppProductCardVertical(product: items[index]),
