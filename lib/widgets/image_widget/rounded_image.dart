@@ -34,7 +34,6 @@ class AppRoundedImage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    final bool dark = AppHelperFunctions.isDarkMode(context);
     final bool network = isNetworkImage || imageUrl.startsWith('http');
 
     return GestureDetector(
@@ -46,7 +45,6 @@ class AppRoundedImage extends StatelessWidget
         decoration: BoxDecoration(
           border: border,
           borderRadius: BorderRadius.circular(borderRadius),
-          color: backgroundColor ?? (dark ? Colors.black : Colors.white),
         ),
         child: ClipRRect(
           borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,

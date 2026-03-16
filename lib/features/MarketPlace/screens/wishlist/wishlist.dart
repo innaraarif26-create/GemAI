@@ -9,21 +9,16 @@ import 'package:gemai/widgets/layouts/grid_layout.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/constants/sizes.dart';
+import '../../../../core/utils/popups/login_required_dialog.dart';
 import '../../../../navigation_menu.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
 
-  String get _uid {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) throw "User not logged in";
-    return user.uid;
-  }
-
-  Stream<List<String>> _wishlistIdsStream() {
+  Stream<List<String>> _wishlistIdsStream(String uid) {
     return FirebaseFirestore.instance
         .collection("Users")
-        .doc(_uid)
+        .doc(uid)
         .collection("Wishlist")
         .orderBy("createdAt", descending: true)
         .snapshots()
@@ -33,6 +28,7 @@ class FavouriteScreen extends StatelessWidget {
   Stream<List<ProductModel>> _productsStreamByIds(List<String> ids) {
     if (ids.isEmpty) return Stream.value(<ProductModel>[]);
 
+    // Firestore whereIn supports max 10 ids
     final limitedIds = ids.take(10).toList();
 
     return FirebaseFirestore.instance
@@ -42,12 +38,33 @@ class FavouriteScreen extends StatelessWidget {
         .map((snap) {
       final products = snap.docs.map((d) => ProductModel.fromSnapshot(d)).toList();
       final map = {for (final p in products) p.id: p};
+
+      // keep wishlist order
       return limitedIds.map((id) => map[id]).whereType<ProductModel>().toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    // If user is not logged in, show dialog and show a simple message (no crash)
+    if (firebaseUser == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await showLoginRequiredDialog(message: "Please login to view your wishlist.");
+      });
+
+      return Scaffold(
+        appBar: AppAppBar(
+          showBackArrow: true,
+          title: Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium),
+        ),
+        body: const Center(child: Text("Please login to view your wishlist.")),
+      );
+    }
+
+    final uid = firebaseUser.uid;
+
     return Scaffold(
       appBar: AppAppBar(
         showBackArrow: true,
@@ -60,7 +77,7 @@ class FavouriteScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: StreamBuilder<List<String>>(
-            stream: _wishlistIdsStream(),
+            stream: _wishlistIdsStream(uid),
             builder: (context, wishSnap) {
               if (wishSnap.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());

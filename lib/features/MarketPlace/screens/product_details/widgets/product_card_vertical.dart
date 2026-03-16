@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
+import 'package:gemai/features/MarketPlace/controllers/wishlist_controller.dart';
 import 'package:gemai/features/MarketPlace/models/product_model.dart';
 import 'package:gemai/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:gemai/widgets/image_widget/rounded_image.dart';
@@ -20,6 +21,7 @@ class AppProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
     final thumb = product.imageUrls.isNotEmpty ? product.imageUrls.first : null;
+    final wishlist = WishlistController.instance;
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),
@@ -49,13 +51,35 @@ class AppProductCardVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   if (thumb != null)
-                    AppRoundedImage(imageUrl: thumb, applyImageRadius: true, isNetworkImage: true)
+                    AppRoundedImage(
+                      imageUrl: thumb,
+                      applyImageRadius: true,
+                      isNetworkImage: true,
+                    )
                   else
                     const Center(child: Icon(Iconsax.image, size: 40)),
-                  const Positioned(
+
+                  Positioned(
                     top: 0,
                     right: 0,
-                    child: AppCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                    child: StreamBuilder<bool>(
+                      stream: wishlist.isWishlistedStream(product.id),
+                      builder: (context, snap) {
+                        final isFav = snap.data ?? false;
+
+                        return AppCircularIcon(
+                          width: 40,
+                          height: 40,
+                          icon: isFav ? Iconsax.heart5 : Iconsax.heart,
+                          color: isFav ? Colors.red : (dark ? Colors.white : Colors.black),
+                          backgroundColor: Colors.white.withValues(alpha: 0.95),
+                          elevation: 2,
+                          onPressed: () async {
+                            await wishlist.toggle(product.id, currentlyWishlisted: isFav);
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
