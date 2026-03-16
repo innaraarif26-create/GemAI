@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/sizes.dart';
 import '../../../../data/repositories/product/product_repository.dart';
+import '../../../../widgets/appbar/appbar.dart';
 import '../../../personalization/controllers/user_controller.dart';
 import '../../models/product_model.dart';
 
@@ -12,149 +13,110 @@ class CreateListingScreen extends StatefulWidget {
   const CreateListingScreen({super.key});
 
   @override
-  State<CreateListingScreen> createState() => _CreateListingScreenState();
+  State<CreateListingScreen> createState() => CreateListingScreenState();
 }
 
-class _CreateListingScreenState extends State<CreateListingScreen> {
-  final _formKey = GlobalKey<FormState>();
+class CreateListingScreenState extends State<CreateListingScreen> {
+  final formKey = GlobalKey<FormState>();
 
-  final _title = TextEditingController();
-  final _desc = TextEditingController();
-  final _price = TextEditingController();
-  final _location = TextEditingController();
-  final _category = TextEditingController(text: "Emerald");
-
-  // Weight stays manual
-  final _weight = TextEditingController(text: "0");
+  final title = TextEditingController();
+  final desc = TextEditingController();
+  final price = TextEditingController();
+  final location = TextEditingController();
+  final category = TextEditingController();
+  final weight = TextEditingController();
 
   // "Other" text controllers (used only if user selects Other)
-  final _gemTypeOther = TextEditingController();
-  final _colorOther = TextEditingController();
-  final _originOther = TextEditingController();
-  final _cutOther = TextEditingController();
-  final _clarityOther = TextEditingController();
-  final _treatmentOther = TextEditingController();
+  final gemTypeOther = TextEditingController();
+  final colorOther = TextEditingController();
+  final originOther = TextEditingController();
+  final cutOther = TextEditingController();
+  final clarityOther = TextEditingController();
+  final treatmentOther = TextEditingController();
 
-  bool _certification = true;
+  bool certification = true;
 
-  final _images = <XFile>[];
-  bool _saving = false;
+  final images = <XFile>[];
+  bool saving = false;
 
   // Dropdown options
-  static const String _other = "Other...";
+  static const String other = "Other...";
 
-  final List<String> _gemTypes = const [
-    "Natural Emerald",
-    "Natural Ruby",
-    "Natural Sapphire",
-    "Natural Topaz",
-    "Natural Garnet",
-    "Natural Aquamarine",
-    _other,
+  final List<String> gemTypes = const [
+    "Amethyst", "Aquamarine", "Citrine", "Diamond", "Emerald", "Garnet", "Gold", "Garnet", "Opal", "Peridot", "Ruby", "Sapphire",
+    "Tanzanite", "Topaz", other,
   ];
 
-  final List<String> _colors = const [
-    "Rich Green",
-    "Green",
-    "Bluish Green",
-    "Red",
-    "Pinkish Red",
-    "Blue",
-    "Yellow",
-    "White",
-    "Black",
-    _other,
+  final List<String> colors = const [
+    "Colorless (D–F)", "Near Colorless (G–J)", "Faint (K–M)", "Very Light (N–R)", "Light Color (S–Z)", "Light Yellow", "Fancy Yellow", "Fancy Pink",
+    "Fancy Blue", "Fancy Green", "Grey/Silver", "Multicolor", "Red", "Green", "Yellow", "Blue", "Purple", "Orange", other,
   ];
 
-  final List<String> _origins = const [
-    "Pakistan",
-    "Afghanistan",
-    "Sri Lanka",
-    "Myanmar (Burma)",
-    "Madagascar",
-    "Tanzania",
-    "Mozambique",
-    "Brazil",
-    _other,
+  final List<String> origins = const [
+    "Pakistan", "Afghanistan", "Sri Lanka", "Myanmar (Burma)", "Madagascar", "Tanzania",
+    "Mozambique", "Brazil", other,
   ];
 
-  final List<String> _cuts = const [
-    "Oval Cut",
-    "Round Cut",
-    "Pear Cut",
-    "Emerald Cut",
-    "Cushion Cut",
-    "Princess Cut",
-    "Marquise Cut",
-    "Cabochon",
-    _other,
+  final List<String> cuts = const [
+    "Round", "Oval", "Princess", "Pear", "Cushion", "Radiant", "Asscher", "Marquise", "Heart", "Emerald Cut",
+    "Trillion", other,
   ];
 
-  final List<String> _clarities = const [
-    "FL",
-    "IF",
-    "VVS",
-    "VS",
-    "SI",
-    "I",
-    _other,
+  final List<String> clarities = const [
+    "FL (Flawless)", "IF (Internally Flawless)", "VVS1(Very Very Slightly Included 1)", "VVS2(Very Very Slightly      Included2)",
+    "VS1(Very Slightly Included 1)", "VS2(Very Slightly Included 2)", "SI1(Slightly Included 1)", "SI2(Slightly Included 2)", "I1(Included 1)", "I2(Included 2)", "I3(Included 3)", other,
   ];
 
-  final List<String> _treatments = const [
-    "Untreated",
-    "Heat Treated",
-    "Oiled",
-    "Dyed",
-    "Irradiated",
-    "Fracture Filled",
-    _other,
+  final List<String> treatments = const [
+    "Untreated", "Heat Treated", "Oiled", "Dyed",
+    "Irradiated", "Fracture Filled", other,
   ];
 
   // Selected dropdown values
-  late String _selectedGemType;
-  late String _selectedColor;
-  late String _selectedOrigin;
-  late String _selectedCut;
-  late String _selectedClarity;
-  late String _selectedTreatment;
+  late String selectedGemType;
+  late String selectedColor;
+  late String selectedOrigin;
+  late String selectedCut;
+  late String selectedClarity;
+  late String selectedTreatment;
 
   @override
   void initState() {
     super.initState();
 
     // Default selections
-    _selectedGemType = _gemTypes.first;
-    _selectedColor = _colors.first;
-    _selectedOrigin = _origins.first;
-    _selectedCut = _cuts.first;
-    _selectedClarity = _clarities.first;
-    _selectedTreatment = _treatments.first;
+    selectedGemType = gemTypes.first;
+    selectedColor = colors.first;
+    selectedOrigin = origins.first;
+    selectedCut = cuts.first;
+    selectedClarity = clarities.first;
+    selectedTreatment = treatments.first;
   }
 
   @override
   void dispose() {
-    _title.dispose();
-    _desc.dispose();
-    _price.dispose();
-    _location.dispose();
-    _category.dispose();
-    _weight.dispose();
+    title.dispose();
+    desc.dispose();
+    price.dispose();
+    location.dispose();
+    category.dispose();
+    weight.dispose();
 
-    _gemTypeOther.dispose();
-    _colorOther.dispose();
-    _originOther.dispose();
-    _cutOther.dispose();
-    _clarityOther.dispose();
-    _treatmentOther.dispose();
+    gemTypeOther.dispose();
+    colorOther.dispose();
+    originOther.dispose();
+    cutOther.dispose();
+    clarityOther.dispose();
+    treatmentOther.dispose();
     super.dispose();
   }
 
-  InputDecoration _decoration(String label, {String? hint, IconData? icon}) {
+  InputDecoration decoration(String label, {String? hint, IconData? icon}) {
     return InputDecoration(
       labelText: label,
       hintText: hint,
       prefixIcon: icon == null ? null : Icon(icon),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppSizes.md)),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide(color: Colors.grey.shade300),
@@ -169,7 +131,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     );
   }
 
-  Widget _card({required Widget child}) {
+  Widget card({required Widget child}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -189,7 +151,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     );
   }
 
-  Widget _sectionTitle(String title, {String? subtitle}) {
+  Widget sectionTitle(String title, {String? subtitle}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -202,31 +164,31 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     );
   }
 
-  Future<void> _pickImages() async {
+  Future<void> pickImages() async {
     final picker = ImagePicker();
     final files = await picker.pickMultiImage(imageQuality: 75, maxWidth: 1280);
-    if (files.isNotEmpty) setState(() => _images.addAll(files));
+    if (files.isNotEmpty) setState(() => images.addAll(files));
   }
 
-  void _removeImageAt(int index) => setState(() => _images.removeAt(index));
+  void _removeImageAt(int index) => setState(() => images.removeAt(index));
 
   String _finalValue(String selected, TextEditingController otherCtrl) {
-    if (selected != _other) return selected;
+    if (selected != other) return selected;
     return otherCtrl.text.trim();
   }
 
-  Future<void> _submit() async {
-    if (_saving) return;
+  Future<void> submit() async {
+    if (saving) return;
 
-    final form = _formKey.currentState;
+    final form = formKey.currentState;
     if (form == null || !form.validate()) return;
 
-    if (_images.isEmpty) {
+    if (images.isEmpty) {
       Get.snackbar("Images required", "Please select at least 1 image.");
       return;
     }
 
-    setState(() => _saving = true);
+    setState(() => saving = true);
 
     try {
       final user = UserController.instance.user.value;
@@ -235,29 +197,29 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
       final repo = ProductRepository.instance;
 
       final productId = repo.newProductId();
-      final price = double.tryParse(_price.text.trim()) ?? 0;
-      final weight = double.tryParse(_weight.text.trim()) ?? 0;
+      final priceValue = double.tryParse(price.text.trim()) ?? 0;
+      final weightValue = double.tryParse(weight.text.trim()) ?? 0;
 
-      final gemType = _finalValue(_selectedGemType, _gemTypeOther);
-      final color = _finalValue(_selectedColor, _colorOther);
-      final origin = _finalValue(_selectedOrigin, _originOther);
-      final cut = _finalValue(_selectedCut, _cutOther);
-      final clarity = _finalValue(_selectedClarity, _clarityOther);
-      final treatment = _finalValue(_selectedTreatment, _treatmentOther);
+      final gemType = _finalValue(selectedGemType, gemTypeOther);
+      final color = _finalValue(selectedColor, colorOther);
+      final origin = _finalValue(selectedOrigin, originOther);
+      final cut = _finalValue(selectedCut, cutOther);
+      final clarity = _finalValue(selectedClarity, clarityOther);
+      final treatment = _finalValue(selectedTreatment, treatmentOther);
 
       final imageUrls = await repo.uploadImages(
         sellerId: user.id,
         productId: productId,
-        images: _images,
+        images: images,
       );
 
       final product = ProductModel(
         id: productId,
-        title: _title.text.trim(),
-        description: _desc.text.trim(),
-        price: price,
-        location: _location.text.trim(),
-        category: _category.text.trim(),
+        title: title.text.trim(),
+        description: desc.text.trim(),
+        price: priceValue,
+        location: location.text.trim(),
+        category: category.text.trim(),
         sellerId: user.id,
         sellerName: user.fullName,
         sellerPhotoUrl: user.profilePicture,
@@ -269,11 +231,11 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
         gemType: gemType,
         color: color,
         origin: origin,
-        weightCarat: weight,
+        weightCarat: weightValue,
         cut: cut,
         clarity: clarity,
         treatment: treatment,
-        certification: _certification,
+        certification: certification,
       );
 
       await repo.createProduct(product: product);
@@ -283,11 +245,11 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     } catch (e) {
       Get.snackbar("Error", e.toString());
     } finally {
-      if (mounted) setState(() => _saving = false);
+      if (mounted) setState(() => saving = false);
     }
   }
 
-  Widget _dropdown({
+  Widget dropdown({
     required String label,
     required IconData icon,
     required String value,
@@ -296,27 +258,27 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
   }) {
     return DropdownButtonFormField<String>(
       initialValue: value,
-      decoration: _decoration(label, icon: icon),
+      decoration: decoration(label, icon: icon),
       isExpanded: true,
       items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-      onChanged: _saving ? null : onChanged,
+      onChanged: saving ? null : onChanged,
       validator: (v) => (v == null || v.trim().isEmpty) ? "Required" : null,
     );
   }
 
-  Widget _otherFieldIfNeeded({
+  Widget otherFieldIfNeeded({
     required String selected,
     required TextEditingController controller,
     required String label,
   }) {
-    if (selected != _other) return const SizedBox.shrink();
+    if (selected != other) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: TextFormField(
         controller: controller,
-        decoration: _decoration(label, hint: "Type custom value"),
+        decoration: decoration(label, hint: "Type custom value"),
         validator: (v) {
-          if (selected != _other) return null;
+          if (selected != other) return null;
           return (v == null || v.trim().isEmpty) ? "Please enter value" : null;
         },
       ),
@@ -325,35 +287,33 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("List Product"),
-        centerTitle: true,
+      appBar: AppAppBar(
+        title: const Text("List Product"),showBackArrow: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: [
-                _card(
+                card(
                   child: Row(
                     children: [
                       Container(
                         width: 46,
                         height: 46,
                         decoration: BoxDecoration(
-                          color: scheme.primary.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.buttonSecondary.withValues(alpha: 0.09),
+                          borderRadius: BorderRadius.circular(AppSizes.sm),
                         ),
-                        child: Icon(Icons.diamond_outlined, color: scheme.primary),
+                        child: Icon(Icons.diamond_outlined, color: AppColors.buttonSecondary),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _sectionTitle(
+                        child: sectionTitle(
                           "Create a Gem Listing",
                           subtitle: "Add clear photos and accurate gem details to sell faster.",
                         ),
@@ -361,44 +321,42 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 14),
-
                 // Photos
-                _card(
+                card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _sectionTitle("Photos", subtitle: "Add at least 1 photo. More photos = more trust."),
+                      sectionTitle("Photos", subtitle: "Add at least 1 photo. More photos = more trust."),
                       const SizedBox(height: 12),
                       Row(
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: _saving ? null : _pickImages,
+                              onPressed: saving ? null : pickImages,
                               icon: const Icon(Icons.image_outlined),
-                              label: Text("Pick Images (${_images.length})"),
+                              label: Text("Pick Images (${images.length})"),
                             ),
                           ),
                           const SizedBox(width: 10),
-                          if (_images.isNotEmpty)
+                          if (images.isNotEmpty)
                             IconButton(
-                              onPressed: _saving ? null : () => setState(() => _images.clear()),
+                              onPressed: saving ? null : () => setState(() => images.clear()),
                               icon: const Icon(Icons.delete_outline),
                               tooltip: "Remove all",
                             ),
                         ],
                       ),
-                      if (_images.isNotEmpty) ...[
+                      if (images.isNotEmpty) ...[
                         const SizedBox(height: 12),
                         SizedBox(
                           height: 92,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
-                            itemCount: _images.length,
-                            separatorBuilder: (_, __) => const SizedBox(width: 10),
+                            itemCount: images.length,
+                            separatorBuilder: (_, _) => const SizedBox(width: 10),
                             itemBuilder: (context, index) {
-                              final img = _images[index];
+                              final img = images[index];
                               return Stack(
                                 children: [
                                   ClipRRect(
@@ -414,7 +372,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                                     top: 6,
                                     right: 6,
                                     child: InkWell(
-                                      onTap: _saving ? null : () => _removeImageAt(index),
+                                      onTap: saving ? null : () => _removeImageAt(index),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: Colors.black.withValues(alpha: 0.65),
@@ -438,21 +396,21 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                 const SizedBox(height: 14),
 
                 // Basic info
-                _card(
+                card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _sectionTitle("Basic Information"),
+                      sectionTitle("Basic Information"),
                       const SizedBox(height: 12),
                       TextFormField(
-                        controller: _title,
-                        decoration: _decoration("Title", hint: "e.g. Certified Emerald Necklace", icon: Icons.title),
+                        controller: title,
+                        decoration: decoration("Title", hint: "e.g. Certified Emerald Necklace", icon: Icons.title),
                         validator: (v) => (v == null || v.trim().isEmpty) ? "Required" : null,
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        controller: _desc,
-                        decoration: _decoration(
+                        controller: desc,
+                        decoration: decoration(
                           "Description",
                           hint: "Mention clarity, certification, treatments, etc.",
                           icon: Icons.description_outlined,
@@ -466,8 +424,8 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                         children: [
                           Expanded(
                             child: TextFormField(
-                              controller: _price,
-                              decoration: _decoration("Price (Rs)", hint: "e.g. 50000", icon: Icons.currency_rupee),
+                              controller: price,
+                              decoration: decoration("Price (Rs)", hint: "e.g. 50000", icon: Icons.currency_rupee),
                               keyboardType: TextInputType.number,
                               validator: (v) =>
                               (double.tryParse((v ?? "").trim()) == null) ? "Enter valid price" : null,
@@ -476,8 +434,8 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: TextFormField(
-                              controller: _location,
-                              decoration: _decoration("Location", hint: "e.g. Gilgit", icon: Icons.location_on_outlined),
+                              controller: location,
+                              decoration: decoration("Location", hint: "e.g. Gilgit,Pakistan", icon: Icons.location_on_outlined),
                               validator: (v) => (v == null || v.trim().isEmpty) ? "Required" : null,
                             ),
                           ),
@@ -485,8 +443,8 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        controller: _category,
-                        decoration: _decoration("Category", hint: "Emerald, Ruby, Sapphire...", icon: Icons.category_outlined),
+                        controller: category,
+                        decoration: decoration("Category", hint: "Diamond, Emerald, Ruby, Sapphire...", icon: Icons.category_outlined),
                         validator: (v) => (v == null || v.trim().isEmpty) ? "Required" : null,
                       ),
                     ],
@@ -496,61 +454,61 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                 const SizedBox(height: 14),
 
                 // Gem details as dropdowns + Other
-                _card(
+                card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _sectionTitle("Gem Details", subtitle: "Select values or choose Other to type custom."),
+                      sectionTitle("Gem Details", subtitle: "Select values or choose Other to type custom."),
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Gem Type",
                         icon: Icons.diamond_outlined,
-                        value: _selectedGemType,
-                        items: _gemTypes,
-                        onChanged: (v) => setState(() => _selectedGemType = v ?? _gemTypes.first),
+                        value: selectedGemType,
+                        items: gemTypes,
+                        onChanged: (v) => setState(() => selectedGemType = v ?? gemTypes.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedGemType,
-                        controller: _gemTypeOther,
+                      otherFieldIfNeeded(
+                        selected: selectedGemType,
+                        controller: gemTypeOther,
                         label: "Custom Gem Type",
                       ),
 
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Color",
                         icon: Icons.palette_outlined,
-                        value: _selectedColor,
-                        items: _colors,
-                        onChanged: (v) => setState(() => _selectedColor = v ?? _colors.first),
+                        value: selectedColor,
+                        items: colors,
+                        onChanged: (v) => setState(() => selectedColor = v ?? colors.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedColor,
-                        controller: _colorOther,
+                      otherFieldIfNeeded(
+                        selected: selectedColor,
+                        controller: colorOther,
                         label: "Custom Color",
                       ),
 
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Origin",
                         icon: Icons.public_outlined,
-                        value: _selectedOrigin,
-                        items: _origins,
-                        onChanged: (v) => setState(() => _selectedOrigin = v ?? _origins.first),
+                        value: selectedOrigin,
+                        items: origins,
+                        onChanged: (v) => setState(() => selectedOrigin = v ?? origins.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedOrigin,
-                        controller: _originOther,
+                      otherFieldIfNeeded(
+                        selected: selectedOrigin,
+                        controller: originOther,
                         label: "Custom Origin",
                       ),
 
                       const SizedBox(height: 12),
 
                       TextFormField(
-                        controller: _weight,
-                        decoration: _decoration("Weight (Carat)", hint: "e.g. 5.2", icon: Icons.scale_outlined),
+                        controller: weight,
+                        decoration: decoration("Weight (Carat)", hint: "e.g. 5.2", icon: Icons.scale_outlined),
                         keyboardType: TextInputType.number,
                         validator: (v) =>
                         (double.tryParse((v ?? "").trim()) == null) ? "Enter valid number" : null,
@@ -558,46 +516,46 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
 
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Cut",
                         icon: Icons.auto_fix_high_outlined,
-                        value: _selectedCut,
-                        items: _cuts,
-                        onChanged: (v) => setState(() => _selectedCut = v ?? _cuts.first),
+                        value: selectedCut,
+                        items: cuts,
+                        onChanged: (v) => setState(() => selectedCut = v ?? cuts.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedCut,
-                        controller: _cutOther,
+                      otherFieldIfNeeded(
+                        selected: selectedCut,
+                        controller: cutOther,
                         label: "Custom Cut",
                       ),
 
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Clarity",
                         icon: Icons.visibility_outlined,
-                        value: _selectedClarity,
-                        items: _clarities,
-                        onChanged: (v) => setState(() => _selectedClarity = v ?? _clarities.first),
+                        value: selectedClarity,
+                        items: clarities,
+                        onChanged: (v) => setState(() => selectedClarity = v ?? clarities.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedClarity,
-                        controller: _clarityOther,
+                      otherFieldIfNeeded(
+                        selected: selectedClarity,
+                        controller: clarityOther,
                         label: "Custom Clarity",
                       ),
 
                       const SizedBox(height: 12),
 
-                      _dropdown(
+                      dropdown(
                         label: "Treatment",
                         icon: Icons.science_outlined,
-                        value: _selectedTreatment,
-                        items: _treatments,
-                        onChanged: (v) => setState(() => _selectedTreatment = v ?? _treatments.first),
+                        value: selectedTreatment,
+                        items: treatments,
+                        onChanged: (v) => setState(() => selectedTreatment = v ?? treatments.first),
                       ),
-                      _otherFieldIfNeeded(
-                        selected: _selectedTreatment,
-                        controller: _treatmentOther,
+                      otherFieldIfNeeded(
+                        selected: selectedTreatment,
+                        controller: treatmentOther,
                         label: "Custom Treatment",
                       ),
 
@@ -605,10 +563,12 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
 
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        value: _certification,
-                        onChanged: _saving ? null : (v) => setState(() => _certification = v),
+                        value: certification,
+                        onChanged: saving ? null : (v) => setState(() => certification = v),
                         title: const Text("Certification Available"),
                         subtitle: const Text("Turn on if you have lab certificate/proof."),
+                        activeThumbColor: AppColors.white,
+                        activeTrackColor: AppColors.buttonSecondary,
                       ),
                     ],
                   ),
@@ -618,15 +578,13 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
 
                 SizedBox(
                   width: double.infinity,
-                  height: 52,
+                  height: 50,
                   child: ElevatedButton(
-                    onPressed: _saving ? null : _submit,
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                    ),
-                    child: Text(_saving ? "Publishing..." : "Publish"),
+                    onPressed: saving ? null : submit,
+                    child: Text(saving ? "Publishing..." : "Publish"),
                   ),
                 ),
+                SizedBox(height: AppSizes.defaultSpace,)
               ],
             ),
           ),

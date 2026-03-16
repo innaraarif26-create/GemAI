@@ -9,6 +9,7 @@ import 'package:gemai/widgets/image_widget/rounded_image.dart';
 import 'package:gemai/widgets/texts/product_title_text.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../product_details/product_detail.dart';
 import '../../../../../widgets/icons/circular_icon.dart';
 
@@ -27,7 +28,6 @@ class AppProductCardVertical extends StatelessWidget {
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),
       child: Container(
         width: 180,
-        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -37,7 +37,7 @@ class AppProductCardVertical extends StatelessWidget {
               offset: const Offset(0, 2),
             ),
           ],
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
           color: dark ? AppColors.darkerGrey : AppColors.white,
         ),
@@ -45,20 +45,31 @@ class AppProductCardVertical extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppRoundedContainer(
-              height: 180,
-              padding: const EdgeInsets.all(AppSizes.sm),
+              height: 160,
+              padding: EdgeInsets.zero,
               backgroundColor: dark ? AppColors.dark : AppColors.light,
               child: Stack(
                 children: [
-                  if (thumb != null)
-                    AppRoundedImage(
-                      imageUrl: thumb,
-                      applyImageRadius: true,
-                      isNetworkImage: true,
-                    )
-                  else
-                    const Center(child: Icon(Iconsax.image, size: 40)),
+                  /// Force image to fit full container width/height
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(AppSizes.productImageRadius),
+                      topRight: Radius.circular(AppSizes.productImageRadius),
+                    ),
+                    child: SizedBox.expand(
+                      child: (thumb != null)
+                          ? AppRoundedImage(
+                        imageUrl: thumb,
+                        isNetworkImage: true,
+                        applyImageRadius: false,
+                        borderRadius: AppSizes.productImageRadius,
+                        fit: BoxFit.cover,
+                      )
+                          : const Center(child: Icon(Iconsax.image, size: 40)),
+                    ),
+                  ),
 
+                  /// HEART ICON (wishlist toggle)
                   Positioned(
                     top: 0,
                     right: 0,
@@ -71,9 +82,7 @@ class AppProductCardVertical extends StatelessWidget {
                           width: 40,
                           height: 40,
                           icon: isFav ? Iconsax.heart5 : Iconsax.heart,
-                          color: isFav ? Colors.red : (dark ? Colors.white : Colors.black),
-                          backgroundColor: Colors.white.withValues(alpha: 0.95),
-                          elevation: 2,
+                          color: isFav ? Colors.red : Colors.redAccent.shade700,
                           onPressed: () async {
                             await wishlist.toggle(product.id, currentlyWishlisted: isFav);
                           },
@@ -84,26 +93,44 @@ class AppProductCardVertical extends StatelessWidget {
                 ],
               ),
             ),
+
             const SizedBox(height: AppSizes.spaceBtwItems / 2),
+
+            /// TEXT AREA
             Padding(
-              padding: const EdgeInsets.only(left: AppSizes.xs),
+              padding: const EdgeInsets.only(left: AppSizes.xs, right: AppSizes.xs),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppProductTitleText(title: product.title, smallSize: false),
                   const SizedBox(height: AppSizes.spaceBtwItems / 2),
+
                   Row(
                     children: [
-                      const Icon(Icons.person, size: 14, color: AppColors.grey),
+                      const Icon(Icons.person, size: 14, color: AppColors.darkerGrey),
                       const SizedBox(width: AppSizes.xs),
-                      AppProductTitleText(title: product.sellerName, smallSize: true),
+                      Expanded(child: AppProductTitleText(title: product.sellerName, smallSize: true, maxLines: 1,)),
                     ],
                   ),
+
                   const SizedBox(height: AppSizes.xs),
-                  AppProductTitleText(title: "Rs ${product.price.toStringAsFixed(0)}"),
+
+                  AppProductTitleText(title: "Rs ${product.price.toStringAsFixed(0)}", smallSize: true,),
+                  const SizedBox(height: AppSizes.xs),
+
+                  Row(
+                    children: [
+                      const Icon(Iconsax.location, size: 14, color: AppColors.darkerGrey),
+                      const SizedBox(width: AppSizes.xs),
+                      Expanded(
+                        child: Text(product.location, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.darkerGrey),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

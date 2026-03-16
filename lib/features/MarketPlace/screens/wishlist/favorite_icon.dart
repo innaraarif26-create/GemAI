@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/utils/popups/login_required_dialog.dart';
 
 class AppFavoriteCounterIcon extends StatelessWidget {
   const AppFavoriteCounterIcon({
@@ -15,34 +13,27 @@ class AppFavoriteCounterIcon extends StatelessWidget {
   final Color iconColor;
   final int count;
 
-  Future<void> _handlePressed() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      await showLoginRequiredDialog(
-        message: "Please login to view your wishlist.",
-      );
-      return;
-    }
-
-    onPressed();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final hasItems = count > 0;
+
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         IconButton(
-          onPressed: _handlePressed,
+          onPressed: onPressed,
           icon: Icon(Icons.favorite_border, color: iconColor),
         ),
-        if (count > 0)
+
+        if (hasItems)
           Positioned(
-            right: 0,
+            right: 4,
+            top: 4,
             child: Container(
               width: 16,
               height: 16,
               decoration: BoxDecoration(
-                color: AppColors.black,
+                color: Colors.red,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(

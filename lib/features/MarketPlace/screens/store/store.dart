@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/features/MarketPlace/controllers/product_controller.dart';
+import 'package:gemai/features/MarketPlace/controllers/wishlist_controller.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/custom_shapes/containers/search_container.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
@@ -19,12 +21,24 @@ class Store extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
+    final wishlist = WishlistController.instance;
+    final dark = AppHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       appBar: AppAppBar(
         title: Text("Store", style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          AppFavoriteCounterIcon(onPressed: () => Get.to(const FavouriteScreen()), iconColor: AppColors.black,
+          StreamBuilder<int>(
+            stream: wishlist.wishlistCountStream(),
+            builder: (context, snap) {
+              final count = snap.data ?? 0;
+
+              return AppFavoriteCounterIcon(
+                count: count,
+                iconColor: dark ? AppColors.white : AppColors.black,
+                onPressed: () => Get.to(const FavouriteScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -39,13 +53,16 @@ class Store extends StatelessWidget {
           children: [
             AppSearchContainer(text: "Search in store", showBackground: false),
             const SizedBox(height: AppSizes.spaceBtwSections),
-            AppSectionHeading(title: "Popular Products", showActionButton: true, onPressed: () => Get.to(() => const AllProducts()),),
+            AppSectionHeading(
+              title: "Popular Products",
+              showActionButton: true,
+              onPressed: () => Get.to(() => const AllProducts()),
+            ),
             const SizedBox(height: AppSizes.spaceBtwItems),
             StreamBuilder(
               stream: controller.popularStream(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting)
-                {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) return Text("Error: ${snapshot.error}");
