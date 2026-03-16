@@ -30,22 +30,24 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             AppProductImageSlider(imageUrls: product.imageUrls),
             Padding(
-              padding: const EdgeInsets.only(
-                right: AppSizes.defaultSpace,
-                left: AppSizes.defaultSpace,
-                bottom: AppSizes.defaultSpace,
-              ),
+              padding: const EdgeInsets.only(right: AppSizes.defaultSpace, left: AppSizes.defaultSpace, bottom: AppSizes.defaultSpace,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  /// Price and share Button
                   AppPriceAndShare(price: product.price),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+                  /// Title
                   AppProductTitleText(title: product.title),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+                  /// Location
                   AppProductLocation(location: product.location),
                   const SizedBox(height: AppSizes.defaultSpace),
+                  /// Product Details
                   AppProductMetaData(product: product),
                   const SizedBox(height: AppSizes.defaultSpace),
+                  /// Description
                   Text(
                     "Description",
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
@@ -62,6 +64,8 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
+
+                  /// Posted By
                   AppPostedBy(
                     sellerName: product.sellerName,
                     sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
@@ -69,6 +73,8 @@ class ProductDetailScreen extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwItems),
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
+
+                  /// Safety Notice Section
                   const AppProductSafetyNotice(),
                 ],
               ),

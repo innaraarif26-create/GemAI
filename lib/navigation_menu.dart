@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
-import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'features/MainScreens/Home/screens/home.dart';
