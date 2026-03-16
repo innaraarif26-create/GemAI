@@ -24,14 +24,12 @@ class Store extends StatelessWidget {
       appBar: AppAppBar(
         title: Text("Store", style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          AppFavoriteCounterIcon(
-            onPressed: () => Get.to(const FavouriteScreen()),
-            iconColor: AppColors.black,
+          AppFavoriteCounterIcon(onPressed: () => Get.to(const FavouriteScreen()), iconColor: AppColors.black,
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.accent,
         onPressed: () => Get.to(() => const CreateListingScreen()),
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -41,16 +39,13 @@ class Store extends StatelessWidget {
           children: [
             AppSearchContainer(text: "Search in store", showBackground: false),
             const SizedBox(height: AppSizes.spaceBtwSections),
-            AppSectionHeading(
-              title: "Popular Products",
-              showActionButton: true,
-              onPressed: () => Get.to(() => const AllProducts()),
-            ),
+            AppSectionHeading(title: "Popular Products", showActionButton: true, onPressed: () => Get.to(() => const AllProducts()),),
             const SizedBox(height: AppSizes.spaceBtwItems),
             StreamBuilder(
               stream: controller.popularStream(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                if (snapshot.connectionState == ConnectionState.waiting)
+                {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) return Text("Error: ${snapshot.error}");

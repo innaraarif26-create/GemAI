@@ -8,7 +8,6 @@ class GeneralBindings extends Bindings {
   void dependencies() {
     Get.put(NetworkManager());
     Get.put(ProductController(), permanent: true);
-
     Get.put(UserController(), permanent: true);
   }
 }
