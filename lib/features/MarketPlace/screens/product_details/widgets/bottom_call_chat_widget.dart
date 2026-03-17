@@ -30,7 +30,7 @@ class AppBottomCallAndChat extends StatelessWidget {
       ),
       child: Row(
         children: [
-          /// Call Button
+          /// Call
           OutlinedButton(
             onPressed: onCallTap,
             style: OutlinedButton.styleFrom(
