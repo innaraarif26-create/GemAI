@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/controllers/user_controller.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/image_strings.dart';
@@ -14,17 +12,31 @@ class AppUserProfileTile extends StatelessWidget {
     required this.onPressed,
   });
 
-final VoidCallback onPressed;
+  final VoidCallback onPressed;
+
   @override
-  Widget build(BuildContext context)
-  {
-    final controller = Get.put(UserController());
-    return Obx(() => ListTile(
-        leading: AppCircularImage(image: AppImages.user, width: 50, height: 50, padding: 0,),
-        title: Text(controller.user.value.fullName,style: Theme.of(context).textTheme.headlineSmall!.apply(color: AppColors.white)),
-        subtitle: Text(controller.user.value.email,style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.white)),
-        trailing: IconButton(onPressed: onPressed, icon: const Icon(Iconsax.edit,color: AppColors.white,),),
-      ),
-    );
+  Widget build(BuildContext context) {
+    final controller = UserController.instance;
+
+    return Obx(() {
+      final user = controller.user.value;
+      final profileUrl = user.profilePicture;
+
+      return ListTile(
+        leading: AppCircularImage(
+          image: profileUrl.isNotEmpty ? profileUrl : AppImages.user,
+          width: 50,
+          height: 50,
+          padding: 0,
+          isNetworkImage: profileUrl.isNotEmpty,
+        ),
+        title: Text(user.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color: AppColors.white),),
+        subtitle: Text(user.email, style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.white),),
+        trailing: IconButton(
+          onPressed: onPressed,
+          icon: const Icon(Iconsax.edit, color: AppColors.white),
+        ),
+      );
+    });
   }
 }

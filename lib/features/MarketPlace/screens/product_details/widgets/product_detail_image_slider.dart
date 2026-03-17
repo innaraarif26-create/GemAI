@@ -2,73 +2,131 @@ import 'package:flutter/material.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/constants/sizes.dart';
 import '../../../../../widgets/appbar/appbar.dart';
 import '../../../../../widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import '../../../../../widgets/icons/circular_icon.dart';
-import '../../../../../widgets/image_widget/rounded_image.dart';
+import '../../../../../widgets/indicators/dot_indicators.dart';
 
-class AppProductImageSlider extends StatelessWidget {
-  const AppProductImageSlider({super.key, required this.imageUrls});
+class AppProductImageSlider extends StatefulWidget {
+  const AppProductImageSlider({
+    super.key,
+    required this.imageUrls,
+    this.isFav = false,
+    this.onHeartPressed,
+  });
 
   final List<String> imageUrls;
+  final bool isFav;
+  final VoidCallback? onHeartPressed;
+
+  @override
+  State<AppProductImageSlider> createState() => _AppProductImageSliderState();
+}
+
+class _AppProductImageSliderState extends State<AppProductImageSlider> {
+  late final PageController _pageController;
+  int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void didUpdateWidget(covariant AppProductImageSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (_index >= widget.imageUrls.length) {
+      _index = 0;
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
-
-    final main = imageUrls.isNotEmpty ? imageUrls.first : null;
+    final hasImages = widget.imageUrls.isNotEmpty;
 
     return AppCurvedEdgeWidget(
       child: Container(
+        width: double.infinity,
         color: dark ? AppColors.darkerGrey : AppColors.light,
         child: Stack(
           children: [
-            /// Main Large Image
+            /// MAIN SLIDER (swipe)
             SizedBox(
               height: 400,
-              child: Padding(
-                padding: const EdgeInsets.all(AppSizes.productImageRadius * 2),
-                child: Center(
-                  child: main == null
-                      ? const Icon(Iconsax.image, size: 60)
-                      : Image.network(main, fit: BoxFit.contain),
-                ),
-              ),
+              width: double.infinity,
+              child: hasImages
+                  ? PageView.builder(
+                controller: _pageController,
+                itemCount: widget.imageUrls.length,
+                onPageChanged: (i) => setState(() => _index = i),
+                itemBuilder: (_, i) {
+                  final url = widget.imageUrls[i];
+                  return Image.network(
+                    url,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    loadingBuilder: (context, child, progress) {
+                      if (progress == null) return child;
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                    errorBuilder: (_, __, ___) =>
+                    const Center(child: Icon(Iconsax.image, size: 70)),
+                  );
+                },
+              )
+                  : const Center(child: Icon(Iconsax.image, size: 70)),
             ),
 
-            /// Image Slider
-            Positioned(
-              right: 0,
-              bottom: 30,
-              left: AppSizes.defaultSpace,
-              child: SizedBox(
-                height: 80,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  separatorBuilder: (_, _) => const SizedBox(width: AppSizes.spaceBtwItems),
-                  itemCount: imageUrls.length,
-                  itemBuilder: (_, index) => AppRoundedImage(
-                    width: 80,
-                    backgroundColor: dark ? AppColors.dark : AppColors.white,
-                    border: Border.all(color: AppColors.accent),
-                    padding: const EdgeInsets.all(AppSizes.sm),
-                    imageUrl: imageUrls[index],
-                    isNetworkImage: true,
+            /// Gradient overlay for readability
+            Positioned.fill(
+              child: IgnorePointer(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 0.30),
+                        Colors.transparent,
+                        Colors.black.withValues(alpha: 0.30),
+                      ],
+                      stops: const [0.0, 0.55, 1.0],
+                    ),
                   ),
                 ),
               ),
             ),
 
-            /// Appbar Icons
+            /// INDICATORS (dots) instead of thumbnails
+            if (hasImages && widget.imageUrls.length > 1)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 16,
+                child: Center(
+                  child: DotsIndicator(
+                    count: widget.imageUrls.length,
+                    index: _index,
+                    activeColor: AppColors.accent,
+                    inactiveColor: Colors.white.withValues(alpha: 0.55),
+                  ),
+                ),
+              ),
             AppAppBar(
               showBackArrow: true,
-              actions: const [
-                AppCircularIcon(icon: Iconsax.heart5, color: Colors.red),
-              ],
-            )
+            ),
           ],
         ),
       ),
