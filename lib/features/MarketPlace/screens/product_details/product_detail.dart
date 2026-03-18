@@ -24,7 +24,7 @@ class ProductDetailScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      bottomNavigationBar: const AppBottomCallAndChat(),
+      bottomNavigationBar: const AppBottomCallAndChat(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [
