@@ -15,8 +15,6 @@ class CallListener extends StatefulWidget {
 
   final String myUid;
   final Widget child;
-
-  /// You decide how to get display name from /Users
   final Future<String> Function(String callerId) getCallerName;
 
   @override
@@ -26,6 +24,7 @@ class CallListener extends StatefulWidget {
 class _CallListenerState extends State<CallListener> {
   StreamSubscription? _sub;
   bool _handling = false;
+
   final _repo = WebRtcCallRepo(FirebaseFirestore.instance);
 
   @override
@@ -33,9 +32,7 @@ class _CallListenerState extends State<CallListener> {
     super.initState();
 
     _sub = _repo.incomingCallsStream(widget.myUid).listen((snap) async {
-      if (!mounted) return;
-      if (_handling) return;
-      if (snap.docs.isEmpty) return;
+      if (!mounted || _handling || snap.docs.isEmpty) return;
 
       final doc = snap.docs.first;
       final callId = doc.id;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/repositories/call/webrtc_call_repository.dart';
 import '../../../../services/Firebase/webrtc_service.dart';
+import '../../../../widgets/appbar/appbar.dart';
 
 class OutgoingCallScreen extends StatefulWidget {
   const OutgoingCallScreen({
@@ -120,7 +121,7 @@ class _OutgoingCallScreenState extends State<OutgoingCallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Calling ${widget.calleeName}')),
+      appBar: AppAppBar(title: Text('Calling ${widget.calleeName}'),showBackArrow: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

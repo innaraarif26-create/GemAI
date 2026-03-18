@@ -11,8 +11,8 @@ class ChatRepo {
     required String productId,
   }) async {
     final ref = _db.collection('chats').doc(chatId);
-
     final snap = await ref.get();
+
     if (!snap.exists) {
       await ref.set({
         'participants': [buyerId, sellerId],

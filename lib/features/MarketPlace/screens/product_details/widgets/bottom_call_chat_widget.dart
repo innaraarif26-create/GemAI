@@ -6,9 +6,12 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../data/repositories/call/webrtc_call_repository.dart';
+import '../../../../../data/repositories/chat/chat_repository.dart';
 import '../../../../../services/Firebase/webrtc_service.dart';
 import '../../../models/product_model.dart';
 import '../../call/outgoing_call_screen.dart';
+import '../../chat/chat_id.dart';
+import '../../chat/chat_screen.dart';
 
 class AppBottomCallAndChat extends StatelessWidget {
   const AppBottomCallAndChat({super.key, required this.product});
@@ -17,16 +20,23 @@ class AppBottomCallAndChat extends StatelessWidget {
 
   Future<void> _onCallTap(BuildContext context) async {
     final user = FirebaseAuth.instance.currentUser;
+
     if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Please login to call')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please login to call')),
+      );
       return;
     }
 
-    final callerId = user.uid;
-    final calleeId = product.sellerId;
+    final sellerId = product.sellerId.trim();
+    if (sellerId.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Seller not found')),
+      );
+      return;
+    }
 
-    if (callerId == calleeId) {
+    if (user.uid == sellerId) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("You can't call yourself")),
       );
@@ -35,14 +45,14 @@ class AppBottomCallAndChat extends StatelessWidget {
 
     final repo = WebRtcCallRepo(FirebaseFirestore.instance);
 
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => OutgoingCallScreen(
           repo: repo,
           webRtc: WebRtcService(),
-          callerId: callerId,
-          calleeId: calleeId,
+          callerId: user.uid,
+          calleeId: sellerId,
           productId: product.id,
           calleeName: product.sellerName,
         ),
@@ -50,10 +60,69 @@ class AppBottomCallAndChat extends StatelessWidget {
     );
   }
 
-  void _onChatTap(BuildContext context) {
-    // Your chat navigation can be added here later
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Chat not implemented here yet')),
+  Future<void> _onChatTap(BuildContext context) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please login to chat')),
+      );
+      return;
+    }
+
+    final buyerId = user.uid;
+    final sellerId = product.sellerId.trim();
+
+    if (sellerId.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Seller not found')),
+      );
+      return;
+    }
+
+    if (buyerId == sellerId) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("You can't chat with yourself")),
+      );
+      return;
+    }
+
+    final chatId = buildChatId(
+      buyerId: buyerId,
+      sellerId: sellerId,
+      productId: product.id,
+    );
+
+    final repo = ChatRepo(FirebaseFirestore.instance);
+
+    try {
+      await repo.createOrGetChat(
+        chatId: chatId,
+        buyerId: buyerId,
+        sellerId: sellerId,
+        productId: product.id,
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to open chat: $e')),
+        );
+      }
+      return;
+    }
+
+    if (!context.mounted) return;
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ChatScreen(
+          chatId: chatId,
+          currentUserId: buyerId,
+          repo: repo,
+          otherName: product.sellerName,
+        ),
+      ),
     );
   }
 

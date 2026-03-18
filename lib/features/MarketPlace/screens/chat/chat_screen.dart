@@ -9,13 +9,13 @@ class ChatScreen extends StatefulWidget {
     required this.chatId,
     required this.currentUserId,
     required this.repo,
-    required this.sellerName,
+    required this.otherName,
   });
 
   final String chatId;
   final String currentUserId;
   final ChatRepo repo;
-  final String sellerName;
+  final String otherName;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.sellerName)),
+      appBar: AppBar(title: Text(widget.otherName)),
       body: Column(
         children: [
           Expanded(
@@ -68,13 +68,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     final isMe = senderId == widget.currentUserId;
 
                     return Align(
-                      alignment:
-                      isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: isMe
@@ -87,9 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           style: TextStyle(
                             color: isMe
                                 ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context)
-                                .colorScheme
-                                .onSurfaceVariant,
+                                : Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),

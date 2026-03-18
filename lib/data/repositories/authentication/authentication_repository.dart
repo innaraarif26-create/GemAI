@@ -9,6 +9,7 @@ import 'package:gemai/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../../app_after_login.dart';
 import '../../../core/utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../core/utils/exceptions/firebase_exceptions.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
@@ -39,7 +40,10 @@ class AuthenticationRepository extends GetxController {
     {
       if(user.emailVerified)
       {
-        Get.offAll(() => const NavigationMenu());
+        Get.offAll(() => AppAfterLogin(
+          myUid: FirebaseAuth.instance.currentUser!.uid,
+          child: const NavigationMenu(),
+        ));
       }
       else
       {
