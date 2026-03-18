@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../data/repositories/chat/chat_repository.dart';
+
+import '../../../../data/repositories/chat/chat_repository.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
