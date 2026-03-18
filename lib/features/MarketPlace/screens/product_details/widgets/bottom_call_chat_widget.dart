@@ -5,88 +5,55 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/sizes.dart';
-import '../../../../../data/repositories/chat/chat_repository.dart';
-import '../../../../../services/Firebase/call_service.dart';
+import '../../../../../data/repositories/call/webrtc_call_repository.dart';
+import '../../../../../services/Firebase/webrtc_service.dart';
 import '../../../models/product_model.dart';
-import '../../../chat/chat_id.dart';
-import '../../../chat/chat_screen.dart';
+import '../../call/outgoing_call_screen.dart';
 
 class AppBottomCallAndChat extends StatelessWidget {
   const AppBottomCallAndChat({super.key, required this.product});
 
   final ProductModel product;
 
-  Future<void> onCallTap(BuildContext context) async {
-    // You must have seller phone in your product model:
-    final phone = product.sellerPhone; // <-- add this to ProductModel
-    if (phone.trim().isEmpty) {
+  Future<void> _onCallTap(BuildContext context) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Please login to call')));
+      return;
+    }
+
+    final callerId = user.uid;
+    final calleeId = product.sellerId;
+
+    if (callerId == calleeId) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Seller phone number not available')),
+        const SnackBar(content: Text("You can't call yourself")),
       );
       return;
     }
 
-    try {
-      await CallService.callPhoneNumber(phone);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not open dialer: $e')),
-      );
-    }
-  }
-
-  Future<void> onChatTap(BuildContext context) async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please login to chat')),
-      );
-      return;
-    }
-
-    final buyerId = currentUser.uid;
-    final sellerId = product.sellerId; // <-- add this to ProductModel
-
-    if (sellerId.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Seller info not available')),
-      );
-      return;
-    }
-
-    if (sellerId == buyerId) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You can't chat with yourself")),
-      );
-      return;
-    }
-
-    final chatId = buildChatId(
-      buyerId: buyerId,
-      sellerId: sellerId,
-      productId: product.id,
-    );
-
-    final repo = ChatRepo(FirebaseFirestore.instance);
-    await repo.createOrGetChat(
-      chatId: chatId,
-      buyerId: buyerId,
-      sellerId: sellerId,
-      productId: product.id,
-    );
-
-    if (!context.mounted) return;
+    final repo = WebRtcCallRepo(FirebaseFirestore.instance);
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => ChatScreen(
-          chatId: chatId,
-          currentUserId: buyerId,
+        builder: (_) => OutgoingCallScreen(
           repo: repo,
-          sellerName: product.sellerName,
+          webRtc: WebRtcService(),
+          callerId: callerId,
+          calleeId: calleeId,
+          productId: product.id,
+          calleeName: product.sellerName,
         ),
       ),
+    );
+  }
+
+  void _onChatTap(BuildContext context) {
+    // Your chat navigation can be added here later
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Chat not implemented here yet')),
     );
   }
 
@@ -116,7 +83,7 @@ class AppBottomCallAndChat extends StatelessWidget {
       child: Row(
         children: [
           OutlinedButton(
-            onPressed: () => onCallTap(context),
+            onPressed: () => _onCallTap(context),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 38),
               shape: RoundedRectangleBorder(
@@ -135,7 +102,7 @@ class AppBottomCallAndChat extends StatelessWidget {
           const SizedBox(width: AppSizes.sm),
           Expanded(
             child: ElevatedButton(
-              onPressed: () => onChatTap(context),
+              onPressed: () => _onChatTap(context),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
