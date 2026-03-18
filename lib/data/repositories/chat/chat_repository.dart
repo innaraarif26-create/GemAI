@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class ChatRepo {
   ChatRepo(this._db);
@@ -11,19 +12,20 @@ class ChatRepo {
     required String productId,
   }) async {
     final ref = _db.collection('chats').doc(chatId);
-    final snap = await ref.get();
 
-    if (!snap.exists) {
-      await ref.set({
-        'participants': [buyerId, sellerId],
-        'buyerId': buyerId,
-        'sellerId': sellerId,
-        'productId': productId,
-        'lastMessage': '',
-        'lastMessageAt': FieldValue.serverTimestamp(),
-        'createdAt': FieldValue.serverTimestamp(),
-      });
-    }
+    final payload = <String, dynamic>{
+      'participants': [buyerId, sellerId],
+      'buyerId': buyerId,
+      'sellerId': sellerId,
+      'productId': productId,
+      'createdAt': FieldValue.serverTimestamp(),
+      'lastMessage': '',
+      'lastMessageAt': FieldValue.serverTimestamp(),
+    };
+
+    debugPrint('CHAT SET payload for chats/$chatId => $payload');
+
+    await ref.set(payload, SetOptions(merge: true));
 
     return chatId;
   }

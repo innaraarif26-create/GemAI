@@ -35,11 +35,19 @@ class _ChatScreenState extends State<ChatScreen> {
     if (text.isEmpty) return;
 
     _controller.clear();
-    await widget.repo.sendMessage(
-      chatId: widget.chatId,
-      senderId: widget.currentUserId,
-      text: text,
-    );
+
+    try {
+      await widget.repo.sendMessage(
+        chatId: widget.chatId,
+        senderId: widget.currentUserId,
+        text: text,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to send message: $e')),
+      );
+    }
   }
 
   @override
@@ -52,30 +60,47 @@ class _ChatScreenState extends State<ChatScreen> {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: widget.repo.messagesStream(widget.chatId),
               builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error loading messages: ${snapshot.error}'),
+                  );
+                }
+
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
                 final docs = snapshot.data!.docs;
 
+                if (docs.isEmpty) {
+                  return const Center(child: Text('No messages yet'));
+                }
+
                 return ListView.builder(
                   reverse: true,
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     final data = docs[index].data();
+
                     final senderId = (data['senderId'] ?? '') as String;
                     final text = (data['text'] ?? '') as String;
                     final isMe = senderId == widget.currentUserId;
 
                     return Align(
-                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment:
+                      isMe ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: isMe
                               ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.surfaceContainerHighest,
+                              : Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -83,7 +108,9 @@ class _ChatScreenState extends State<ChatScreen> {
                           style: TextStyle(
                             color: isMe
                                 ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context).colorScheme.onSurfaceVariant,
+                                : Theme.of(context)
+                                .colorScheme
+                                .onSurfaceVariant,
                           ),
                         ),
                       ),
