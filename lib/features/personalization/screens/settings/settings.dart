@@ -62,11 +62,9 @@ class SettingScreen extends StatelessWidget
                         return;
                       }
 
-                      final repo = ChatRepo(FirebaseFirestore.instance);
-
                       Get.to(() => MessagesScreen(
                         currentUserId: user.uid,
-                        repo: repo,
+                        repo: ChatRepo(FirebaseFirestore.instance),
                       ));
                     },
                   ),

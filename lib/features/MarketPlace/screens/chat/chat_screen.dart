@@ -30,18 +30,12 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    widget.repo.markChatRead(chatId: widget.chatId, userId: widget.currentUserId);
-  }
-
-
   Future<void> _send() async {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
     _controller.clear();
+    FocusScope.of(context).unfocus();
 
     try {
       await widget.repo.sendMessage(
@@ -84,13 +78,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
 
                 return ListView.builder(
-                  reverse: true,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  reverse: false,
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     final data = docs[index].data();
 
-                    final senderId = (data['senderId'] ?? '') as String;
-                    final text = (data['text'] ?? '') as String;
+                    final senderId = data['senderId']?.toString() ?? '';
+                    final text = data['text']?.toString() ?? '';
                     final isMe = senderId == widget.currentUserId;
 
                     return Align(

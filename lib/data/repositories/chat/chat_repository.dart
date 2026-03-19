@@ -1,54 +1,53 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class ChatRepo {
   ChatRepo(this._db);
 
   final FirebaseFirestore _db;
 
-  CollectionReference<Map<String, dynamic>> get _chats =>
-      _db.collection('chats');
-
-  CollectionReference<Map<String, dynamic>> _messages(String chatId) =>
-      _chats.doc(chatId).collection('messages');
-
-  /// Create chat doc if not exists
-  Future<void> createOrGetChat({
+  Future<String> createOrGetChat({
     required String chatId,
     required String buyerId,
     required String sellerId,
     required String productId,
   }) async {
-    final ref = _chats.doc(chatId);
-    final snap = await ref.get();
-    if (snap.exists) return;
+    final ref = _db.collection('chats').doc(chatId);
 
-    await ref.set({
+    final payload = <String, dynamic>{
       'chatId': chatId,
+      'participants': [buyerId, sellerId],
       'buyerId': buyerId,
       'sellerId': sellerId,
       'productId': productId,
+      'createdAt': FieldValue.serverTimestamp(),
       'lastMessage': '',
       'lastMessageAt': FieldValue.serverTimestamp(),
-      'lastSenderId': '',
       'unreadCounts': {
         buyerId: 0,
         sellerId: 0,
       },
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+    };
+
+    debugPrint('CHAT SET payload for chats/$chatId => $payload');
+
+    await ref.set(payload, SetOptions(merge: true));
+    return chatId;
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> messagesStream(String chatId) {
-    return _messages(chatId)
-        .orderBy('createdAt', descending: true)
+    return _db
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .orderBy('createdAt', descending: false)
         .snapshots();
   }
 
-  /// Stream user chats (buyer OR seller)
   Stream<QuerySnapshot<Map<String, dynamic>>> userChatsStream(String userId) {
-
-    return _chats
-        .where('members', arrayContains: userId)
+    return _db
+        .collection('chats')
+        .where('participants', arrayContains: userId)
         .orderBy('lastMessageAt', descending: true)
         .snapshots();
   }
@@ -58,34 +57,38 @@ class ChatRepo {
     required String senderId,
     required String text,
   }) async {
-    final chatRef = _chats.doc(chatId);
-    final msgRef = _messages(chatId).doc();
+    final chatRef = _db.collection('chats').doc(chatId);
+    final msgRef = chatRef.collection('messages').doc();
 
-    await _db.runTransaction((tx) async {
-      final chatSnap = await tx.get(chatRef);
-      if (!chatSnap.exists) {
-        throw Exception('Chat does not exist.');
-      }
+    final chatSnap = await chatRef.get();
+    if (!chatSnap.exists) {
+      throw StateError('Chat $chatId does not exist.');
+    }
 
-      final data = chatSnap.data() as Map<String, dynamic>;
-      final buyerId = (data['buyerId'] ?? '') as String;
-      final sellerId = (data['sellerId'] ?? '') as String;
+    final data = chatSnap.data() ?? {};
+    final buyerId = data['buyerId'] as String?;
+    final sellerId = data['sellerId'] as String?;
 
-      final receiverId = senderId == buyerId ? sellerId : buyerId;
+    final unreadCounts = Map<String, dynamic>.from(
+      (data['unreadCounts'] as Map?) ?? {},
+    );
 
-      tx.set(msgRef, {
-        'senderId': senderId,
-        'text': text,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
+    if (buyerId != null && sellerId != null) {
+      final recipientId = senderId == buyerId ? sellerId : buyerId;
+      unreadCounts[recipientId] =
+          ((unreadCounts[recipientId] as num?)?.toInt() ?? 0) + 1;
+    }
 
-      // increment unread for receiver, reset not needed for sender
-      tx.update(chatRef, {
-        'lastMessage': text,
-        'lastMessageAt': FieldValue.serverTimestamp(),
-        'lastSenderId': senderId,
-        'unreadCounts.$receiverId': FieldValue.increment(1),
-      });
+    await msgRef.set({
+      'senderId': senderId,
+      'text': text,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+
+    await chatRef.update({
+      'lastMessage': text,
+      'lastMessageAt': FieldValue.serverTimestamp(),
+      'unreadCounts': unreadCounts,
     });
   }
 
@@ -93,26 +96,13 @@ class ChatRepo {
     required String chatId,
     required String userId,
   }) async {
-    await _chats.doc(chatId).update({
-      'unreadCounts.$userId': 0,
-    });
-  }
+    final ref = _db.collection('chats').doc(chatId);
 
-  /// Optional helper to ensure schema supports userChatsStream().
-  Future<void> ensureMembersField({
-    required String chatId,
-  }) async {
-    final ref = _chats.doc(chatId);
-    final snap = await ref.get();
-    if (!snap.exists) return;
-    final data = snap.data()!;
-    if (data['members'] != null) return;
-
-    final buyerId = (data['buyerId'] ?? '') as String;
-    final sellerId = (data['sellerId'] ?? '') as String;
-
-    await ref.update({
-      'members': [buyerId, sellerId],
-    });
+    // Use set with merge instead of update
+    await ref.set({
+      'unreadCounts': {
+        userId: 0,
+      }
+    }, SetOptions(merge: true));
   }
 }
