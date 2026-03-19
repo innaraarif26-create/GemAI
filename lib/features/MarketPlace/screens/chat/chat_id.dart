@@ -5,5 +5,5 @@ String buildChatId({
 }) {
   final a = buyerId.compareTo(sellerId) <= 0 ? buyerId : sellerId;
   final b = buyerId.compareTo(sellerId) <= 0 ? sellerId : buyerId;
-  return '${a}_$b\_$productId';
+  return '${a}_${b}_$productId';
 }

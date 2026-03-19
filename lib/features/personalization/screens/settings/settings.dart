@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/features/personalization/screens/address/widgets/address.dart';
@@ -8,8 +10,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
+import '../../../../data/repositories/chat/chat_repository.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
+import '../../../MarketPlace/screens/chat/messages_screen.dart';
 import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
 import '../profile/widgets/profile.dart';
@@ -49,8 +53,23 @@ class SettingScreen extends StatelessWidget
                   AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: ()=> Get.to(UserAddressScreen())),
                   AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: ()=> Get.to(FavouriteScreen())),
-                  AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers",
+                    onTap: () {
+                      final user = FirebaseAuth.instance.currentUser;
 
+                      if (user == null) {
+                        Get.snackbar('Login required', 'Please login to view messages.');
+                        return;
+                      }
+
+                      final repo = ChatRepo(FirebaseFirestore.instance);
+
+                      Get.to(() => MessagesScreen(
+                        currentUserId: user.uid,
+                        repo: repo,
+                      ));
+                    },
+                  ),
 
                   /// Divider
                   const SizedBox(height: AppSizes.spaceBtwItems),

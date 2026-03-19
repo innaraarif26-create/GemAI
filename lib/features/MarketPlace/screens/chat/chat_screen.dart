@@ -30,6 +30,13 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    widget.repo.markChatRead(chatId: widget.chatId, userId: widget.currentUserId);
+  }
+
+
   Future<void> _send() async {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
