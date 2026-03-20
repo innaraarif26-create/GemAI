@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/constants/colors.dart';
+
 import '../../../../data/repositories/chat/chat_repository.dart';
+import '../../../MarketPlace/models/product_model.dart';
 import 'chat_screen.dart';
 
 class MessagesScreen extends StatefulWidget {
@@ -44,10 +46,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
     }
   }
 
-  Future<Map<String, dynamic>?> _getProductData(String productId) async {
+  Future<ProductModel?> _getProduct(String productId) async {
     try {
       final doc = await _db.collection('Products').doc(productId).get();
-      return doc.data();
+      if (!doc.exists) return null;
+      return ProductModel.fromSnapshot(doc);
     } catch (e) {
       debugPrint('Error fetching product $productId: $e');
       return null;
@@ -82,20 +85,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
     return (userData['ProfilePicture'] as String?) ?? '';
   }
 
-  String _getProductName(Map<String, dynamic>? productData) {
-    if (productData == null) return 'Product';
-    return (productData['title'] as String?) ?? 'Product';
-  }
-
-  String _getProductImage(Map<String, dynamic>? productData) {
-    if (productData == null) return '';
-    final images = productData['imageUrls'];
-    if (images is List && images.isNotEmpty) {
-      return images.first.toString();
-    }
-    return '';
-  }
-
   bool _matchesSearch(String userName, String productName, String lastMessage) {
     final q = _searchQuery.trim().toLowerCase();
     if (q.isEmpty) return true;
@@ -117,7 +106,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: dark ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: dark ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
           iconSize: 20,
         ),
@@ -129,43 +121,53 @@ class _MessagesScreenState extends State<MessagesScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: TextField(
-              controller: _searchController,
-              onChanged: (value) {
-                setState(() {
-                  _searchQuery = value;
-                });
-              },
-              decoration: InputDecoration(
-                hintText: 'Type to search...',
-                prefixIcon: Icon(
-                  Iconsax.search_favorite,
-                  color: dark ? AppColors.darkerGrey : Colors.grey,
-                  size: 18,
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _searchController,
+                onChanged: (value) {
+                  setState(() {
+                    _searchQuery = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: 'Search messages...',
+                  prefixIcon: Icon(
+                    Iconsax.search_favorite,
+                    color: dark ? AppColors.darkerGrey : Colors.grey,
+                    size: 18,
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  suffixIcon: _searchQuery.isNotEmpty
+                      ? IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {
+                        _searchQuery = '';
+                      });
+                    },
+                  )
+                      : null,
                 ),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                suffixIcon: _searchQuery.isNotEmpty
-                    ? IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    _searchController.clear();
-                    setState(() {
-                      _searchQuery = '';
-                    });
-                  },
-                )
-                    : null,
               ),
             ),
           ),
-
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: widget.repo.userChatsStream(widget.currentUserId),
@@ -211,23 +213,24 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     final unread =
                         (unreadCounts[widget.currentUserId] as num?)?.toInt() ?? 0;
 
-                    return FutureBuilder<List<Map<String, dynamic>?>>(
+                    return FutureBuilder<List<dynamic>>(
                       future: Future.wait([
                         _getUserData(otherUserId),
-                        _getProductData(productId),
+                        _getProduct(productId),
                       ]),
                       builder: (context, snap) {
                         if (!snap.hasData) {
                           return const SizedBox.shrink();
                         }
 
-                        final userData = snap.data![0];
-                        final productData = snap.data![1];
+                        final userData = snap.data![0] as Map<String, dynamic>?;
+                        final product = snap.data![1] as ProductModel?;
 
                         final userName = _getUserName(userData);
                         final userImage = _getUserImage(userData);
-                        final productName = _getProductName(productData);
-                        final productImage = _getProductImage(productData);
+                        final productName = product?.title ?? 'Product';
+                        final productImage =
+                        (product != null && product.imageUrls.isNotEmpty) ? product.imageUrls.first : null;
 
                         if (!_matchesSearch(userName, productName, lastMessage)) {
                           return const SizedBox.shrink();
@@ -235,11 +238,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
                         return Material(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(14),
                           elevation: 3,
                           shadowColor: Colors.black12,
                           child: InkWell(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(14),
                             onTap: () async {
                               await widget.repo.markChatRead(
                                 chatId: chatId,
@@ -256,9 +259,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                     currentUserId: widget.currentUserId,
                                     repo: widget.repo,
                                     otherName: userName,
-                                    otherUserPhotoUrl: userImage,
-                                    productTitle: productName,
-                                    productImageUrl: productImage.isNotEmpty ? productImage : null,
+                                    otherUserPhotoUrl: userImage.isNotEmpty ? userImage : null,
+                                    productTitle: product?.title,
+                                    productPrice: product?.price.toString(),
+                                    productImageUrl: productImage,
+                                    productId: productId,
                                     onDeleteChat: () async {
                                       await widget.repo.deleteChat(chatId);
                                       if (context.mounted) {
@@ -270,7 +275,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                               );
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(12),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -279,7 +284,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: productImage.isNotEmpty
+                                        child: productImage != null
                                             ? Image.network(
                                           productImage,
                                           width: 55,
@@ -321,8 +326,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                                 ? Image.network(
                                               userImage,
                                               fit: BoxFit.cover,
-                                              errorBuilder:
-                                                  (context, error, stackTrace) =>
+                                              errorBuilder: (context, error, stackTrace) =>
                                                   _initialAvatar(userName),
                                             )
                                                 : _initialAvatar(userName),
@@ -338,7 +342,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            Expanded(child: AppSectionHeading(title: userName)),
+                                            Expanded(
+                                              child: AppSectionHeading(title: userName),
+                                            ),
                                             Text(
                                               _formatTime(lastMessageAt),
                                               style: TextStyle(
@@ -355,12 +361,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                           productName,
                                           style: Theme.of(context).textTheme.bodySmall,
                                           maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 2),
                                         Text(
                                           lastMessage.isEmpty ? 'No messages yet' : lastMessage,
                                           style: Theme.of(context).textTheme.bodyMedium,
                                           maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
                                     ),

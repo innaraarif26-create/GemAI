@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:gemai/core/constants/colors.dart';
+import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../core/constants/colors.dart';
-import '../../../../../core/constants/sizes.dart';
 import '../../../../../data/repositories/call/webrtc_call_repository.dart';
 import '../../../../../data/repositories/chat/chat_repository.dart';
 import '../../../../../services/Firebase/webrtc_service.dart';
@@ -126,10 +126,11 @@ class AppBottomCallAndChat extends StatelessWidget {
           currentUserId: buyerId,
           repo: repo,
           otherName: product.sellerName,
+          otherUserPhotoUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
           productTitle: product.title,
+          productPrice: product.price.toString(),
           productImageUrl: product.imageUrls.isNotEmpty ? product.imageUrls.first : null,
-          onOpenProduct: () {
-          },
+          productId: product.id,
           onDeleteChat: () async {
             await repo.deleteChat(chatId);
             if (context.mounted) {

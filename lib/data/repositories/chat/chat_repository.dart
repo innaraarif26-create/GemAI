@@ -181,52 +181,6 @@ class ChatRepo {
     }, SetOptions(merge: true));
   }
 
-  Future<void> markMessageSeen({
-    required String chatId,
-    required String messageId,
-    required String userId,
-  }) async {
-    final msgRef = _db
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .doc(messageId);
-
-    await msgRef.set({
-      'status': 'seen',
-      'seenBy': FieldValue.arrayUnion([userId]),
-    }, SetOptions(merge: true));
-  }
-
-  Future<void> markMessageDelivered({
-    required String chatId,
-    required String messageId,
-  }) async {
-    final msgRef = _db
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .doc(messageId);
-
-    await msgRef.set({
-      'status': 'delivered',
-    }, SetOptions(merge: true));
-  }
-
-  Future<void> markMessageNotDelivered({
-    required String chatId,
-    required String messageId,
-  }) async {
-    final msgRef = _db
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .doc(messageId);
-
-    await msgRef.set({
-      'status': 'not_delivered',
-    }, SetOptions(merge: true));
-  }
 
   Future<void> deleteChat(String chatId) async {
     final chatRef = _db.collection('chats').doc(chatId);
@@ -242,4 +196,17 @@ class ChatRepo {
 
     await batch.commit();
   }
+
+  Future<void> deleteMessage({
+    required String chatId,
+    required String messageId,
+  }) async {
+    await _db
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .doc(messageId)
+        .delete();
+  }
+
 }
