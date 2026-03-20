@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../data/repositories/call/webrtc_call_repository.dart';
@@ -93,7 +95,10 @@ class AppBottomCallAndChat extends StatelessWidget {
       productId: product.id,
     );
 
-    final repo = ChatRepo(FirebaseFirestore.instance);
+    final repo = ChatRepo(
+      FirebaseFirestore.instance,
+      FirebaseStorage.instance,
+    );
 
     try {
       await repo.createOrGetChat(
@@ -121,6 +126,19 @@ class AppBottomCallAndChat extends StatelessWidget {
           currentUserId: buyerId,
           repo: repo,
           otherName: product.sellerName,
+          productTitle: product.title,
+          productImageUrl: product.imageUrls.isNotEmpty ? product.imageUrls.first : null,
+          onOpenProduct: () {
+          },
+          onDeleteChat: () async {
+            await repo.deleteChat(chatId);
+            if (context.mounted) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Chat deleted')),
+              );
+            }
+          },
         ),
       ),
     );

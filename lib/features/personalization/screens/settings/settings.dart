@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/features/personalization/screens/address/widgets/address.dart';
@@ -64,7 +65,10 @@ class SettingScreen extends StatelessWidget
 
                       Get.to(() => MessagesScreen(
                         currentUserId: user.uid,
-                        repo: ChatRepo(FirebaseFirestore.instance),
+                        repo: ChatRepo(
+                            FirebaseFirestore.instance,
+                            FirebaseStorage.instance,
+                        ),
                       ));
                     },
                   ),
