@@ -34,7 +34,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
-  }
+  }//
 
   Future<Map<String, dynamic>?> _getUserData(String userId) async {
     try {
