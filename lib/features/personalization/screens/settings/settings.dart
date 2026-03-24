@@ -14,7 +14,7 @@ import '../../../../core/constants/sizes.dart';
 import '../../../../data/repositories/chat/chat_repository.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
-import '../../../MarketPlace/screens/chat/screens/messages_screen.dart';
+import '../../../MarketPlace/screens/chat/messages_screen.dart';
 import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
 import '../profile/widgets/profile.dart';
