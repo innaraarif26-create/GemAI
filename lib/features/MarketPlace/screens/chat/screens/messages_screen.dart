@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../data/repositories/chat/chat_repository.dart';
-import '../../../MarketPlace/models/product_model.dart';
+import '../../../../../data/repositories/chat/chat_repository.dart';
+import '../../../models/product_model.dart';
 import 'chat_screen.dart';
 
 class MessagesScreen extends StatefulWidget {

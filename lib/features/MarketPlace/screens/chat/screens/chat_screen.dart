@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
@@ -8,10 +7,9 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../../data/repositories/chat/chat_repository.dart';
-import '../../../MarketPlace/models/product_model.dart';
-import '../product_details/product_detail.dart';
+import '../../../../../data/repositories/chat/chat_repository.dart';
+import '../../../models/product_model.dart';
+import '../../product_details/product_detail.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
@@ -270,7 +268,6 @@ class _ChatScreenState extends State<ChatScreen> {
       return const SizedBox.shrink();
     }
 
-    final cardBg = dark ? Colors.grey.shade900 : Colors.white;
     final borderColor = dark ? Colors.white10 : AppColors.darkerGrey.withValues(alpha: 0.35);
 
     return InkWell(

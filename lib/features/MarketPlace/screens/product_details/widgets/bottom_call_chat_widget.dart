@@ -13,7 +13,7 @@ import '../../../../../services/Firebase/webrtc_service.dart';
 import '../../../models/product_model.dart';
 import '../../call/outgoing_call_screen.dart';
 import '../../chat/chat_id.dart';
-import '../../chat/chat_screen.dart';
+import '../../chat/screens/chat_screen.dart';
 
 class AppBottomCallAndChat extends StatelessWidget {
   const AppBottomCallAndChat({super.key, required this.product});
