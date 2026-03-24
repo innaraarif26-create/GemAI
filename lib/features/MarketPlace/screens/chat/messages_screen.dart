@@ -34,7 +34,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
-  }//
+  }
 
   Future<Map<String, dynamic>?> _getUserData(String userId) async {
     try {
@@ -94,16 +94,48 @@ class _MessagesScreenState extends State<MessagesScreen> {
         lastMessage.toLowerCase().contains(q);
   }
 
+  Widget _initialAvatar(String name, {required bool dark}) {
+    final initials = name
+        .trim()
+        .split(' ')
+        .where((e) => e.isNotEmpty)
+        .take(2)
+        .map((e) => e[0].toUpperCase())
+        .join();
+
+    return Container(
+      color: dark ? Colors.grey.shade800 : Colors.grey.shade300,
+      child: Center(
+        child: Text(
+          initials.isEmpty ? 'U' : initials,
+          style: TextStyle(
+            color: dark ? Colors.white : Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
 
+    final bg = dark ? Colors.black : const Color(0xFFF4F7FB);
+    final cardColor = dark ? Colors.grey.shade900 : Colors.white;
+    final textColor = dark ? Colors.white : Colors.black;
+    final mutedTextColor = dark ? Colors.grey.shade400 : Colors.grey.shade500;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7FB),
+      backgroundColor: bg,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Chats',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          ),
         ),
         leading: IconButton(
           icon: Icon(
@@ -114,7 +146,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           iconSize: 20,
         ),
         backgroundColor: dark ? Colors.black : Colors.white,
-        foregroundColor: dark ? Colors.white : Colors.black,
+        foregroundColor: textColor,
         elevation: 0,
         centerTitle: false,
       ),
@@ -124,18 +156,22 @@ class _MessagesScreenState extends State<MessagesScreen> {
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: cardColor,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: Colors.black.withValues(alpha: dark ? 0.18 : 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),
                 ],
+                border: Border.all(
+                  color: dark ? Colors.white10 : Colors.black12,
+                ),
               ),
               child: TextField(
                 controller: _searchController,
+                style: TextStyle(color: textColor),
                 onChanged: (value) {
                   setState(() {
                     _searchQuery = value;
@@ -143,6 +179,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Search messages...',
+                  hintStyle: TextStyle(color: mutedTextColor),
                   prefixIcon: Icon(
                     Iconsax.search_favorite,
                     color: dark ? AppColors.darkerGrey : Colors.grey,
@@ -155,7 +192,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   ),
                   suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
-                    icon: const Icon(Icons.close),
+                    icon: Icon(
+                      Icons.close,
+                      color: mutedTextColor,
+                    ),
                     onPressed: () {
                       _searchController.clear();
                       setState(() {
@@ -182,12 +222,21 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: dark ? Colors.white : AppColors.buttonSecondary,
+                    ),
+                  );
                 }
 
                 final chats = snapshot.data?.docs ?? [];
                 if (chats.isEmpty) {
-                  return const Center(child: Text('No conversations yet'));
+                  return Center(
+                    child: Text(
+                      'No conversations yet',
+                      style: TextStyle(color: mutedTextColor),
+                    ),
+                  );
                 }
 
                 return ListView.separated(
@@ -202,8 +251,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     final buyerId = (data['buyerId'] as String?) ?? '';
                     final sellerId = (data['sellerId'] as String?) ?? '';
                     final productId = (data['productId'] as String?) ?? '';
-                    final otherUserId =
-                    widget.currentUserId == buyerId ? sellerId : buyerId;
+                    final otherUserId = widget.currentUserId == buyerId ? sellerId : buyerId;
 
                     final lastMessage = (data['lastMessage'] as String?) ?? '';
                     final lastMessageAt = data['lastMessageAt'] as Timestamp?;
@@ -229,17 +277,18 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         final userName = _getUserName(userData);
                         final userImage = _getUserImage(userData);
                         final productName = product?.title ?? 'Product';
-                        final productImage =
-                        (product != null && product.imageUrls.isNotEmpty) ? product.imageUrls.first : null;
+                        final productImage = (product != null && product.imageUrls.isNotEmpty)
+                            ? product.imageUrls.first
+                            : null;
 
                         if (!_matchesSearch(userName, productName, lastMessage)) {
                           return const SizedBox.shrink();
                         }
 
                         return Material(
-                          color: Colors.white,
+                          color: cardColor,
                           borderRadius: BorderRadius.circular(14),
-                          elevation: 3,
+                          elevation: dark ? 0 : 3,
                           shadowColor: Colors.black12,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(14),
@@ -259,16 +308,16 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                     currentUserId: widget.currentUserId,
                                     repo: widget.repo,
                                     otherName: userName,
-                                    otherUserPhotoUrl: userImage.isNotEmpty ? userImage : null,
+                                    otherUserPhotoUrl:
+                                    userImage.isNotEmpty ? userImage : null,
                                     productTitle: product?.title,
                                     productPrice: product?.price.toString(),
                                     productImageUrl: productImage,
                                     productId: productId,
                                     onDeleteChat: () async {
                                       await widget.repo.deleteChat(chatId);
-                                      if (context.mounted) {
-                                        Navigator.pop(context);
-                                      }
+                                      if (!context.mounted) return;
+                                      Navigator.pop(context);
                                     },
                                   ),
                                 ),
@@ -294,15 +343,25 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                               Container(
                                                 width: 55,
                                                 height: 58,
-                                                color: Colors.grey.shade200,
-                                                child: const Icon(Icons.image_not_supported),
+                                                color: dark
+                                                    ? Colors.grey.shade800
+                                                    : Colors.grey.shade200,
+                                                child: Icon(
+                                                  Icons.image_not_supported,
+                                                  color: mutedTextColor,
+                                                ),
                                               ),
                                         )
                                             : Container(
                                           width: 55,
                                           height: 58,
-                                          color: Colors.grey.shade200,
-                                          child: const Icon(Icons.image),
+                                          color: dark
+                                              ? Colors.grey.shade800
+                                              : Colors.grey.shade200,
+                                          child: Icon(
+                                            Icons.image,
+                                            color: mutedTextColor,
+                                          ),
                                         ),
                                       ),
                                       Positioned(
@@ -313,7 +372,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                           height: 26,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.white, width: 2),
+                                            border: Border.all(
+                                              color: dark ? Colors.black : Colors.white,
+                                              width: 2,
+                                            ),
                                             gradient: LinearGradient(
                                               colors: [
                                                 Colors.blue.shade500,
@@ -326,10 +388,17 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                                 ? Image.network(
                                               userImage,
                                               fit: BoxFit.cover,
-                                              errorBuilder: (context, error, stackTrace) =>
-                                                  _initialAvatar(userName),
+                                              errorBuilder:
+                                                  (context, error, stackTrace) =>
+                                                  _initialAvatar(
+                                                    userName,
+                                                    dark: dark,
+                                                  ),
                                             )
-                                                : _initialAvatar(userName),
+                                                : _initialAvatar(
+                                              userName,
+                                              dark: dark,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -343,13 +412,15 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                         Row(
                                           children: [
                                             Expanded(
-                                              child: AppSectionHeading(title: userName),
+                                              child: AppSectionHeading(
+                                                title: userName,
+                                              ),
                                             ),
                                             Text(
                                               _formatTime(lastMessageAt),
                                               style: TextStyle(
                                                 fontSize: 12,
-                                                color: Colors.grey[500],
+                                                color: mutedTextColor,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                               maxLines: 1,
@@ -359,14 +430,30 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                         const SizedBox(height: 2),
                                         Text(
                                           productName,
-                                          style: Theme.of(context).textTheme.bodySmall,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                            color: dark
+                                                ? Colors.grey.shade300
+                                                : Colors.black87,
+                                          ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 2),
                                         Text(
-                                          lastMessage.isEmpty ? 'No messages yet' : lastMessage,
-                                          style: Theme.of(context).textTheme.bodyMedium,
+                                          lastMessage.isEmpty
+                                              ? 'No messages yet'
+                                              : lastMessage,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.copyWith(
+                                            color: dark
+                                                ? Colors.grey.shade400
+                                                : Colors.black54,
+                                          ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -388,30 +475,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _initialAvatar(String name) {
-    final initials = name
-        .trim()
-        .split(' ')
-        .where((e) => e.isNotEmpty)
-        .take(2)
-        .map((e) => e[0].toUpperCase())
-        .join();
-
-    return Container(
-      color: Colors.grey.shade300,
-      child: Center(
-        child: Text(
-          initials.isEmpty ? 'U' : initials,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
       ),
     );
   }

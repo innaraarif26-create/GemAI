@@ -1,11 +1,14 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/sizes.dart';
+import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../data/repositories/chat/chat_repository.dart';
 import '../../../MarketPlace/models/product_model.dart';
 import '../product_details/product_detail.dart';
@@ -131,7 +134,8 @@ class _ChatScreenState extends State<ChatScreen> {
       showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (dialogContext) => const Center(child: CircularProgressIndicator()),
+        builder: (dialogContext) =>
+        const Center(child: CircularProgressIndicator()),
       );
 
       final imageUrl = await widget.repo.uploadChatImage(
@@ -241,11 +245,13 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  Widget _buildAvatar() {
+  Widget _buildAvatar({required bool dark}) {
     final url = widget.otherUserPhotoUrl;
+
     return CircleAvatar(
       radius: 20,
-      backgroundColor: AppColors.buttonSecondary,
+      backgroundColor:
+      dark ? Colors.grey.shade800 : AppColors.buttonSecondary,
       backgroundImage: (url != null && url.isNotEmpty) ? NetworkImage(url) : null,
       child: (url == null || url.isEmpty)
           ? Text(
@@ -259,10 +265,13 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildProductHeader() {
+  Widget _buildProductHeader({required bool dark}) {
     if (widget.productTitle == null && widget.productImageUrl == null) {
       return const SizedBox.shrink();
     }
+
+    final cardBg = dark ? Colors.grey.shade900 : Colors.white;
+    final borderColor = dark ? Colors.white10 : AppColors.darkerGrey.withValues(alpha: 0.35);
 
     return InkWell(
       onTap: _openProduct,
@@ -272,13 +281,13 @@ class _ChatScreenState extends State<ChatScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.grey.withValues(alpha: 0.58),
+              (dark ? Colors.grey.shade800 : AppColors.grey).withValues(alpha: 0.58),
               Theme.of(context).colorScheme.surfaceContainerHighest,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          border: Border.all(color: AppColors.darkerGrey.withValues(alpha: 0.35)),
+          border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -289,14 +298,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 width: 40,
                 height: 40,
                 color: Theme.of(context).colorScheme.surfaceContainer,
-                child: widget.productImageUrl != null && widget.productImageUrl!.isNotEmpty
+                child: widget.productImageUrl != null &&
+                    widget.productImageUrl!.isNotEmpty
                     ? Image.network(
                   widget.productImageUrl!,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
-                  const Icon(Icons.image_not_supported),
+                      Icon(Icons.image_not_supported,
+                          color: dark ? Colors.grey.shade300 : null),
                 )
-                    : const Icon(Icons.shopping_bag_outlined),
+                    : Icon(Icons.shopping_bag_outlined,
+                    color: dark ? Colors.grey.shade300 : null),
               ),
             ),
             const SizedBox(width: 12),
@@ -310,6 +322,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
+                      color: dark ? Colors.white : null,
                     ),
                   ),
                   if ((widget.productPrice ?? '').isNotEmpty) ...[
@@ -337,7 +350,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildQuickReplies() {
+  Widget _buildQuickReplies({required bool dark}) {
     return SizedBox(
       height: 34,
       child: ListView.separated(
@@ -354,7 +367,7 @@ class _ChatScreenState extends State<ChatScreen> {
             backgroundColor: AppColors.buttonSecondary.withValues(alpha: 0.12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(999),
-              side: BorderSide(color: AppColors.grey),
+              side: BorderSide(color: dark ? Colors.white12 : AppColors.grey),
             ),
           );
         },
@@ -362,7 +375,13 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildImageBubble(String imageUrl, {required bool isMe, String? timeLabel, String? status}) {
+  Widget _buildImageBubble(
+      String imageUrl, {
+        required bool isMe,
+        String? timeLabel,
+        String? status,
+        required bool dark,
+      }) {
     final bg = isMe
         ? AppColors.buttonSecondary
         : Theme.of(context).colorScheme.surfaceContainerHighest;
@@ -484,6 +503,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildMessageItem({
     required Map<String, dynamic> data,
     required String currentUserId,
+    required bool dark,
   }) {
     final senderId = data['senderId']?.toString() ?? '';
     final isMe = senderId == currentUserId;
@@ -500,6 +520,7 @@ class _ChatScreenState extends State<ChatScreen> {
         isMe: isMe,
         timeLabel: timeLabel,
         status: isMe ? _messageStatus(data) : null,
+        dark: dark,
       );
     }
 
@@ -511,9 +532,19 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildMessages(QuerySnapshot<Map<String, dynamic>> snapshot) {
+  Widget _buildMessages(
+      QuerySnapshot<Map<String, dynamic>> snapshot, {
+        required bool dark,
+      }) {
     final docs = snapshot.docs;
-    if (docs.isEmpty) return const Center(child: Text('No messages yet'));
+    if (docs.isEmpty) {
+      return Center(
+        child: Text(
+          'No messages yet',
+          style: TextStyle(color: dark ? Colors.grey.shade400 : Colors.grey),
+        ),
+      );
+    }
 
     final List<Widget> items = [];
     String? lastGroup;
@@ -532,6 +563,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 group,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
+                  color: dark ? Colors.grey.shade400 : null,
                 ),
               ),
             ),
@@ -540,7 +572,13 @@ class _ChatScreenState extends State<ChatScreen> {
         lastGroup = group;
       }
 
-      items.add(_buildMessageItem(data: data, currentUserId: widget.currentUserId));
+      items.add(
+        _buildMessageItem(
+          data: data,
+          currentUserId: widget.currentUserId,
+          dark: dark,
+        ),
+      );
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
@@ -554,6 +592,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dark = AppHelperFunctions.isDarkMode(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -565,7 +605,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         title: Row(
           children: [
-            _buildAvatar(),
+            _buildAvatar(dark: dark),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -576,14 +616,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     widget.otherName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: dark ? Colors.white : null,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     _formatLastActive(widget.otherUserLastActive),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: dark ? Colors.grey.shade400 : null,
+                    ),
                   ),
                 ],
               ),
@@ -643,23 +687,29 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          _buildProductHeader(),
+          _buildProductHeader(dark: dark),
           const SizedBox(height: 8),
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: widget.repo.messagesStream(widget.chatId),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error loading messages: ${snapshot.error}'));
+                  return Center(
+                    child: Text('Error loading messages: ${snapshot.error}'),
+                  );
                 }
                 if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: dark ? Colors.white : AppColors.buttonSecondary,
+                    ),
+                  );
                 }
-                return _buildMessages(snapshot.data!);
+                return _buildMessages(snapshot.data!, dark: dark);
               },
             ),
           ),
-          _buildQuickReplies(),
+          _buildQuickReplies(dark: dark),
           const SizedBox(height: AppSizes.sm),
           SafeArea(
             top: false,
@@ -668,7 +718,10 @@ class _ChatScreenState extends State<ChatScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .outlineVariant
+                        .withValues(alpha: 0.5),
                   ),
                 ),
               ),
@@ -686,8 +739,14 @@ class _ChatScreenState extends State<ChatScreen> {
                       onSubmitted: (_) => _send(),
                       minLines: 1,
                       maxLines: 4,
-                      decoration: const InputDecoration(
+                      style: TextStyle(
+                        color: dark ? Colors.white : null,
+                      ),
+                      decoration: InputDecoration(
                         hintText: 'Type a message...',
+                        hintStyle: TextStyle(
+                          color: dark ? Colors.grey.shade500 : null,
+                        ),
                         border: InputBorder.none,
                       ),
                     ),
