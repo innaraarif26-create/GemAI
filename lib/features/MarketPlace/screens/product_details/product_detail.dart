@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/features/MarketPlace/controllers/product_controller.dart';
 import 'package:gemai/features/MarketPlace/models/product_model.dart';
-import 'package:gemai/features/MarketPlace/screens/product_details/widgets/bottom_call_chat_widget.dart';
+import 'package:gemai/features/MarketPlace/screens/product_details/widgets/bottom_chat_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/price_share_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_location.dart';

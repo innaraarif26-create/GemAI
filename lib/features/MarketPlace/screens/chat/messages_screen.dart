@@ -108,8 +108,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       child: Center(
         child: Text(
           initials.isEmpty ? 'U' : initials,
-          style: TextStyle(
-            color: dark ? Colors.white : Colors.white,
+          style: const TextStyle(
+            color: Colors.white,
             fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
@@ -121,7 +121,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
-
     final bg = dark ? Colors.black : const Color(0xFFF4F7FB);
     final cardColor = dark ? Colors.grey.shade900 : Colors.white;
     final textColor = dark ? Colors.white : Colors.black;
@@ -230,7 +229,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 }
 
                 final chats = snapshot.data?.docs ?? [];
-                if (chats.isEmpty) {
+
+                final visibleChats = chats.where((doc) {
+                  final data = doc.data();
+                  final lastMessage = (data['lastMessage'] as String?) ?? '';
+                  return lastMessage.trim().isNotEmpty;
+                }).toList();
+
+                if (visibleChats.isEmpty) {
                   return Center(
                     child: Text(
                       'No conversations yet',
@@ -241,17 +247,18 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
                 return ListView.separated(
                   padding: const EdgeInsets.all(12),
-                  itemCount: chats.length,
+                  itemCount: visibleChats.length,
                   separatorBuilder: (context, index) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
-                    final doc = chats[index];
+                    final doc = visibleChats[index];
                     final data = doc.data();
 
                     final chatId = (data['chatId'] as String?) ?? doc.id;
                     final buyerId = (data['buyerId'] as String?) ?? '';
                     final sellerId = (data['sellerId'] as String?) ?? '';
                     final productId = (data['productId'] as String?) ?? '';
-                    final otherUserId = widget.currentUserId == buyerId ? sellerId : buyerId;
+                    final otherUserId =
+                    widget.currentUserId == buyerId ? sellerId : buyerId;
 
                     final lastMessage = (data['lastMessage'] as String?) ?? '';
                     final lastMessageAt = data['lastMessageAt'] as Timestamp?;
@@ -277,7 +284,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         final userName = _getUserName(userData);
                         final userImage = _getUserImage(userData);
                         final productName = product?.title ?? 'Product';
-                        final productImage = (product != null && product.imageUrls.isNotEmpty)
+                        final productImage =
+                        (product != null && product.imageUrls.isNotEmpty)
                             ? product.imageUrls.first
                             : null;
 
@@ -316,8 +324,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                     productId: productId,
                                     onDeleteChat: () async {
                                       await widget.repo.deleteChat(chatId);
-                                      if (!context.mounted) return;
-                                      Navigator.pop(context);
                                     },
                                   ),
                                 ),
@@ -443,9 +449,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                         ),
                                         const SizedBox(height: 2),
                                         Text(
-                                          lastMessage.isEmpty
-                                              ? 'No messages yet'
-                                              : lastMessage,
+                                          lastMessage,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium

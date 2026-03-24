@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/colors.dart';
@@ -8,7 +7,6 @@ import 'package:gemai/core/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../data/repositories/chat/chat_repository.dart';
 import '../../../MarketPlace/models/product_model.dart';
 import '../product_details/product_detail.dart';
@@ -270,7 +268,6 @@ class _ChatScreenState extends State<ChatScreen> {
       return const SizedBox.shrink();
     }
 
-    final cardBg = dark ? Colors.grey.shade900 : Colors.white;
     final borderColor = dark ? Colors.white10 : AppColors.darkerGrey.withValues(alpha: 0.35);
 
     return InkWell(
@@ -288,7 +285,7 @@ class _ChatScreenState extends State<ChatScreen> {
             end: Alignment.bottomRight,
           ),
           border: Border.all(color: borderColor),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
           children: [
@@ -352,7 +349,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildQuickReplies({required bool dark}) {
     return SizedBox(
-      height: 34,
+      height: 44,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
         scrollDirection: Axis.horizontal,
@@ -364,7 +361,7 @@ class _ChatScreenState extends State<ChatScreen> {
             label: Text(text),
             onPressed: () => _send(textOverride: text),
             labelStyle: const TextStyle(fontWeight: FontWeight.w500),
-            backgroundColor: AppColors.buttonSecondary.withValues(alpha: 0.12),
+            backgroundColor: AppColors.grey.withValues(alpha: 0.12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(999),
               side: BorderSide(color: dark ? Colors.white12 : AppColors.grey),
@@ -382,13 +379,8 @@ class _ChatScreenState extends State<ChatScreen> {
         String? status,
         required bool dark,
       }) {
-    final bg = isMe
-        ? AppColors.buttonSecondary
-        : Theme.of(context).colorScheme.surfaceContainerHighest;
-
-    final fg = isMe
-        ? Colors.white
-        : Theme.of(context).colorScheme.onSurfaceVariant;
+    final bg = isMe ? AppColors.buttonSecondary : Theme.of(context).colorScheme.surfaceContainerHighest;
+    final fg = isMe ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant;
 
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -448,13 +440,9 @@ class _ChatScreenState extends State<ChatScreen> {
     required String timeLabel,
     String? status,
   }) {
-    final bg = isMe
-        ? AppColors.buttonSecondary
-        : Theme.of(context).colorScheme.surfaceContainerHighest;
+    final bg = isMe ? AppColors.buttonSecondary : Theme.of(context).colorScheme.surfaceContainerHighest;
 
-    final fg = isMe
-        ? Colors.white
-        : Theme.of(context).colorScheme.onSurfaceVariant;
+    final fg = isMe ? Colors.white : Theme.of(context).colorScheme.onSurfaceVariant;
 
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -673,10 +661,6 @@ class _ChatScreenState extends State<ChatScreen> {
             ],
             icon: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-              ),
               child: Icon(
                 Icons.more_vert,
                 color: Theme.of(context).colorScheme.onSurface,
