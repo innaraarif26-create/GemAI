@@ -6,10 +6,12 @@ class AppPostedBy extends StatelessWidget {
     super.key,
     required this.sellerName,
     this.sellerImageUrl,
+    required this.onTap,
   });
 
   final String sellerName;
   final String? sellerImageUrl;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,6 @@ class AppPostedBy extends StatelessWidget {
         // Left side: Avatar + Texts
         Row(
           children: [
-            /// Avatar
             CircleAvatar(
               radius: 20,
               backgroundImage: sellerImageUrl != null
@@ -31,8 +32,6 @@ class AppPostedBy extends StatelessWidget {
                   : null,
             ),
             const SizedBox(width: AppSizes.sm),
-
-            /// Column with texts
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,17 +40,20 @@ class AppPostedBy extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: AppSizes.xs),
-                Text(sellerName, style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600,),
+                Text(
+                  sellerName,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
               ],
             ),
           ],
         ),
-
-        // Right side: Icon
         IconButton(
-          onPressed: () {}, 
-          icon: Icon(Icons.arrow_forward_ios,size: 16,),
+          onPressed: onTap,
+          icon: const Icon(Icons.arrow_forward_ios, size: 16),
         ),
       ],
     );

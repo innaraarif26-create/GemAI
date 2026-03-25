@@ -14,7 +14,7 @@ class ProductModel {
 
   final List<String> imageUrls;
 
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   final int views;
   final int likes;
@@ -64,7 +64,7 @@ class ProductModel {
     "sellerName": sellerName,
     "sellerPhotoUrl": sellerPhotoUrl,
     "imageUrls": imageUrls,
-    "createdAt": Timestamp.fromDate(createdAt),
+    "createdAt": createdAt != null ? Timestamp.fromDate(createdAt!) : null,
     "views": views,
     "likes": likes,
     "isActive": isActive,
@@ -78,9 +78,7 @@ class ProductModel {
     "certification": certification,
   };
 
-  factory ProductModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> doc,
-      ) {
+  factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data();
     if (data == null) throw StateError("Product ${doc.id} is empty.");
 
@@ -98,16 +96,16 @@ class ProductModel {
           ?.map((e) => e.toString())
           .toList() ??
           <String>[],
-      createdAt: (data["createdAt"] as Timestamp?)?.toDate() ??
-          DateTime.fromMillisecondsSinceEpoch(0),
+      createdAt: (data["createdAt"] as Timestamp?)?.toDate(),
       views: (data["views"] is num) ? (data["views"] as num).toInt() : 0,
       likes: (data["likes"] is num) ? (data["likes"] as num).toInt() : 0,
       isActive: (data["isActive"] as bool?) ?? true,
       gemType: (data["gemType"] ?? "").toString(),
       color: (data["color"] ?? "").toString(),
       origin: (data["origin"] ?? "").toString(),
-      weightCarat:
-      (data["weightCarat"] is num) ? (data["weightCarat"] as num).toDouble() : 0.0,
+      weightCarat: (data["weightCarat"] is num)
+          ? (data["weightCarat"] as num).toDouble()
+          : 0.0,
       cut: (data["cut"] ?? "").toString(),
       clarity: (data["clarity"] ?? "").toString(),
       treatment: (data["treatment"] ?? "").toString(),

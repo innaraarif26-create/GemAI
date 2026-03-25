@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/features/MarketPlace/controllers/product_controller.dart';
 import 'package:gemai/features/MarketPlace/models/product_model.dart';
+import 'package:gemai/features/MarketPlace/screens/product_details/seller_profile_screen.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/bottom_chat_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/price_share_widget.dart';
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_detail_image_slider.dart';
@@ -91,9 +92,20 @@ class ProductDetailScreen extends StatelessWidget {
                   /// Posted By
                   AppPostedBy(
                     sellerName: product.sellerName,
-                    sellerImageUrl: product.sellerPhotoUrl.isEmpty
-                        ? null
-                        : product.sellerPhotoUrl,
+                    sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SellerProfileScreen(
+                            sellerId: product.sellerId,
+                            sellerName: product.sellerName,
+                            sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
+                            sellerLocation: product.location,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 

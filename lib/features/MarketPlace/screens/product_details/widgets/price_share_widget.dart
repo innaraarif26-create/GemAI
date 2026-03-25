@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:share_plus/share_plus.dart';
-
 import 'package:gemai/features/MarketPlace/screens/product_details/widgets/product_price_text.dart';
 import '../../../../../core/constants/sizes.dart';
 import '../../../../../widgets/icons/circular_icon.dart';
@@ -59,8 +57,8 @@ class AppPriceAndShare extends StatelessWidget {
                 return AppCircularIcon(
                   width: 40,
                   height: 40,
-                  icon: isFav ? Iconsax.heart5 : Iconsax.heart,
-                  color: isFav ? Colors.red : Colors.redAccent,
+                  icon: isFav ? Icons.favorite: Icons.favorite_border,size: AppSizes.iconMd,
+                  color: isFav ? Colors.red : Colors.black,
                   onPressed: () async {
                     await wishlist.toggle(
                       product.id,
@@ -73,7 +71,7 @@ class AppPriceAndShare extends StatelessWidget {
             const SizedBox(width: 2),
             IconButton(
               onPressed: _shareProduct,
-              icon: const Icon(Icons.share_outlined, size: AppSizes.iconMd),
+              icon: const Icon(Icons.share_outlined, size: AppSizes.iconMd,color: Colors.black,),
             ),
           ],
         ),
