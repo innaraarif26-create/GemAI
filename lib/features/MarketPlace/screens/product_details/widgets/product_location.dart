@@ -7,7 +7,7 @@ class AppProductLocation extends StatelessWidget {
     super.key,
     required this.location,
     this.icon = Iconsax.location,
-    this.iconSize = 14,
+    this.iconSize = 16,
   });
 
   final String location;

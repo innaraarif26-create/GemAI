@@ -14,19 +14,28 @@ class WishlistController extends GetxController {
     await repo.toggle(productId, currentlyWishlisted: currentlyWishlisted);
   }
 
-  /// realtime count for appbar badge
   Stream<int> wishlistCountStream() {
     return FirebaseAuth.instance.authStateChanges().asyncExpand((user) {
-      if (user == null) {
-        return Stream.value(0);
-      }
+      if (user == null) return Stream.value(0);
 
-      return FirebaseFirestore.instance
+      final wishRef = FirebaseFirestore.instance
           .collection("Users")
           .doc(user.uid)
-          .collection("Wishlist")
-          .snapshots()
-          .map((snap) => snap.size);
+          .collection("Wishlist");
+
+      return wishRef.snapshots().asyncMap((snap) async {
+        final ids = snap.docs.map((d) => d.id).toList();
+
+        if (ids.isEmpty) return 0;
+        final limited = ids.take(100).toList();
+
+        final productsSnap = await FirebaseFirestore.instance
+            .collection("Products")
+            .where(FieldPath.documentId, whereIn: limited)
+            .get();
+
+        return productsSnap.size;
+      });
     });
   }
 }

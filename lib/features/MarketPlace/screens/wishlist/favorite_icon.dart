@@ -23,6 +23,7 @@ class AppFavoriteCounterIcon extends StatelessWidget {
         IconButton(
           onPressed: onPressed,
           icon: Icon(Icons.favorite_border, color: iconColor),
+          tooltip: 'Favorite Products',
         ),
 
         if (hasItems)

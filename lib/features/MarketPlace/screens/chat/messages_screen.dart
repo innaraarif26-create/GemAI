@@ -159,7 +159,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: dark ? 0.18 : 0.05),
+                    color: Colors.black.withValues(alpha:  dark ? 0.18 : 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),

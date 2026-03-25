@@ -1,3 +1,4 @@
+// Chat repository — corrected and complete
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -181,7 +182,6 @@ class ChatRepo {
     }, SetOptions(merge: true));
   }
 
-
   Future<void> deleteChat(String chatId) async {
     final chatRef = _db.collection('chats').doc(chatId);
     final messagesSnap = await chatRef.collection('messages').get();
@@ -208,5 +208,4 @@ class ChatRepo {
         .doc(messageId)
         .delete();
   }
-
 }

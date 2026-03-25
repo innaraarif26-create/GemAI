@@ -20,7 +20,7 @@ class AppProductTitleText extends StatelessWidget
   {
     return Text(
       title,
-      style: smallSize ? Theme.of(context).textTheme.bodyMedium : Theme.of(context).textTheme.bodySmall!.apply(color: AppColors.accent),
+      style: smallSize ? Theme.of(context).textTheme.bodyMedium : Theme.of(context).textTheme.titleLarge!.apply(color: AppColors.buttonSecondary),
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
       textAlign: textAlign,

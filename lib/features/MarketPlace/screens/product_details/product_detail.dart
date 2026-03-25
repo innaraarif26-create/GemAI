@@ -47,7 +47,7 @@ class ProductDetailScreen extends StatelessWidget {
                     productId: product.id,
                     product: product,
                   ),
-                  const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+                  const SizedBox(height: AppSizes.xs),
 
                   /// Title
                   AppProductTitleText(title: product.title),
