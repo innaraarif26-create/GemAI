@@ -38,12 +38,13 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// Price and share Button
+                  /// Price, Favorite and share Button
                   AppPriceAndShare(
                     price: product.price,
                     title: product.title,
                     location: product.location,
                     productId: product.id,
+                    product: product,
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
 
