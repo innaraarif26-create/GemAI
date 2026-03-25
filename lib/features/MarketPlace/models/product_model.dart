@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
   final String id;
-
   final String title;
   final String description;
   final double price;
@@ -21,7 +20,6 @@ class ProductModel {
   final int likes;
   final bool isActive;
 
-  // Gem Details (for your AppProductMetaData widget)
   final String gemType;
   final String color;
   final String origin;
@@ -80,7 +78,9 @@ class ProductModel {
     "certification": certification,
   };
 
-  factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory ProductModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> doc,
+      ) {
     final data = doc.data();
     if (data == null) throw StateError("Product ${doc.id} is empty.");
 
@@ -94,15 +94,20 @@ class ProductModel {
       sellerId: (data["sellerId"] ?? "").toString(),
       sellerName: (data["sellerName"] ?? "").toString(),
       sellerPhotoUrl: (data["sellerPhotoUrl"] ?? "").toString(),
-      imageUrls: (data["imageUrls"] as List?)?.map((e) => e.toString()).toList() ?? <String>[],
-      createdAt: (data["createdAt"] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0),
+      imageUrls: (data["imageUrls"] as List?)
+          ?.map((e) => e.toString())
+          .toList() ??
+          <String>[],
+      createdAt: (data["createdAt"] as Timestamp?)?.toDate() ??
+          DateTime.fromMillisecondsSinceEpoch(0),
       views: (data["views"] is num) ? (data["views"] as num).toInt() : 0,
       likes: (data["likes"] is num) ? (data["likes"] as num).toInt() : 0,
       isActive: (data["isActive"] as bool?) ?? true,
       gemType: (data["gemType"] ?? "").toString(),
       color: (data["color"] ?? "").toString(),
       origin: (data["origin"] ?? "").toString(),
-      weightCarat: (data["weightCarat"] is num) ? (data["weightCarat"] as num).toDouble() : 0.0,
+      weightCarat:
+      (data["weightCarat"] is num) ? (data["weightCarat"] as num).toDouble() : 0.0,
       cut: (data["cut"] ?? "").toString(),
       clarity: (data["clarity"] ?? "").toString(),
       treatment: (data["treatment"] ?? "").toString(),

@@ -30,47 +30,72 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             AppProductImageSlider(imageUrls: product.imageUrls),
             Padding(
-              padding: const EdgeInsets.only(right: AppSizes.defaultSpace, left: AppSizes.defaultSpace, bottom: AppSizes.defaultSpace,),
+              padding: const EdgeInsets.only(
+                right: AppSizes.defaultSpace,
+                left: AppSizes.defaultSpace,
+                bottom: AppSizes.defaultSpace,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   /// Price and share Button
-                  AppPriceAndShare(price: product.price),
+                  AppPriceAndShare(
+                    price: product.price,
+                    title: product.title,
+                    location: product.location,
+                    productId: product.id,
+                  ),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+
                   /// Title
                   AppProductTitleText(title: product.title),
                   const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
+
                   /// Location
                   AppProductLocation(location: product.location),
                   const SizedBox(height: AppSizes.defaultSpace),
+
                   /// Product Details
                   AppProductMetaData(product: product),
                   const SizedBox(height: AppSizes.defaultSpace),
+
                   /// Description
                   Text(
                     "Description",
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
+
                   ReadMoreText(
                     product.description,
                     trimLines: 2,
                     trimMode: TrimMode.Line,
-                    trimCollapsedText: "Show more",
-                    trimExpandedText: " Less",
-                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    trimCollapsedText: " Show more",
+                    trimExpandedText: " Show less",
+                    moreStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    lessStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
+
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Posted By
                   AppPostedBy(
                     sellerName: product.sellerName,
-                    sellerImageUrl: product.sellerPhotoUrl.isEmpty ? null : product.sellerPhotoUrl,
+                    sellerImageUrl: product.sellerPhotoUrl.isEmpty
+                        ? null
+                        : product.sellerPhotoUrl,
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
+
                   const Divider(),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
