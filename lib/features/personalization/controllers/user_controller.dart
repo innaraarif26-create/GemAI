@@ -53,11 +53,20 @@ class UserController extends GetxController {
     super.onClose();
   }
 
-  /// Fetch user record
+  /// Fetch user record from Firestore and update with Firebase Auth email
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
+
+      // Fetch from Firestore
       final u = await userRepository.fetchUserDetails();
+
+      // Get the latest email from Firebase Auth (source of truth)
+      final firebaseUser = FirebaseAuth.instance.currentUser;
+      if (firebaseUser != null) {
+        u.email = firebaseUser.email ?? u.email;
+      }
+
       user(u);
     } catch (_) {
       user(UserModel.empty());

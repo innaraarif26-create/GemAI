@@ -122,6 +122,28 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  /// NEW: Update user email with verification
+  Future<void> updateUserEmail(String newEmail) async {
+    try {
+      // Verify the email change before updating
+      await _auth.currentUser?.verifyBeforeUpdateEmail(newEmail);
+
+      // Send verification email for the new email address
+      await Future.delayed(const Duration(seconds: 1));
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw AppFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const AppFormatException();
+    } on PlatformException catch (e) {
+      throw AppPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
   Future<void> reAuthenticateWithEmailAndPassword(
       String email,
       String password,

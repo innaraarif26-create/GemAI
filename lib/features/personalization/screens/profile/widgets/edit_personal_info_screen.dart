@@ -5,6 +5,7 @@ import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:gemai/core/utils/popups/full_screen_loader.dart';
 import 'package:gemai/core/utils/popups/loaders.dart';
 import 'package:gemai/core/utils/validators/validation.dart';
+import 'package:gemai/data/repositories/authentication/authentication_repository.dart';
 import 'package:gemai/data/repositories/user/user_repository.dart';
 import 'package:gemai/features/personalization/controllers/user_controller.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
@@ -29,9 +30,11 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
   late TextEditingController phoneController;
   late TextEditingController dobController;
   late String selectedGender;
+  bool isLoading = false;
 
   final userController = UserController.instance;
   final userRepository = UserRepository.instance;
+  final authRepository = AuthenticationRepository.instance;
   final formKey = GlobalKey<FormState>();
 
   final List<String> genderOptions = ["Male", "Female", "Other"];
@@ -76,6 +79,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
   Future<void> updateUserInfo() async {
     try {
+      setState(() => isLoading = true);
       AppFullScreenLoader.openLoadingDialog("Updating information...", AppImages.docerAnimation);
 
       final isConnected = await NetworkManager.instance.isConnected();
@@ -85,15 +89,18 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
           title: "No Internet",
           message: "Please check your internet connection.",
         );
+        setState(() => isLoading = false);
         return;
       }
 
       if (!formKey.currentState!.validate()) {
         AppFullScreenLoader.stopLoading();
+        setState(() => isLoading = false);
         return;
       }
 
       Map<String, dynamic> updateData = {};
+      bool isEmailUpdate = false;
 
       // Handle different field types
       switch (widget.fieldType) {
@@ -104,10 +111,24 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
               title: "No Changes",
               message: "Email is the same as before.",
             );
+            setState(() => isLoading = false);
             return;
           }
-          updateData = {"Email": emailController.text.trim()};
-          userController.user.value.email = emailController.text.trim();
+
+          final newEmail = emailController.text.trim();
+
+          // Step 1: Update Firebase Auth Email with verification
+          await authRepository.updateUserEmail(newEmail);
+
+          // Step 2: Immediately update Firestore email as well
+          updateData = {"Email": newEmail};
+          await userRepository.updateSingleField(updateData);
+
+          // Step 3: Update local controller
+          userController.user.value.email = newEmail;
+          userController.user.refresh();
+
+          isEmailUpdate = true;
           break;
 
         case 'phone':
@@ -117,6 +138,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
               title: "No Changes",
               message: "Phone number is the same as before.",
             );
+            setState(() => isLoading = false);
             return;
           }
           updateData = {"PhoneNumber": phoneController.text.trim()};
@@ -130,6 +152,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
               title: "No Changes",
               message: "Gender is the same as before.",
             );
+            setState(() => isLoading = false);
             return;
           }
           updateData = {"Gender": selectedGender};
@@ -143,6 +166,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
               title: "No Changes",
               message: "Date of birth is the same as before.",
             );
+            setState(() => isLoading = false);
             return;
           }
           updateData = {"DateOfBirth": dobController.text.trim()};
@@ -155,23 +179,50 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
             title: "Cannot Edit",
             message: "User ID cannot be changed.",
           );
+          setState(() => isLoading = false);
           return;
       }
 
-      await userRepository.updateSingleField(updateData);
-      userController.user.refresh();
+      // Update Firestore for non-email fields
+      if (widget.fieldType != 'email') {
+        await userRepository.updateSingleField(updateData);
+        userController.user.refresh();
+      }
 
       AppFullScreenLoader.stopLoading();
 
-      AppLoaders.successSnackBar(
-        title: "Success",
-        message: "Your information has been updated successfully.",
-      );
+      // Show success message
+      if (isEmailUpdate) {
+        AppLoaders.successSnackBar(
+          title: "Verification Email Sent",
+          message: "Verification link has been sent to your new email address.",
+        );
+      } else {
+        AppLoaders.successSnackBar(
+          title: "Success",
+          message: "Your information has been updated successfully.",
+        );
+      }
 
-      Get.back();
+      // Update UI - refresh the screen with new data
+      setState(() {
+        // Update text controllers to show new values
+        emailController.text = userController.user.value.email;
+        phoneController.text = userController.user.value.phoneNumber;
+        dobController.text = userController.user.value.dateOfBirth;
+        selectedGender = userController.user.value.gender.isEmpty ? "Male" : userController.user.value.gender;
+      });
+
+      setState(() => isLoading = false);
+
+      // Optional: Navigate back after a delay (only if you want)
+      // await Future.delayed(const Duration(seconds: 2));
+      // Get.back();
+
     } catch (e) {
       AppFullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: "Error", message: e.toString());
+      setState(() => isLoading = false);
     }
   }
 
@@ -224,8 +275,24 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: updateUserInfo,
-                      child: const Text("Save Changes"),
+                      onPressed: isLoading ? null : updateUserInfo,
+                      child: isLoading
+                          ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                          : const Text("Save Changes"),
+                    ),
+                  ),
+
+                /// Back Button (Optional)
+                if (widget.fieldType != 'userid')
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () => Get.back(),
+                      child: const Text("Back to Profile"),
                     ),
                   ),
               ],
@@ -273,7 +340,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
   String _getScreenDescription() {
     switch (widget.fieldType) {
       case 'email':
-        return "Enter your new email address. A verification link will be sent to this email.";
+        return "Enter your new email address. A verification link will be sent to this email. You must verify it before the change takes effect.";
       case 'phone':
         return "Enter your new phone number. We'll verify it with an SMS.";
       case 'gender':
