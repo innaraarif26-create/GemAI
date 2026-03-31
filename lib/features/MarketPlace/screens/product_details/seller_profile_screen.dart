@@ -128,7 +128,13 @@ class SellerProfileScreen extends StatelessWidget {
                         .copyWith(color: textColor),
                   ),
                 ),
-
+                const SizedBox(height: 8),
+                Center(
+                  child: Text(
+                    "Location: $sellerLocation",
+                    style: TextStyle(color: subTextColor),
+                  ),
+                ),
                 const SizedBox(height: 8),
 
                 Center(

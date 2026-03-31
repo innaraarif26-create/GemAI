@@ -6,9 +6,11 @@ class UserModel {
   String firstName;
   String lastName;
   final String username;
-  final String email;
+  String email;
   String phoneNumber;
   String profilePicture;
+  String gender;
+  String dateOfBirth;
 
   UserModel({
     required this.id,
@@ -18,6 +20,8 @@ class UserModel {
     required this.email,
     required this.phoneNumber,
     required this.profilePicture,
+    this.gender = "",
+    this.dateOfBirth = "",
   });
 
   /// Full name getter
@@ -51,6 +55,8 @@ class UserModel {
     email: "",
     phoneNumber: "",
     profilePicture: "",
+    gender: "",
+    dateOfBirth: "",
   );
 
   /// Convert to JSON
@@ -62,6 +68,8 @@ class UserModel {
       "Email": email,
       "PhoneNumber": phoneNumber,
       "ProfilePicture": profilePicture,
+      "Gender": gender,
+      "DateOfBirth": dateOfBirth,
     };
   }
 
@@ -83,6 +91,8 @@ class UserModel {
       email: data["Email"] ?? "",
       phoneNumber: data["PhoneNumber"] ?? "",
       profilePicture: data["ProfilePicture"] ?? "",
+      gender: data["Gender"] ?? "",
+      dateOfBirth: data["DateOfBirth"] ?? "",
     );
   }
 }

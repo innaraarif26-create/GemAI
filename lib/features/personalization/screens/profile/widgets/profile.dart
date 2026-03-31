@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gemai/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:gemai/features/personalization/screens/profile/widgets/edit_personal_info_screen.dart';
 import 'package:gemai/widgets/appbar/appbar.dart';
 import 'package:gemai/widgets/shimmer/app_shimmer_effect.dart';
 import 'package:gemai/widgets/texts/section_heading.dart';
@@ -80,25 +81,54 @@ class ProfileScreen extends StatelessWidget {
               const AppSectionHeading(title: "Personal Information", showActionButton: false),
               const SizedBox(height: AppSizes.spaceBtwItems),
 
-              /// Reactive personal info fields
+              /// User ID - Click to copy (no navigation for userid)
               Obx(() => AppProfileMenu(
                 title: "User ID",
                 value: controller.user.value.id,
                 icon: Iconsax.copy,
-                onPressed: () {},
+                onPressed: () {
+                  _showUserIdDialog(context, controller.user.value.id);
+                },
               )),
+
+              /// Email
               Obx(() => AppProfileMenu(
                 title: "Email",
                 value: controller.user.value.email,
-                onPressed: () {},
+                onPressed: () => Get.to(() => const EditPersonalInfoScreen(fieldType: 'email'),
+                ),
               )),
+
+              /// Phone Number
               Obx(() => AppProfileMenu(
                 title: "Phone Number",
                 value: controller.user.value.phoneNumber,
-                onPressed: () {},
+                onPressed: () => Get.to(
+                      () => const EditPersonalInfoScreen(fieldType: 'phone'),
+                ),
               )),
-              AppProfileMenu(title: "Gender", value: "Male", onPressed: () {}),
-              AppProfileMenu(title: "Date of Birth", value: "21 Aug, 2021", onPressed: () {}),
+
+              /// Gender
+              Obx(() => AppProfileMenu(
+                title: "Gender",
+                value: controller.user.value.gender.isEmpty
+                    ? "Not Set"
+                    : controller.user.value.gender,
+                onPressed: () => Get.to(
+                      () => const EditPersonalInfoScreen(fieldType: 'gender'),
+                ),
+              )),
+
+              /// Date of Birth
+              Obx(() => AppProfileMenu(
+                title: "Date of Birth",
+                value: controller.user.value.dateOfBirth.isEmpty
+                    ? "Not Set"
+                    : controller.user.value.dateOfBirth,
+                onPressed: () => Get.to(
+                      () => const EditPersonalInfoScreen(fieldType: 'dob'),
+                ),
+              )),
 
               const Divider(),
               const SizedBox(height: AppSizes.spaceBtwItems),
@@ -113,6 +143,42 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// Dialog to show User ID with copy option
+  void _showUserIdDialog(BuildContext context, String userId) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Your User ID"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.grey.shade50,
+              ),
+              child: SelectableText(
+                userId,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Close"),
+          ),
+        ],
       ),
     );
   }

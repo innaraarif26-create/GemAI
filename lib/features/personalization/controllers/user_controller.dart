@@ -36,10 +36,6 @@ class UserController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    /// ✅ Fix "User not loaded / re-login" on app start:
-    /// Firebase restores the session asynchronously, so currentUser can be null
-    /// for a moment. Listen to auth changes and load user record only when ready.
     _authSub = FirebaseAuth.instance.authStateChanges().listen((firebaseUser) async {
       if (firebaseUser == null) {
         user(UserModel.empty());
