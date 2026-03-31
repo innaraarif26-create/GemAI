@@ -33,7 +33,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
   final userController = UserController.instance;
   final userRepository = UserRepository.instance;
   final formKey = GlobalKey<FormState>();
-  bool isLoading = false;
 
   final List<String> genderOptions = ["Male", "Female", "Other"];
 
@@ -79,16 +78,9 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
     try {
       AppFullScreenLoader.openLoadingDialog("Updating information...", AppImages.docerAnimation);
 
-      setState(() {
-        isLoading = true;
-      });
-
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         AppFullScreenLoader.stopLoading();
-        setState(() {
-          isLoading = false;
-        });
         AppLoaders.warningSnackBar(
           title: "No Internet",
           message: "Please check your internet connection.",
@@ -98,9 +90,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
       if (!formKey.currentState!.validate()) {
         AppFullScreenLoader.stopLoading();
-        setState(() {
-          isLoading = false;
-        });
         return;
       }
 
@@ -111,9 +100,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
         case 'email':
           if (emailController.text.trim() == userController.user.value.email) {
             AppFullScreenLoader.stopLoading();
-            setState(() {
-              isLoading = false;
-            });
             AppLoaders.warningSnackBar(
               title: "No Changes",
               message: "Email is the same as before.",
@@ -127,9 +113,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
         case 'phone':
           if (phoneController.text.trim() == userController.user.value.phoneNumber) {
             AppFullScreenLoader.stopLoading();
-            setState(() {
-              isLoading = false;
-            });
             AppLoaders.warningSnackBar(
               title: "No Changes",
               message: "Phone number is the same as before.",
@@ -143,9 +126,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
         case 'gender':
           if (selectedGender == userController.user.value.gender) {
             AppFullScreenLoader.stopLoading();
-            setState(() {
-              isLoading = false;
-            });
             AppLoaders.warningSnackBar(
               title: "No Changes",
               message: "Gender is the same as before.",
@@ -159,9 +139,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
         case 'dob':
           if (dobController.text.trim() == userController.user.value.dateOfBirth) {
             AppFullScreenLoader.stopLoading();
-            setState(() {
-              isLoading = false;
-            });
             AppLoaders.warningSnackBar(
               title: "No Changes",
               message: "Date of birth is the same as before.",
@@ -174,9 +151,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
         case 'userid':
           AppFullScreenLoader.stopLoading();
-          setState(() {
-            isLoading = false;
-          });
           AppLoaders.warningSnackBar(
             title: "Cannot Edit",
             message: "User ID cannot be changed.",
@@ -188,27 +162,15 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
       userController.user.refresh();
 
       AppFullScreenLoader.stopLoading();
-      setState(() {
-        isLoading = false;
-      });
 
       AppLoaders.successSnackBar(
         title: "Success",
         message: "Your information has been updated successfully.",
       );
 
-      // Navigate back after a short delay to ensure snackbar is shown
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        if (mounted) {
-          Get.back();
-        }
-      });
-
+      Get.back();
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      setState(() {
-        isLoading = false;
-      });
       AppLoaders.errorSnackBar(title: "Error", message: e.toString());
     }
   }
@@ -221,8 +183,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
       title: "Copied",
       message: "User ID copied to clipboard",
     );
-    // Don't navigate, just close the dialog if it was opened
-    Get.back();
   }
 
   @override
@@ -264,14 +224,8 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: isLoading ? null : updateUserInfo,
-                      child: isLoading
-                          ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                          : const Text("Save Changes"),
+                      onPressed: updateUserInfo,
+                      child: const Text("Save Changes"),
                     ),
                   ),
               ],
