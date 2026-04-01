@@ -18,6 +18,7 @@ import '../../../MarketPlace/screens/chat/messages_screen.dart';
 import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
 import '../profile/profile.dart';
+import 'uploads/my_uploads_screen.dart';
 
 class SettingScreen extends StatelessWidget
 {
@@ -52,7 +53,7 @@ class SettingScreen extends StatelessWidget
                   SizedBox(height: AppSizes.spaceBtwItems,),
                   AppSettingMenuTile(icon: Iconsax.edit, title: "Edit Profile", subTitle: "Keep your profile up to date", onTap: ()=> Get.to(ProfileScreen())),
                   AppSettingMenuTile(icon: Iconsax.safe_home, title: "My Address", subTitle: "Set Shopping delivery address", onTap: ()=> Get.to(UserAddressScreen())),
-                  AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.document_upload, title: "My Uploads", subTitle: "View and manage items you’ve uploaded", onTap: () => Get.to(const MyUploadsScreen())),
                   AppSettingMenuTile(icon: Iconsax.heart, title: "My Favorites", subTitle: "Items you’ve saved for later", onTap: ()=> Get.to(FavouriteScreen())),
                   AppSettingMenuTile(icon: Iconsax.messages4, title: "Messages / Chats", subTitle: "View conversations with buyers and sellers",
                     onTap: () {
