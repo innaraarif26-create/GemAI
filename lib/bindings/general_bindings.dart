@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../data/repositories/feedback/feedback_repository.dart';
 import '../core/utils/helpers/network_manager.dart';
 import '../features/MarketPlace/controllers/product_controller.dart';
 import '../features/MarketPlace/controllers/wishlist_controller.dart';
@@ -19,5 +20,8 @@ class GeneralBindings extends Bindings {
 
     // wishlist toggle + wishlist streams
     Get.put(WishlistController(), permanent: true);
+
+    // feedback repository
+    Get.put(FeedbackRepository(), permanent: true);
   }
 }
