@@ -7,11 +7,12 @@ import 'package:gemai/widgets/texts/section_heading.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../core/constants/image_strings.dart';
-import '../../../../../core/constants/sizes.dart';
-import '../../../../../widgets/image_widget/circular_image.dart';
-import '../../../controllers/user_controller.dart';
-import 'change_name.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/image_strings.dart';
+import '../../../../core/constants/sizes.dart';
+import '../../../../widgets/image_widget/circular_image.dart';
+import '../../controllers/user_controller.dart';
+import 'widgets/change_name.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -50,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                     }),
                     TextButton(
                       onPressed: () => controller.uploadUserProfilePicture(),
-                      child: const Text("Change Profile Picture"),
+                      child: const Text("Change Profile Picture",style: TextStyle(color: AppColors.buttonSecondary),),
                     ),
                   ],
                 ),
@@ -71,7 +72,8 @@ class ProfileScreen extends StatelessWidget {
               Obx(() => AppProfileMenu(
                 title: "Username",
                 value: controller.user.value.username,
-                onPressed: () {},
+                onPressed: () => Get.to(() => const EditPersonalInfoScreen(fieldType: 'username'),
+                ),
               )),
 
               const SizedBox(height: AppSizes.spaceBtwItems),

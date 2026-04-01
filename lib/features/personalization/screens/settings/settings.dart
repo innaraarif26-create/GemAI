@@ -17,7 +17,7 @@ import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
 import '../../../MarketPlace/screens/chat/messages_screen.dart';
 import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
-import '../profile/widgets/profile.dart';
+import '../profile/profile.dart';
 
 class SettingScreen extends StatelessWidget
 {

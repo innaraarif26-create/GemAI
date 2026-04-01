@@ -5,8 +5,8 @@ class UserModel {
   final String id;
   String firstName;
   String lastName;
-  final String username;
-  String email;  // Changed to mutable for Firebase Auth sync
+  String username;
+  String email;
   String phoneNumber;
   String profilePicture;
   String gender;

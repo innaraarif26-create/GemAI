@@ -24,7 +24,9 @@ class ChangeName extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// Heading
-            Text("Use real name for easy verification. This name will appear on several pages.",style: Theme.of(context).textTheme.labelMedium,),
+            Text("Use real name for easy verification. This name will appear on several pages.",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.grey,
+            ),),
             const SizedBox(height: AppSizes.spaceBtwSections,),
 
             /// Form Text field and Button

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gemai/core/constants/colors.dart';
 import 'package:gemai/core/constants/sizes.dart';
 import 'package:gemai/core/utils/helpers/network_manager.dart';
 import 'package:gemai/core/utils/popups/full_screen_loader.dart';
@@ -14,7 +15,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../core/constants/image_strings.dart';
 
 class EditPersonalInfoScreen extends StatefulWidget {
-  final String fieldType; // 'email', 'phone', 'gender', 'dob', 'userid'
+  final String fieldType; // 'username', 'email', 'phone', 'gender', 'dob', 'userid'
 
   const EditPersonalInfoScreen({
     super.key,
@@ -26,6 +27,7 @@ class EditPersonalInfoScreen extends StatefulWidget {
 }
 
 class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
+  late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController phoneController;
   late TextEditingController dobController;
@@ -42,6 +44,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
   @override
   void initState() {
     super.initState();
+    usernameController = TextEditingController(text: userController.user.value.username);
     emailController = TextEditingController(text: userController.user.value.email);
     phoneController = TextEditingController(text: userController.user.value.phoneNumber);
     dobController = TextEditingController(text: userController.user.value.dateOfBirth);
@@ -52,6 +55,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
   @override
   void dispose() {
+    usernameController.dispose();
     emailController.dispose();
     phoneController.dispose();
     dobController.dispose();
@@ -104,6 +108,20 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
       // Handle different field types
       switch (widget.fieldType) {
+        case 'username':
+          if (usernameController.text.trim() == userController.user.value.username) {
+            AppFullScreenLoader.stopLoading();
+            AppLoaders.warningSnackBar(
+              title: "No Changes",
+              message: "Username is the same as before.",
+            );
+            setState(() => isLoading = false);
+            return;
+          }
+          updateData = {"Username": usernameController.text.trim()};
+          userController.user.value.username = usernameController.text.trim();
+          break;
+
         case 'email':
           if (emailController.text.trim() == userController.user.value.email) {
             AppFullScreenLoader.stopLoading();
@@ -207,6 +225,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
       // Update UI - refresh the screen with new data
       setState(() {
         // Update text controllers to show new values
+        usernameController.text = userController.user.value.username;
         emailController.text = userController.user.value.email;
         phoneController.text = userController.user.value.phoneNumber;
         dobController.text = userController.user.value.dateOfBirth;
@@ -214,10 +233,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
       });
 
       setState(() => isLoading = false);
-
-      // Optional: Navigate back after a delay (only if you want)
-      // await Future.delayed(const Duration(seconds: 2));
-      // Get.back();
 
     } catch (e) {
       AppFullScreenLoader.stopLoading();
@@ -251,11 +266,6 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSizes.spaceBtwSections),
-                Text(
-                  _getScreenTitle(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
                 const SizedBox(height: AppSizes.spaceBtwItems),
                 Text(
                   _getScreenDescription(),
@@ -305,23 +315,8 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
   String _getAppBarTitle() {
     switch (widget.fieldType) {
-      case 'email':
-        return "Edit Email";
-      case 'phone':
-        return "Edit Phone Number";
-      case 'gender':
-        return "Edit Gender";
-      case 'dob':
-        return "Edit Date of Birth";
-      case 'userid':
-        return "User ID";
-      default:
-        return "Edit Information";
-    }
-  }
-
-  String _getScreenTitle() {
-    switch (widget.fieldType) {
+      case 'username':
+        return "Update Your Username";
       case 'email':
         return "Update Your Email";
       case 'phone':
@@ -339,6 +334,8 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
   String _getScreenDescription() {
     switch (widget.fieldType) {
+      case 'username':
+        return "Enter a new username. Username must be 3-20 characters and can contain letters, numbers, hyphens, and underscores.";
       case 'email':
         return "Enter your new email address. A verification link will be sent to this email. You must verify it before the change takes effect.";
       case 'phone':
@@ -356,6 +353,21 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
 
   Widget _buildEditWidget(BuildContext context) {
     switch (widget.fieldType) {
+      case 'username':
+        return TextFormField(
+          controller: usernameController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Iconsax.user),
+            labelText: "Username",
+            hintText: "john_doe",
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            helperText: "3-20 characters. Letters, numbers, hyphens, underscores only.",
+          ),
+          validator: AppValidator.validateUsername,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+        );
+
       case 'email':
         return TextFormField(
           controller: emailController,
@@ -375,7 +387,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
           decoration: InputDecoration(
             prefixIcon: const Icon(Iconsax.call),
             labelText: "Phone Number",
-            hintText: "+1 (555) 000-0000",
+            hintText: "+92 (300) 000-0000",
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
           ),
           validator: (value) {
@@ -397,6 +409,7 @@ class _EditPersonalInfoScreenState extends State<EditPersonalInfoScreen> {
               title: Text(gender),
               value: gender,
               groupValue: selectedGender,
+              activeColor: AppColors.buttonSecondary,
               onChanged: (value) {
                 setState(() {
                   if (value != null) {

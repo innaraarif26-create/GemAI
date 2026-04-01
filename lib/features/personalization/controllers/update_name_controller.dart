@@ -4,7 +4,7 @@ import 'package:gemai/core/utils/popups/full_screen_loader.dart';
 import 'package:gemai/core/utils/popups/loaders.dart';
 import 'package:gemai/data/repositories/user/user_repository.dart';
 import 'package:gemai/features/personalization/controllers/user_controller.dart';
-import 'package:gemai/features/personalization/screens/profile/widgets/profile.dart';
+import 'package:gemai/features/personalization/screens/profile/profile.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constants/image_strings.dart';
