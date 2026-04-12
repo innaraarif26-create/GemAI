@@ -8,6 +8,7 @@ import '../../../../widgets/custom_shapes/containers/primary_header_container.da
 import '../../../../widgets/custom_shapes/containers/search_container.dart';
 import '../../../../widgets/texts/section_heading.dart';
 import 'Articles/home_articles_list.dart';
+import 'Books/all_books_screen.dart';
 import 'home_appbar.dart';
 import 'home_books_list.dart';
 
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
 
                   /// Books Heading
-                  AppSectionHeading(title: 'Books'),
+                  AppSectionHeading(title: 'Books', showActionButton: true, onPressed: () => Get.to(() => const AllBooksScreen())),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Books Horizontal List

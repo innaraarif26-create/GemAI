@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../core/utils/helpers/network_manager.dart';
+import '../features/MainScreens/Home/controllers/book_controller.dart';
 import '../features/MarketPlace/controllers/product_controller.dart';
 import '../features/MarketPlace/controllers/wishlist_controller.dart';
 import '../features/auth/controllers/auth_controller.dart';
@@ -19,5 +20,8 @@ class GeneralBindings extends Bindings {
 
     // wishlist toggle + wishlist streams
     Get.put(WishlistController(), permanent: true);
+
+    // book list controller – loads local, Firebase, and Google Books
+    Get.put(BookController(), permanent: true);
   }
 }
