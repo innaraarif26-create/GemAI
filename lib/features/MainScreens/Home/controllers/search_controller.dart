@@ -17,6 +17,32 @@ class GemSearchController extends GetxController {
 
   final List<String> categories = ['All', 'Gems', 'Books', 'Articles', 'Real/Fake'];
 
+  List<SearchResult> _cachedItems = [];
+
+  @override
+  void onInit() {
+    _buildCache();
+    super.onInit();
+  }
+
+  void _buildCache() {
+    _cachedItems = _buildAllItems();
+    // If gems haven't loaded yet, rebuild cache once they finish loading
+    try {
+      final gemsController = Get.find<GemsController>();
+      if (gemsController.isLoading.value || gemsController.allGems.isEmpty) {
+        ever(gemsController.isLoading, (bool loading) {
+          if (!loading) {
+            _cachedItems = _buildAllItems();
+            if (searchQuery.value.isNotEmpty || selectedCategory.value != 'All') {
+              _filterResults();
+            }
+          }
+        });
+      }
+    } catch (_) {}
+  }
+
   List<SearchResult> _buildAllItems() {
     final List<SearchResult> items = [];
 
@@ -87,7 +113,7 @@ class GemSearchController extends GetxController {
     }
 
     searchResults.assignAll(
-      _buildAllItems().where((item) {
+      _cachedItems.where((item) {
         final matchesCategory = category == 'All' || item.category == category;
         final matchesQuery =
             query.isEmpty || item.title.toLowerCase().contains(query);
