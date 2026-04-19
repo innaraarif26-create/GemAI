@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemai/features/MainScreens/Home/screens/popular_gems/home_popular_gems_section.dart';
 import 'package:gemai/features/MainScreens/Home/screens/realfake_gems/all_real_fake_gems.dart';
 import 'package:gemai/features/MainScreens/Home/screens/realfake_gems/home_realfake_section.dart';
+import 'package:gemai/features/MainScreens/Home/screens/search/search_screen.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../widgets/custom_shapes/containers/primary_header_container.dart';
@@ -30,7 +31,10 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   /// Search Bar
-                  AppSearchContainer(text: "Search for Gemstones"),
+                  AppSearchContainer(
+                    text: "Search for Gemstones",
+                    onTap: () => Get.to(() => const SearchScreen()),
+                  ),
                   const SizedBox(height: AppSizes.defaultSpace),
 
                   /// Popular Gems Section
