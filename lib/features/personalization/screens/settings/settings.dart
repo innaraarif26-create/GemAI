@@ -17,6 +17,7 @@ import '../../../../widgets/layouts/list_tiles/user_profile_tile.dart';
 import '../../../MarketPlace/screens/chat/messages_screen.dart';
 import '../../../MarketPlace/screens/wishlist/wishlist.dart';
 import '../../../auth/screens/login/login_screen.dart';
+import '../feedback/feedback_screen.dart';
 import '../profile/profile.dart';
 
 class SettingScreen extends StatelessWidget
@@ -82,7 +83,7 @@ class SettingScreen extends StatelessWidget
                   AppSectionHeading(title: "Settings", showActionButton: false,),
                   SizedBox(height: AppSizes.spaceBtwItems,),
                   AppSettingMenuTile(icon: Iconsax.notification, title: "Notifications", subTitle: "Manage alerts for your account and listings", onTap: (){}),
-                  AppSettingMenuTile(icon: Iconsax.message, title: "Feedback", subTitle: "Send us your suggestions", onTap: (){}),
+                  AppSettingMenuTile(icon: Iconsax.message, title: "Feedback", subTitle: "Send us your suggestions", onTap: () => Get.to(() => const FeedbackScreen())),
                   AppSettingMenuTile(icon: Iconsax.document, title: "Terms of Use", subTitle: "Guidelines for using our services", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.shield_tick, title: "Privacy Policy", subTitle: "Learn how we protect your personal information", onTap: (){}),
                   AppSettingMenuTile(icon: Iconsax.login, title: "Sign In / Sign Up", subTitle: "Sign in to manage and list your items", onTap: ()=> Get.to(LoginScreen())),
