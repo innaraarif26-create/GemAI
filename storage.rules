@@ -1,0 +1,97 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isImage() {
+      return request.resource != null &&
+        request.resource.contentType.matches('image/.*');
+    }
+
+    function isPdf() {
+      return request.resource != null &&
+        request.resource.contentType == 'application/pdf';
+    }
+
+    // ===== PROFILE PICTURES =====
+    // Path used by user_repository.dart: Users/Images/Profile/{fileName}
+    match /Users/Images/Profile/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn()
+                   && isImage()
+                   && request.resource.size < 5 * 1024 * 1024;
+    }
+
+    // ===== CHAT IMAGES =====
+    // Path used by chat_repository.dart: chats/{chatId}/{senderId}/{fileName}
+    match /chats/{chatId}/{senderId}/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn()
+                   && isOwner(senderId)
+                   && isImage()
+                   && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // ===== PRODUCT IMAGES =====
+    // Path used by product_repository.dart: Products/{sellerId}/{productId}/{fileName}
+    match /Products/{sellerId}/{productId}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn()
+                   && isOwner(sellerId)
+                   && isImage()
+                   && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // ===== PROFILE PICTURES (alternative lowercase path) =====
+    // Must be declared before the broader /users/{userId}/{allPaths=**} rule
+    match /users/{userId}/profile/{fileName} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId)
+                   && isImage()
+                   && request.resource.size < 5 * 1024 * 1024;
+    }
+
+    // ===== PRIVATE USER FILES =====
+    match /users/{userId}/{allPaths=**} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId)
+                   && request.resource.size < 20 * 1024 * 1024;
+    }
+
+    // ===== PUBLIC BOOKS =====
+    match /Books/{allPaths=**} {
+      allow read: if true;
+      allow write: if isSignedIn()
+                   && (isImage() || isPdf())
+                   && request.resource.size < 50 * 1024 * 1024;
+    }
+
+    // ===== ARTICLES =====
+    match /Articles/{folder}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn()
+                   && (isImage() || isPdf())
+                   && request.resource.size < 20 * 1024 * 1024;
+    }
+
+    // ===== PUBLIC DOCUMENTS =====
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isSignedIn()
+                   && (isImage() || isPdf())
+                   && request.resource.size < 20 * 1024 * 1024;
+    }
+
+    // ===== DENY EVERYTHING ELSE =====
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
